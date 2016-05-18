@@ -8,13 +8,12 @@ public class Controller {
 
 	static Player player1;
 	static Player player2;
-	private static int totalRounds;
+	private static int totalRound;
 	private static int currentRound;
 	//TODO: singleton?
-	public Controller(String name1, String name2, String mark1, String mark2){
+	public Controller(String name1, String name2, String mark1, String mark2, int totalRound){
 		currentRound = 1;
-		//TODO set total rounds
-		totalRounds = 3;
+		Controller.totalRound = totalRound;
 		player1 = new Player(name1, mark1);
 		player2 = new Player(name2, mark2);
 		GameBoard.main();
@@ -40,7 +39,9 @@ public class Controller {
 	public static String getPlayer2Mark(){
 		return player2.getToken();
 	}
-
+	public static int getTotalRound(){
+		return totalRound;
+	}
 	public static void checkStatus(String btnValue[], String token, int checkPlayer){
 		boolean won = GameLogic.isWon(btnValue, token);
 		if(won)
@@ -64,15 +65,15 @@ public class Controller {
 	private static void checkResult()
 	{
 		//TODO: format of displaying results
-		if(currentRound > totalRounds){
+		if(currentRound > totalRound){
 			int max = player1.getScore();
-			String result = player1.getName() +  " is the winner with score of "+ player1.getScore()+" out of "+ totalRounds;
+			String result = player1.getName() +  " is the winner with score of "+ player1.getScore()+" out of "+ totalRound;
 			
 			if(player2.getScore()> max){
-				result = player2.getName() + " is the winner with score of "+ player2.getScore()+" out of "+ totalRounds;
+				result = player2.getName() + " is the winner with score of "+ player2.getScore()+" out of "+ totalRound;
 			}
 			else if(player2.getScore()== max){
-				result = player2.getName() + " and "+ player1.getName()+ " are tied each with a score of "+ player2.getScore()+" out of "+ totalRounds;
+				result = player2.getName() + " and "+ player1.getName()+ " are tied each with a score of "+ player2.getScore()+" out of "+ totalRound;
 			}
 			GameBoard.gameWon(result);
 		}
