@@ -94,7 +94,7 @@ public class PlayerOptionMenu extends JFrame implements ActionListener{
 			mark1 = "O";
 			mark2 = "X";
 		}		
-		int totalRound = 1;
+		int totalRound = 3;
 		//TODO: totalRound = radioButton
 		
 		new Controller(name1, name2, mark1, mark2, totalRound);

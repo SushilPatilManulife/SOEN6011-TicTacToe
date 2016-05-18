@@ -51,7 +51,9 @@ public class Controller {
 			else
 				player2.incrementScore();
 			GameBoard.updateScoreboard(player1.getScore(), player2.getScore());
-			GameBoard.roundWon();
+			int[] line = new int [3];
+			line = GameLogic.getLine();
+			GameBoard.roundWon(line);
 			currentRound++;
 			checkResult();
 		}

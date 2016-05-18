@@ -12,7 +12,6 @@ import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -27,7 +26,6 @@ import control.Controller;
 
 public class GameBoard extends JFrame implements ActionListener{
 	
-	//TODO: start next round button
 
 	private JPanel contentPane;
 	//?//
@@ -40,7 +38,8 @@ public class GameBoard extends JFrame implements ActionListener{
 	
 	lblPlayer2Score = new JLabel(""),
 	lblPlayer1Score = new JLabel(""),
-	lblScoreBoard = new JLabel("Score Board");
+	lblScoreBoard = new JLabel("Score Board"),
+	invalidMove = new JLabel("Invalid move! Choose an empty square.");
 	 
 	JMenuBar gameMenu = new JMenuBar();
 	JMenu file = new JMenu("File");
@@ -49,7 +48,7 @@ public class GameBoard extends JFrame implements ActionListener{
 	exit = new JMenuItem("Exit"),
 	viewHelp = new JMenuItem("View Help"),
 	about = new JMenuItem("About");
-
+	static JButton nextRound = new JButton("Start next round"); 
 	/**
 	 * checkPlayer counts number of moves and is used to set turn
 	 */
@@ -82,7 +81,7 @@ public class GameBoard extends JFrame implements ActionListener{
 	public GameBoard() {
 		setTitle("Tic Tac Toe");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 600, 304);
+		setBounds(100, 100, 600, 350);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -93,6 +92,12 @@ public class GameBoard extends JFrame implements ActionListener{
 		contentPane.add(gameBoardPannel);
 		gameBoardPannel.setLayout(new GridLayout(0, 3, 0, 0));
 		
+		JPanel validateMove = new JPanel();
+		validateMove.setBounds(25, 230, 314, 40);
+		validateMove.add(invalidMove);
+		invalidMove.setVisible(false);
+		invalidMove.setForeground(Color.RED);
+		contentPane.add(validateMove);
 		new Help();
 		gameMenu.add(file);
 		gameMenu.add(help);
@@ -110,8 +115,10 @@ public class GameBoard extends JFrame implements ActionListener{
 				exitGame();
 			}
 		});
+		//TODO : not working properly
 		mnNewGame.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				resetBoard();
 				String[] args = {};
 				dispose();
 				Controller.main(args);
@@ -149,49 +156,63 @@ public class GameBoard extends JFrame implements ActionListener{
 		playerTurnPannel.setLayout(null);
 		lblPlayerMove.setBounds(0, 11, 250, 60);
 		playerTurnPannel.add(lblPlayerMove);
+		nextRound.setBounds(0, 11, 155, 30);
+		playerTurnPannel.add(nextRound);
+		nextRound.setVisible(false);
+		nextRound.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				startNextRound();
+			}
+		});
 		contentPane.add(playerTurnPannel);
 		
 		/**
 		 * create board				
 		 */
 		for(int i = 0 ; i < 9 ; i++){
-			btnOnGameBoard[i]=new JButton();		
+			btnOnGameBoard[i]=new JButton();	
 			btnOnGameBoard[i].setFont(new Font("Tahoma", Font.BOLD, 40));
+			btnOnGameBoard[i].setText("");
 			btnOnGameBoard[i].addActionListener(this);
-			btnOnGameBoard[i].setBackground(new Color(0,0,0));
-			btnOnGameBoard[i].setForeground(new Color(255,255,255));
+			btnOnGameBoard[i].setBackground(new Color(32,22,63));
 			gameBoardPannel.add(btnOnGameBoard[i]);			
 		}
+		checkPlayer=0;
 			
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		invalidMove.setVisible(false);
 		String token;
-		Object checkClick=e.getSource();
+		JButton checkClick=(JButton) e.getSource();
+		if(checkClick.getText()== ""){
 		for (int i = 0; i < 9 ; i++) {
 			if(checkClick==btnOnGameBoard[i] && checkPlayer < 9 ){
 				if(checkPlayer % 2 == 0){
+					btnOnGameBoard[i].setForeground(new Color(247,247,242));
 					btnOnGameBoard[i].setText(mark1);
 					btnValue[i] = mark1;
 					token = mark1;
-					btnOnGameBoard[i].setEnabled(false);
 				}
 				else{
-					btnOnGameBoard[i].setForeground(new Color(255,0,0)); //???????????????????????????
+					btnOnGameBoard[i].setForeground(new Color(246,31,74));
 					btnOnGameBoard[i].setText(mark2);
 					btnValue[i] = mark2;
 					token = mark2;
-					btnOnGameBoard[i].setEnabled(false);
 				}
 				changePlayerTurn();
 				checkPlayer++;
 				Controller.checkStatus(btnValue, token, checkPlayer);
 			}
 		}
+		}
+		else {
+			invalidMove.setVisible(true);
+		}
 	}
 	
-	public void setPlayers(){
+	private void setPlayers(){
 		name1 = Controller.getPlayer1Name();
 		name2 = Controller.getPlayer2Name();
 		mark1 = Controller.getPlayer1Mark();
@@ -201,7 +222,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		totalRound = Controller.getTotalRound();
 	}
 	
-	public static void changePlayerTurn() {
+	private static void changePlayerTurn() {
 		if(checkPlayer % 2 == 0) {
 		turn = name2;
 		mark=mark2;
@@ -216,16 +237,17 @@ public class GameBoard extends JFrame implements ActionListener{
 		lblPlayerMove.setIcon(imageIcon);
 	}
 	
-	public void exitGame(){
+	private void exitGame(){
 		int res = JOptionPane.showConfirmDialog(null, "There is a game in progress. Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
 		if (res == JOptionPane.YES_OPTION)
 			System.exit(1);
 	}
 	
-	public static void resetBoard(){
+	private static void resetBoard(){
 		for(int i = 0 ; i < 9 ; i++){
 		btnOnGameBoard[i].setText("");
 		btnOnGameBoard[i].setEnabled(true);
+		btnOnGameBoard[i].setBackground(new Color(32,22,63));
 		}
 		turn = name1;
 		mark = mark1;
@@ -234,26 +256,41 @@ public class GameBoard extends JFrame implements ActionListener{
 		lblPlayerMove.setIcon(imageIcon);
 		checkPlayer = 0;
 	}
-	public static void roundWon(){
-		changePlayerTurn();
-		//TODO:Label instead of message , turn wins round #
-		JOptionPane.showMessageDialog(null, turn + "wins this round!.\nClick OK to continue.");
-		resetBoard();
+	private void startNextRound(){
+		changePlayerTurn(); 
+		resetBoard(); 
 		Arrays.fill(btnValue, null);
 		currentRound++;
+        nextRound.setVisible(false);
+        lblPlayerMove.setVisible(true);
+	}
+	public static void roundWon(int[] line){
+		for (int i = 0; i < 9 ; i++) {
+					btnOnGameBoard[i].setEnabled(false);
+		}
+		for (int j = 0; j < 3 ; j++) {
+					btnOnGameBoard[line[j]].setBackground(Color.blue);
+		}
+		//TODO:Label instead of message , turn wins round #
+		JOptionPane.showMessageDialog(null, turn + "wins this round!.\nClick OK to continue.");
+        nextRound.setVisible(true);
+        lblPlayerMove.setVisible(false);
+        invalidMove.setVisible(false);
 	}
 	
 	public static void roundTie(){
-		changePlayerTurn();
 		//TODO:Label instead of message , round # is a tie
 		JOptionPane.showMessageDialog(null,  "It's a tie!\nClick OK to continue.");
-		resetBoard();
-		Arrays.fill(btnValue, null);
-		currentRound++;
+        nextRound.setVisible(true);
+        lblPlayerMove.setVisible(false);
+        invalidMove.setVisible(false);
 	}
 	public static void gameWon(String result){
 		//TODO: new game button, disable game board, display scores
 		JOptionPane.showMessageDialog(null, result);
+        nextRound.setVisible(false);
+        lblPlayerMove.setVisible(false);
+        invalidMove.setVisible(false);
 	}
 	public static void updateScoreboard(int score1, int score2){
 		lblPlayer2Score.setText("Player 2 : " + score2);
