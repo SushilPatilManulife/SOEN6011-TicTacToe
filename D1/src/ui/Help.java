@@ -2,6 +2,11 @@ package ui;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
+import java.awt.Dimension;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class Help extends JPanel{
 
@@ -17,7 +22,9 @@ public class Help extends JPanel{
 	public Help(){
 		helpPnl = new JPanel();
 		content = new JTextArea();
-		helpPnl.setBounds(100, 100, 650, 650);
+		content.setBounds(28, 42, 660, 148);
+		helpPnl.setBounds(100, 100, 698, 297);
+		helpPnl.setLayout(null);
 		content.setText(helpPage);
 		helpPnl.add(content);
 		content.setEditable(false);
@@ -26,5 +33,4 @@ public class Help extends JPanel{
 	public JPanel getHelp(){
 		return helpPnl;
 	}
-	
 }

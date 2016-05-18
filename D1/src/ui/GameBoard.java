@@ -17,6 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import control.Controller;
@@ -86,15 +87,15 @@ public class GameBoard extends JFrame implements ActionListener{
 					resetBoard();
 			}
 		});
-		resetPnl.setBounds(373, 56, 125, 83);
+		resetPnl.setBounds(363, 25, 125, 83);
 		resetPnl.add(reset);
 		resetPnl.setVisible(true);
 		contentPane.add(resetPnl);
 		/////////////////////////////////////////
 		
 		Help helpPnl = new Help();
-		helpDg.add(helpPnl.getHelp(), null);
-		helpDg.setBounds(100, 100, 450, 300);
+		helpDg.getContentPane().add(helpPnl.getHelp(), null);
+		helpDg.setBounds(100, 100, 600, 304);
 		gameMenu.add(file);
 		gameMenu.add(help);
 		file.add(mnNewGame);
@@ -103,6 +104,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		this.setJMenuBar(gameMenu);
 		viewHelp.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				helpDg.setTitle("Help");
 				helpDg.setVisible(true);
 			}
 		});
@@ -136,9 +138,9 @@ public class GameBoard extends JFrame implements ActionListener{
 		
 		setPlayers();
 		lblPlayerMove.setText("Current player: " + turn + " [ "+ mark+" ] ");
-		playerTurnPannel.setBounds(350, 150, 250, 49);
+		playerTurnPannel.setBounds(361, 184, 250, 49);
 		playerTurnPannel.setLayout(null);
-		lblPlayerMove.setBounds(0, 11, 250, 14);
+		lblPlayerMove.setBounds(10, 11, 250, 14);
 		playerTurnPannel.add(lblPlayerMove);
 		contentPane.add(playerTurnPannel);
 		
@@ -163,11 +165,13 @@ public class GameBoard extends JFrame implements ActionListener{
 		for (int i = 0; i < 9 ; i++) {
 			if(checkClick==btnOnGameBoard[i] && checkPlayer < 9 ){
 				if(checkPlayer % 2 == 0){
+					UIManager.getDefaults().put("Button.disabledText",Color.WHITE);
 					btnOnGameBoard[i].setText(mark1);
 					btnOnGameBoard[i].setEnabled(false);
 				}
 				else{
-					btnOnGameBoard[i].setForeground(new Color(255,0,0)); //???????????????????????????
+					//btnOnGameBoard[i].setForeground(new Color(255,0,0)); //???????????????????????????
+					UIManager.getDefaults().put("Button.disabledText",Color.RED);
 					btnOnGameBoard[i].setText(mark2);	
 					btnOnGameBoard[i].setEnabled(false);
 				}
@@ -175,6 +179,7 @@ public class GameBoard extends JFrame implements ActionListener{
 				checkPlayer++;
 			}
 		}
+		
 	}
 	
 	public void setPlayers(){
