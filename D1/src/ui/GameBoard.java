@@ -3,13 +3,14 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -21,7 +22,6 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import control.Controller;
-import model.Player;
 public class GameBoard extends JFrame implements ActionListener{
 	
 	private JPanel contentPane;
@@ -30,8 +30,8 @@ public class GameBoard extends JFrame implements ActionListener{
 	JPanel gameBoardPannel = new JPanel(),
 	scoreBoardPannel = new JPanel(),
 	playerTurnPannel = new JPanel();
-	JLabel lblPlayerMove = new JLabel(""),
-	lblIcon = new JLabel();
+	JLabel lblPlayerMove = new JLabel("");
+	//lblIcon = new JLabel();
 	
 	JMenuBar gameMenu = new JMenuBar();
 	JMenu file = new JMenu("File");
@@ -119,17 +119,21 @@ public class GameBoard extends JFrame implements ActionListener{
 		});
 		
 		setPlayers();
-		lblPlayerMove.setText("Current player: " + turn);
+		ImageIcon imageIcon = new ImageIcon (new ImageIcon("src/" + mark + ".png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		lblPlayerMove.setText(turn + "'s turn" );
+		lblPlayerMove.setIcon(imageIcon);
 		playerTurnPannel.setBounds(363, 119, 250, 95);
 		playerTurnPannel.setLayout(null);
-		lblPlayerMove.setBounds(10, 11, 250, 14);
+		lblPlayerMove.setBounds(10, 11, 250, 60);
+		
 		playerTurnPannel.add(lblPlayerMove);
 		contentPane.add(playerTurnPannel);
-		lblIcon.setFont(new Font("Tahoma", Font.BOLD, 40));
+		//pack();
+		/*lblIcon.setFont(new Font("Tahoma", Font.BOLD, 40));
 		lblIcon.setBounds(97, 43, 61, 41);
 		playerTurnPannel.add(lblIcon);
 		lblIcon.setText(mark);
-		lblIcon.setForeground(Color.BLACK);
+		lblIcon.setForeground(Color.BLACK);*/
 		/**
 		 * create board				
 		 */
@@ -186,12 +190,15 @@ public class GameBoard extends JFrame implements ActionListener{
 		turn = name1;
 		mark=mark1;
 		}
-		lblPlayerMove.setText("Current player: " + turn );
-		lblIcon.setText(mark);
+
+		ImageIcon imageIcon = new ImageIcon (new ImageIcon("src/" + mark + ".png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		lblPlayerMove.setText(turn + "'s turn" );
+		lblPlayerMove.setIcon(imageIcon);
+		/*lblIcon.setText(mark);
 		if(mark.equals(mark2))
 			lblIcon.setForeground(Color.RED);
 		else 
-			lblIcon.setForeground(Color.BLACK);
+			lblIcon.setForeground(Color.BLACK);*/
 	}
 	
 	public void exitGame(){
@@ -207,9 +214,11 @@ public class GameBoard extends JFrame implements ActionListener{
 		}
 		turn = name1;
 		mark = mark1;
-		lblPlayerMove.setText("Current player: " + turn);
-		lblIcon.setText(mark);
-		lblIcon.setForeground(Color.BLACK);
+		ImageIcon imageIcon = new ImageIcon (new ImageIcon("src/" + mark + ".png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		lblPlayerMove.setText(turn + "'s turn" );
+		lblPlayerMove.setIcon(imageIcon);
+/*		lblIcon.setText(mark);
+		lblIcon.setForeground(Color.BLACK);*/
 		checkPlayer = 0;
 	}
 
