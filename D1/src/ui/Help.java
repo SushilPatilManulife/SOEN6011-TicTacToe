@@ -1,5 +1,8 @@
 package ui;
 
+import java.awt.BorderLayout;
+
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -7,6 +10,7 @@ public class Help extends JPanel{
 
 	JPanel helpPnl; 
 	JTextArea content;
+	static JDialog helpDg; 
 	String helpPage = "Rules:\n"
 			+ "Player 1 moves first.\n"
 			+ "A piece may be placed on any empty space.\n"
@@ -16,15 +20,19 @@ public class Help extends JPanel{
 			+ " to win (in which case the result is a draw).\n";
 	public Help(){
 		helpPnl = new JPanel();
+	    helpDg = new JDialog();
 		content = new JTextArea();
-		helpPnl.setBounds(100, 100, 650, 650);
+		helpPnl.setLayout(new BorderLayout());
+		helpDg.setLocationRelativeTo(null);
 		content.setText(helpPage);
 		helpPnl.add(content);
+		helpDg.add(helpPnl);
 		content.setEditable(false);
 		helpPnl.setVisible(true);
+		helpDg.pack();
 	}
-	public JPanel getHelp(){
-		return helpPnl;
+	public static void getHelp(){
+		helpDg.setVisible(true);
 	}
 	
 }
