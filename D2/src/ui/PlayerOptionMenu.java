@@ -30,6 +30,7 @@ public class PlayerOptionMenu extends JFrame implements ActionListener{
 	public PlayerOptionMenu(){
 		setTitle("Tic Tac Toe");
 		setBounds(100, 100, 524, 304);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		formPanel = new JPanel();
 		formPanel.setLayout(new GridBagLayout());
