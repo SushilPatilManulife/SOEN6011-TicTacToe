@@ -24,9 +24,9 @@ import javax.swing.border.LineBorder;
 import control.Controller;
 
 public class GameBoard extends JFrame implements ActionListener{
-	//TODO : current round, total round;
+	
 	//TODO: start next round button
-	//TODO: new game menu method
+
 	private JPanel contentPane;
 	//?//
 	static JButton btnOnGameBoard[] = new JButton[9];
@@ -45,8 +45,9 @@ public class GameBoard extends JFrame implements ActionListener{
 	JMenu help = new JMenu("Help");
 	JMenuItem mnNewGame = new JMenuItem("New Game"),
 	exit = new JMenuItem("Exit"),
-	viewHelp = new JMenuItem("View Help");
-	JDialog helpDg = new JDialog();
+	viewHelp = new JMenuItem("View Help"),
+	about = new JMenuItem("About");
+
 	
 	/**
 	 * checkPlayer counts number of moves and is used to set turn
@@ -58,6 +59,8 @@ public class GameBoard extends JFrame implements ActionListener{
 	String mark2;
 	static String btnValue[] = new String[9];
 	
+	static int currentRound;
+	int totalRound;
 	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -88,9 +91,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		contentPane.add(gameBoardPannel);
 		gameBoardPannel.setLayout(new GridLayout(0, 3, 0, 0));
 		
-		Help helpPnl = new Help();
-		helpDg.add(helpPnl.getHelp(), null);
-		helpDg.setBounds(100, 100, 450, 300);
+		new Help();
 		gameMenu.add(file);
 		gameMenu.add(help);
 		file.add(mnNewGame);
@@ -99,7 +100,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		this.setJMenuBar(gameMenu);
 		viewHelp.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				helpDg.setVisible(true);
+				Help.getHelp();
 			}
 		});
 		exit.addActionListener(new ActionListener(){
@@ -107,7 +108,13 @@ public class GameBoard extends JFrame implements ActionListener{
 				exitGame();
 			}
 		});
-		
+		mnNewGame.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				String[] args = {};
+				dispose();
+				Controller.main(args);
+			}
+		});
 		addWindowListener(new WindowAdapter(){
 			@Override
 			public void windowClosing(WindowEvent we){
@@ -132,6 +139,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		scoreBoardPannel.add(lblScoreBoard);
 		
 		setPlayers();
+		currentRound = 1;
 		lblPlayerMove.setText("Current player: " + turn);
 		playerTurnPannel.setBounds(373, 150, 250, 49);
 		playerTurnPannel.setLayout(null);
@@ -185,6 +193,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		mark1 = Controller.getPlayer1Mark();
 		mark2 = Controller.getPlayer2Mark();
 		turn = name1;
+		totalRound = Controller.getTotalRound();
 	}
 	
 	public static void changePlayerTurn() {
@@ -218,6 +227,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		JOptionPane.showMessageDialog(null, turn + "wins this round!.\nClick OK to continue.");
 		resetBoard();
 		Arrays.fill(btnValue, null);
+		currentRound++;
 	}
 	
 	public static void roundTie(){
@@ -226,6 +236,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		JOptionPane.showMessageDialog(null,  "It's a tie!\nClick OK to continue.");
 		resetBoard();
 		Arrays.fill(btnValue, null);
+		currentRound++;
 	}
 	public static void gameWon(String result){
 		//TODO: new game button, disable game board, display scores

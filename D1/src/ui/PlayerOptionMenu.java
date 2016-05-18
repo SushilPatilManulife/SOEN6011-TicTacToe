@@ -9,6 +9,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -23,14 +26,26 @@ public class PlayerOptionMenu extends JFrame implements ActionListener{
 	private ButtonGroup mark;
 	JButton startGame;
 	JRadioButton x, o;
-	
+	JMenuBar gameMenu = new JMenuBar();
+	JMenu help = new JMenu("Help");
+	JMenuItem viewHelp = new JMenuItem("View Help");
 	
 
 	public PlayerOptionMenu(){
-		setTitle("Tic Tac Toe");
+		setTitle("Tic Tac Toe");	
 		setBounds(100, 100, 524, 304);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gameMenu.add(help);
+		help.add(viewHelp);
+		viewHelp.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Help.getHelp();
+			}
+		});
 		formPanel = new JPanel();
+		new Help();
+		setJMenuBar(gameMenu);
 		formPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;

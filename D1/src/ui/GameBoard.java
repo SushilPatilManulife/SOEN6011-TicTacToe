@@ -31,11 +31,6 @@ public class GameBoard extends JFrame implements ActionListener{
 	scoreBoardPannel = new JPanel(),
 	playerTurnPannel = new JPanel();
 	JLabel lblPlayerMove = new JLabel("");
-	//TODO: deliverable 2: player.score;***********
-	//lblPlayer2Score = new JLabel("Player 2: 1"),
-	//lblPlayer1Score = new JLabel("Player 1: 0"),
-	//lblScoreBoard = new JLabel("Score Board");
-	//*********************************************
 	 
 	JMenuBar gameMenu = new JMenuBar();
 	JMenu file = new JMenu("File");
@@ -43,7 +38,7 @@ public class GameBoard extends JFrame implements ActionListener{
 	JMenuItem mnNewGame = new JMenuItem("New Game"),
 	exit = new JMenuItem("Exit"),
 	viewHelp = new JMenuItem("View Help");
-	JDialog helpDg = new JDialog();
+
 	
 	/**
 	 * checkPlayer counts number of moves and is used to set turn
@@ -71,6 +66,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		setTitle("Tic Tac Toe");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 600, 304);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -93,9 +89,10 @@ public class GameBoard extends JFrame implements ActionListener{
 		contentPane.add(resetPnl);
 		/////////////////////////////////////////
 		
+
 		Help helpPnl = new Help();
-		helpDg.getContentPane().add(helpPnl.getHelp(), null);
-		helpDg.setBounds(100, 100, 600, 304);
+		new Help();
+
 		gameMenu.add(file);
 		gameMenu.add(help);
 		file.add(mnNewGame);
@@ -104,8 +101,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		this.setJMenuBar(gameMenu);
 		viewHelp.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				helpDg.setTitle("Help");
-				helpDg.setVisible(true);
+				Help.getHelp();
 			}
 		});
 		exit.addActionListener(new ActionListener(){
@@ -120,21 +116,6 @@ public class GameBoard extends JFrame implements ActionListener{
 				exitGame();
 			}
 		});
-		//DELIVERABLE 2********************************		
-		//scoreBoardPannel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		//scoreBoardPannel.setBounds(373, 56, 125, 83);
-		//contentPane.add(scoreBoardPannel);
-		//scoreBoardPannel.setLayout(null);
-				
-		//lblPlayer2Score.setBounds(23, 58, 108, 14);
-		//scoreBoardPannel.add(lblPlayer2Score);
-		
-		//lblPlayer1Score.setBounds(23, 33, 108, 14);
-		//scoreBoardPannel.add(lblPlayer1Score);
-				
-		//lblScoreBoard.setBounds(23, 8, 91, 14);
-		//scoreBoardPannel.add(lblScoreBoard);
-		//***********************************************
 		
 		setPlayers();
 		lblPlayerMove.setText("Current player: " + turn + " [ "+ mark+" ] ");
