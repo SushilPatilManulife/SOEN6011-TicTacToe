@@ -30,8 +30,9 @@ public class GameBoard extends JFrame implements ActionListener{
 	JPanel gameBoardPannel = new JPanel(),
 	scoreBoardPannel = new JPanel(),
 	playerTurnPannel = new JPanel();
-	JLabel lblPlayerMove = new JLabel("");
-	 
+	JLabel lblPlayerMove = new JLabel(""),
+	lblIcon = new JLabel();
+	
 	JMenuBar gameMenu = new JMenuBar();
 	JMenu file = new JMenu("File");
 	JMenu help = new JMenu("Help");
@@ -44,7 +45,7 @@ public class GameBoard extends JFrame implements ActionListener{
 	 * checkPlayer counts number of moves and is used to set turn
 	 */
 	int checkPlayer=0;
-	String turn, name1, name2, mark1, mark2, mark;
+	String turn, name1, name2, mark1, mark2, mark, markColor;
 	
 	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
@@ -118,13 +119,17 @@ public class GameBoard extends JFrame implements ActionListener{
 		});
 		
 		setPlayers();
-		lblPlayerMove.setText("Current player: " + turn + " [ "+ mark+" ] ");
-		playerTurnPannel.setBounds(361, 184, 250, 49);
+		lblPlayerMove.setText("Current player: " + turn);
+		playerTurnPannel.setBounds(363, 119, 250, 95);
 		playerTurnPannel.setLayout(null);
 		lblPlayerMove.setBounds(10, 11, 250, 14);
 		playerTurnPannel.add(lblPlayerMove);
 		contentPane.add(playerTurnPannel);
-		
+		lblIcon.setFont(new Font("Tahoma", Font.BOLD, 40));
+		lblIcon.setBounds(97, 43, 61, 41);
+		playerTurnPannel.add(lblIcon);
+		lblIcon.setText(mark);
+		lblIcon.setForeground(Color.BLACK);
 		/**
 		 * create board				
 		 */
@@ -181,7 +186,12 @@ public class GameBoard extends JFrame implements ActionListener{
 		turn = name1;
 		mark=mark1;
 		}
-		lblPlayerMove.setText("Current player: " + turn + " [ "+ mark+" ] ");
+		lblPlayerMove.setText("Current player: " + turn );
+		lblIcon.setText(mark);
+		if(mark.equals(mark2))
+			lblIcon.setForeground(Color.RED);
+		else 
+			lblIcon.setForeground(Color.BLACK);
 	}
 	
 	public void exitGame(){
@@ -197,7 +207,9 @@ public class GameBoard extends JFrame implements ActionListener{
 		}
 		turn = name1;
 		mark = mark1;
-		lblPlayerMove.setText("Current player: " + turn + " [ "+ mark+" ] ");
+		lblPlayerMove.setText("Current player: " + turn);
+		lblIcon.setText(mark);
+		lblIcon.setForeground(Color.BLACK);
 		checkPlayer = 0;
 	}
 
