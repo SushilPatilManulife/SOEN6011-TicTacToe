@@ -3,12 +3,14 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Arrays;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -48,15 +50,15 @@ public class GameBoard extends JFrame implements ActionListener{
 	viewHelp = new JMenuItem("View Help"),
 	about = new JMenuItem("About");
 
-	
 	/**
 	 * checkPlayer counts number of moves and is used to set turn
 	 */
 	static int checkPlayer=0;
 	static String turn;
 	static String name1, name2;
-	String mark1;
-	String mark2;
+	static String mark1;
+	static String mark2;
+	static String mark;
 	static String btnValue[] = new String[9];
 	
 	static int currentRound;
@@ -140,10 +142,12 @@ public class GameBoard extends JFrame implements ActionListener{
 		
 		setPlayers();
 		currentRound = 1;
-		lblPlayerMove.setText("Current player: " + turn);
-		playerTurnPannel.setBounds(373, 150, 250, 49);
+		ImageIcon imageIcon = new ImageIcon (new ImageIcon("src/" + mark + ".png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		lblPlayerMove.setText(turn + "'s turn" );
+		lblPlayerMove.setIcon(imageIcon);
+		playerTurnPannel.setBounds(363, 160, 250, 95);
 		playerTurnPannel.setLayout(null);
-		lblPlayerMove.setBounds(0, 11, 250, 14);
+		lblPlayerMove.setBounds(0, 11, 250, 60);
 		playerTurnPannel.add(lblPlayerMove);
 		contentPane.add(playerTurnPannel);
 		
@@ -193,17 +197,23 @@ public class GameBoard extends JFrame implements ActionListener{
 		mark1 = Controller.getPlayer1Mark();
 		mark2 = Controller.getPlayer2Mark();
 		turn = name1;
+		mark = mark1;
 		totalRound = Controller.getTotalRound();
 	}
 	
 	public static void changePlayerTurn() {
 		if(checkPlayer % 2 == 0) {
 		turn = name2;
+		mark=mark2;
 		} 
 		else {
 		turn = name1;
+		mark=mark1;
 		}
-		lblPlayerMove.setText("Current player: " + turn);
+
+		ImageIcon imageIcon = new ImageIcon (new ImageIcon("src/" + mark + ".png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		lblPlayerMove.setText(turn + "'s turn" );
+		lblPlayerMove.setIcon(imageIcon);
 	}
 	
 	public void exitGame(){
@@ -218,7 +228,10 @@ public class GameBoard extends JFrame implements ActionListener{
 		btnOnGameBoard[i].setEnabled(true);
 		}
 		turn = name1;
-		lblPlayerMove.setText("Current player: " + turn);
+		mark = mark1;
+		ImageIcon imageIcon = new ImageIcon (new ImageIcon("src/" + mark + ".png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		lblPlayerMove.setText(turn + "'s turn" );
+		lblPlayerMove.setIcon(imageIcon);
 		checkPlayer = 0;
 	}
 	public static void roundWon(){
