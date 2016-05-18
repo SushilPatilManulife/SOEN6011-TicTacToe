@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import control.Controller;
-
+import model.Player;
 public class GameBoard extends JFrame implements ActionListener{
 	
 	private JPanel contentPane;
@@ -48,8 +48,7 @@ public class GameBoard extends JFrame implements ActionListener{
 	 * checkPlayer counts number of moves and is used to set turn
 	 */
 	int checkPlayer=0;
-	String turn, name1, name2, mark1, mark2;
-	
+	String turn, name1, name2, mark1, mark2, mark;
 	
 	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
@@ -136,7 +135,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		//***********************************************
 		
 		setPlayers();
-		lblPlayerMove.setText("Current player: " + turn);
+		lblPlayerMove.setText("Current player: " + turn + " [ "+ mark+" ] ");
 		playerTurnPannel.setBounds(350, 150, 250, 49);
 		playerTurnPannel.setLayout(null);
 		lblPlayerMove.setBounds(0, 11, 250, 14);
@@ -184,16 +183,19 @@ public class GameBoard extends JFrame implements ActionListener{
 		mark1 = Controller.getPlayer1Mark();
 		mark2 = Controller.getPlayer2Mark();
 		turn = name1;
+		mark = mark1;
 	}
 	
 	public void changePlayerTurn() {
 		if(checkPlayer % 2 == 0) {
 		turn = name2;
+		mark=mark2;
 		} 
 		else {
 		turn = name1;
+		mark=mark1;
 		}
-		lblPlayerMove.setText("Current player: " + turn);
+		lblPlayerMove.setText("Current player: " + turn + " [ "+ mark+" ] ");
 	}
 	
 	public void exitGame(){
@@ -208,9 +210,9 @@ public class GameBoard extends JFrame implements ActionListener{
 		btnOnGameBoard[i].setEnabled(true);
 		}
 		turn = name1;
-		lblPlayerMove.setText("Current player: " + turn);
+		mark = mark1;
+		lblPlayerMove.setText("Current player: " + turn + " [ "+ mark+" ] ");
 		checkPlayer = 0;
 	}
 
 }
-
