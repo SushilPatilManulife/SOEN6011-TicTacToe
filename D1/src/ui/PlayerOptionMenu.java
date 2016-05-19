@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -36,12 +37,11 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 	private JPanel player2Panel;
 	private JTextField player1;
 	private JTextField player2;
-	private BufferedImage imageX;
-	private BufferedImage imageO;
 	private ButtonGroup mark, rounds;
 	JButton startGame;
 	JRadioButton x, o, b1, b3, b5;
-	
+	JLabel p1Image, p2Image;
+	JLabel name;
 
 	public PlayerOptionMenu(){
 		initialize();
@@ -53,11 +53,24 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		c.gridx = 0;
 		c.gridy = 0;
 		c.insets = new Insets(10,10,10,10);
-		c.anchor = GridBagConstraints.FIRST_LINE_START;
-		// formPanel.add(new JLabel ("Enter player names"), c);
+		c.anchor = GridBagConstraints.CENTER;
 		c.gridy++;
+		formPanel.add(new JLabel ("First move"), c);
+		mark = new ButtonGroup();
+		x = new JRadioButton("X");
+		o = new JRadioButton("O");
+		mark.add(x);
+		mark.add(o);
+		JPanel pnl1 = new JPanel();
+		pnl1.add(x);
+		pnl1.add(o);
+		c.gridx++;
+		formPanel.add(pnl1, c);
 		
-		formPanel.add(new JLabel ("Number of Rounds"), c);
+		c.gridx--;
+		c.gridy++;
+		//TODO: add in deliverable 2
+		//formPanel.add(new JLabel ("Number of Rounds"), c);
 		rounds = new ButtonGroup();
 		b1 = new JRadioButton("1");
 		b3 = new JRadioButton("3");
@@ -71,58 +84,64 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		pnl0.add(b5);
 		b3.setSelected(true);
 		c.gridx++;
-		formPanel.add(pnl0, c);
-		c.gridx--;
-		c.gridy++;
-		formPanel.add(new JLabel ("First move"), c);
-		mark = new ButtonGroup();
-		x = new JRadioButton("X");
-		o = new JRadioButton("O");
-		mark.add(x);
-		mark.add(o);
-		JPanel pnl1 = new JPanel();
-		pnl1.add(x);
-		pnl1.add(o);
+		//TODO: add in deliverable 2
+		//formPanel.add(pnl0, c);
+
+
+		p1Image = new JLabel();
+		p2Image = new JLabel();
+		ImageIcon xIcon = new ImageIcon(new ImageIcon("src/X.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		ImageIcon oIcon = new ImageIcon(new ImageIcon("src/O.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 		x.setSelected(true);
-		c.gridx++;
-		//formPanel.add(x, c);
-		//c.gridx++;
-		//formPanel.add(o, c);
-		formPanel.add(pnl1, c);
+		p1Image.setIcon(xIcon);
+		p2Image.setIcon(oIcon);
+
+		x.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				p1Image.setIcon(xIcon);
+				p2Image.setIcon(oIcon); 
+				}
+		});
+		o.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				p2Image.setIcon(xIcon);
+				p1Image.setIcon(oIcon); 
+			}
+		});
+
 		c.gridy++;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = 2;
 		formPanel.add(startGame = new JButton("Start game"), c);
 		startGame.addActionListener(this);
 		this.add(formPanel);
-		
-		try {
-			imageX = ImageIO.read(new File(ClassLoader.getSystemResource("X.png").toURI()));
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
-			imageO = ImageIO.read(new File(ClassLoader.getSystemResource("O.png").toURI()));
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
+		c.fill = GridBagConstraints.NONE;
+		c.gridwidth = 1;
 		player1Panel = new JPanel();
 		player1Panel.setLayout(new GridBagLayout());
 		GridBagConstraints po = new GridBagConstraints();
 		po.insets = new Insets(5,5,5,5);
-		po.gridx = 1;
+		po.gridwidth = 3;
+		po.fill = GridBagConstraints.CENTER;
+		po.gridx = 0;
 		po.gridy = 0;
 		po.anchor = GridBagConstraints.PAGE_START;
 		player1Panel.setBackground(Color.GRAY);
-		player1Panel.add(new JLabel ("First player Name"),po);
+		player1Panel.add(new JLabel ("First player"),po);
+		po.gridx = 0;
+		po.gridy = 1;
+		po.anchor = GridBagConstraints.LINE_START;
+		po.fill = GridBagConstraints.NONE;
+		po.gridwidth = 1;
+		player1Panel.add(new JLabel("Name"),po);
 		po.gridx = 1;
 		po.gridy = 1;
 		player1Panel.add(player1 = new JTextField("Player 1", 10),po);
 		po.gridx = 1;
-		po.gridy = 3;
-		player1Panel.add(new JLabel(new ImageIcon(imageX.getScaledInstance(30,30,20))),po);
+		po.gridy = 2;
+		po.gridwidth = 3;
+		po.fill = GridBagConstraints.CENTER;
+		player1Panel.add(p1Image,po);
 		c.gridy=0;
 		c.gridx=0;
 		formPanel.add(player1Panel,c);
@@ -130,20 +149,30 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		player2Panel = new JPanel();
 		player2Panel.setLayout(new GridBagLayout());
 		GridBagConstraints pt = new GridBagConstraints();
+		pt.gridwidth = 3;
+		pt.fill = GridBagConstraints.CENTER;
 		pt.insets = new Insets(5,5,5,5);
-		pt.gridx = 1;
+		pt.gridx = 0;
 		pt.gridy = 0;
-		pt.anchor = GridBagConstraints.PAGE_START;
 		player2Panel.setBackground(Color.GRAY);
-		player2Panel.add(new JLabel ("Second player Name"),pt);
+		player2Panel.add(new JLabel ("Second player"),pt);
+		pt.gridx = 0;
+		pt.gridy = 1;
+		pt.anchor = GridBagConstraints.LINE_START;
+		pt.fill = GridBagConstraints.NONE;
+		pt.gridwidth = 1;
+		player2Panel.add(new JLabel("Name"),pt);
 		pt.gridx = 1;
 		pt.gridy = 1;
-		player2Panel.add(player1 = new JTextField("Player 2", 10),pt);
+		player2Panel.add(player2 = new JTextField("Player 2", 10),pt);
 		pt.gridx = 1;
-		pt.gridy = 3;
-		player2Panel.add(new JLabel(new ImageIcon(imageO.getScaledInstance(30,30,20))),pt);
+		pt.gridy = 2;
+		pt.gridwidth = 3;
+		pt.fill = GridBagConstraints.CENTER;
+		player2Panel.add(p2Image,pt);
 		c.gridx++;
 		formPanel.add(player2Panel,c);
+		packFrame();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

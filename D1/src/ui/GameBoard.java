@@ -117,7 +117,6 @@ public class GameBoard extends GUIParent implements ActionListener{
 			gameBoardPannel.add(btnOnGameBoard[i]);			
 		}
 		
-			
 	}
 	
 	@Override

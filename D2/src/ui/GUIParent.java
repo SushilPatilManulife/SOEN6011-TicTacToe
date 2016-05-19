@@ -36,7 +36,6 @@ public class GUIParent extends JFrame{
 				Help.getHelp();
 			}
 		});
-
 	}
 	
 	

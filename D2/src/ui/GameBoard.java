@@ -24,7 +24,7 @@ import javax.swing.border.LineBorder;
 
 import control.Controller;
 
-public class GameBoard extends JFrame implements ActionListener{
+public class GameBoard extends GUIParent implements ActionListener{
 	
 
 	private JPanel contentPane;
@@ -41,13 +41,6 @@ public class GameBoard extends JFrame implements ActionListener{
 	lblScoreBoard = new JLabel("Score Board"),
 	invalidMove = new JLabel("Invalid move! Choose an empty square.");
 	 
-	JMenuBar gameMenu = new JMenuBar();
-	JMenu file = new JMenu("File");
-	JMenu help = new JMenu("Help");
-	JMenuItem mnNewGame = new JMenuItem("New Game"),
-	exit = new JMenuItem("Exit"),
-	viewHelp = new JMenuItem("View Help"),
-	about = new JMenuItem("About");
 	static JButton nextRound = new JButton("Start next round"); 
 	/**
 	 * checkPlayer counts number of moves and is used to set turn
@@ -79,10 +72,8 @@ public class GameBoard extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public GameBoard() {
-		setTitle("Tic Tac Toe");
+		initialize();
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 600, 350);
-		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -98,18 +89,7 @@ public class GameBoard extends JFrame implements ActionListener{
 		invalidMove.setVisible(false);
 		invalidMove.setForeground(Color.RED);
 		contentPane.add(validateMove);
-		new Help();
-		gameMenu.add(file);
-		gameMenu.add(help);
-		file.add(mnNewGame);
-		file.add(exit);
-		help.add(viewHelp);
-		this.setJMenuBar(gameMenu);
-		viewHelp.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				Help.getHelp();
-			}
-		});
+
 		exit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				exitGame();
@@ -178,7 +158,7 @@ public class GameBoard extends JFrame implements ActionListener{
 			gameBoardPannel.add(btnOnGameBoard[i]);			
 		}
 		checkPlayer=0;
-			
+
 	}
 	
 	@Override
