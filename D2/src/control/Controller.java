@@ -8,6 +8,7 @@ public class Controller {
 
 	static Player player1;
 	static Player player2;
+	static Player player3;
 	private static int totalRound;
 	private static int currentRound;
 	//TODO: singleton?
@@ -16,6 +17,7 @@ public class Controller {
 		Controller.totalRound = totalRound;
 		player1 = new Player(name1, mark1);
 		player2 = new Player(name2, mark2);
+		player3 = new Player("", "");
 		GameBoard.main();
 	}
 	
@@ -48,9 +50,8 @@ public class Controller {
 		{
 			if (player1.getToken() == token)
 				player1.incrementScore();
-			else
+			else 
 				player2.incrementScore();
-			GameBoard.updateScoreboard(player1.getScore(), player2.getScore());
 			int[] line = new int [3];
 			line = GameLogic.getLine();
 			GameBoard.roundWon(line);
@@ -58,11 +59,12 @@ public class Controller {
 			checkResult();
 		}
 		else if (checkPlayer==9){
+			player3.incrementScore();
 			GameBoard.roundTie();
 			currentRound++;
 			checkResult();
 		}
-		
+		GameBoard.updateScoreboard(player1.getScore(), player2.getScore(), player3.getScore());
 	}
 	private static void checkResult()
 	{

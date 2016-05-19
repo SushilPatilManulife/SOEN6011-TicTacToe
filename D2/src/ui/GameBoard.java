@@ -38,6 +38,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 	
 	lblPlayer2Score = new JLabel(""),
 	lblPlayer1Score = new JLabel(""),
+	lblTiesScore	= new JLabel(""),
 	lblScoreBoard = new JLabel("Score Board"),
 	invalidMove = new JLabel("Invalid move! Choose an empty square.");
 	 
@@ -73,6 +74,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 	 */
 	public GameBoard() {
 		initialize();
+		setPlayers();
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -112,22 +114,26 @@ public class GameBoard extends GUIParent implements ActionListener{
 		});
 	
 		scoreBoardPannel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		scoreBoardPannel.setBounds(373, 56, 125, 83);
+		scoreBoardPannel.setBounds(373, 56, 131, 105);
 		contentPane.add(scoreBoardPannel);
 		scoreBoardPannel.setLayout(null);
 				
 		lblPlayer2Score.setBounds(23, 58, 108, 14);
 		scoreBoardPannel.add(lblPlayer2Score);
-		lblPlayer2Score.setText("Player 2 : 0");
+		lblPlayer2Score.setText(name2 + " : 0");
 		
 		lblPlayer1Score.setBounds(23, 33, 108, 14);
 		scoreBoardPannel.add(lblPlayer1Score);
-		lblPlayer1Score.setText("Player 1 : 0");
+		lblPlayer1Score.setText(name1 + " : 0");
+		
+		lblTiesScore.setBounds(23, 80, 108, 14);
+		scoreBoardPannel.add(lblTiesScore);
+		lblTiesScore.setText("Ties : 0");
 		
 		lblScoreBoard.setBounds(23, 8, 91, 14);
 		scoreBoardPannel.add(lblScoreBoard);
 		
-		setPlayers();
+		
 		currentRound = 1;
 		ImageIcon imageIcon = new ImageIcon (new ImageIcon("src/" + mark + ".png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 		lblPlayerMove.setText(turn + "'s turn" );
@@ -272,9 +278,10 @@ public class GameBoard extends GUIParent implements ActionListener{
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
 	}
-	public static void updateScoreboard(int score1, int score2){
-		lblPlayer2Score.setText("Player 2 : " + score2);
-		lblPlayer1Score.setText("Player 1 : " + score1);
+	public static void updateScoreboard(int score1, int score2, int score3){
+		lblPlayer2Score.setText(name2 + " : " + score2);
+		lblPlayer1Score.setText(name1 + " : " + score1);
+		lblTiesScore.setText("Ties : " + score3);
 	}
 
 }
