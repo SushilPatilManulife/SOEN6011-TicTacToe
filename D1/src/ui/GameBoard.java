@@ -98,7 +98,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 		ImageIcon imageIcon = new ImageIcon (new ImageIcon("src/" + mark + ".png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 		lblPlayerMove.setText(turn + "'s turn" );
 		lblPlayerMove.setIcon(imageIcon);
-		playerTurnPannel.setBounds(363, 119, 250, 95);
+		playerTurnPannel.setBounds(363, 160, 250, 95);
 		playerTurnPannel.setLayout(null);
 		lblPlayerMove.setBounds(10, 11, 250, 60);
 		
@@ -112,8 +112,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 			btnOnGameBoard[i]=new JButton();		
 			btnOnGameBoard[i].setFont(new Font("Tahoma", Font.BOLD, 40));
 			btnOnGameBoard[i].addActionListener(this);
-			btnOnGameBoard[i].setBackground(new Color(0,0,0));
-			btnOnGameBoard[i].setForeground(new Color(255,255,255));
+			btnOnGameBoard[i].setBackground(new Color(32,22,63));
 			gameBoardPannel.add(btnOnGameBoard[i]);			
 		}
 		
@@ -121,22 +120,24 @@ public class GameBoard extends GUIParent implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Object checkClick=e.getSource();
+		JButton checkClick=(JButton) e.getSource();
+		if(checkClick.getText()== ""){
 		for (int i = 0; i < 9 ; i++) {
 			if(checkClick==btnOnGameBoard[i] && checkPlayer < 9 ){
 				if(checkPlayer % 2 == 0){
-					UIManager.getDefaults().put("Button.disabledText",Color.WHITE);
+					btnOnGameBoard[i].setForeground(new Color(247,247,242));
 					btnOnGameBoard[i].setText(mark1);
-					btnOnGameBoard[i].setEnabled(false);
+					//btnOnGameBoard[i].setEnabled(false);
 				}
 				else{
-					UIManager.getDefaults().put("Button.disabledText",Color.RED);
-					btnOnGameBoard[i].setText(mark2);	
-					btnOnGameBoard[i].setEnabled(false);
+					btnOnGameBoard[i].setForeground(new Color(246,31,74));
+					btnOnGameBoard[i].setText(mark2);
+			
 				}
 				changePlayerTurn();
 				checkPlayer++;
 			}
+		}
 		}
 		
 	}
@@ -175,6 +176,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 		for(int i = 0 ; i < 9 ; i++){
 		btnOnGameBoard[i].setText("");
 		btnOnGameBoard[i].setEnabled(true);
+		btnOnGameBoard[i].setBackground(new Color(32,22,63));
 		}
 		turn = name1;
 		mark = mark1;
