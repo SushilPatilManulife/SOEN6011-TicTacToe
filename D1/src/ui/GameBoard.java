@@ -22,7 +22,8 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import control.Controller;
-public class GameBoard extends JFrame implements ActionListener{
+
+public class GameBoard extends GUIParent implements ActionListener{
 	
 	private JPanel contentPane;
 	JButton btnOnGameBoard[] = new JButton[9];
@@ -32,13 +33,6 @@ public class GameBoard extends JFrame implements ActionListener{
 	playerTurnPannel = new JPanel();
 	JLabel lblPlayerMove = new JLabel("");
 	
-	JMenuBar gameMenu = new JMenuBar();
-	JMenu file = new JMenu("File");
-	JMenu help = new JMenu("Help");
-	JMenuItem mnNewGame = new JMenuItem("New Game"),
-	exit = new JMenuItem("Exit"),
-	viewHelp = new JMenuItem("View Help");
-
 	
 	/**
 	 * checkPlayer counts number of moves and is used to set turn
@@ -63,10 +57,8 @@ public class GameBoard extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public GameBoard() {
-		setTitle("Tic Tac Toe");
+		initialize();
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 600, 304);
-		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -89,21 +81,6 @@ public class GameBoard extends JFrame implements ActionListener{
 		contentPane.add(resetPnl);
 		/////////////////////////////////////////
 		
-
-		Help helpPnl = new Help();
-		new Help();
-
-		gameMenu.add(file);
-		gameMenu.add(help);
-		file.add(mnNewGame);
-		file.add(exit);
-		help.add(viewHelp);
-		this.setJMenuBar(gameMenu);
-		viewHelp.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				Help.getHelp();
-			}
-		});
 		exit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				exitGame();

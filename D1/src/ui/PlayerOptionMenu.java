@@ -18,7 +18,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-public class PlayerOptionMenu extends JFrame implements ActionListener{
+import control.Controller;
+
+public class PlayerOptionMenu extends GUIParent implements ActionListener{
 
 	private JPanel formPanel;
 	private JTextField player1;
@@ -26,26 +28,12 @@ public class PlayerOptionMenu extends JFrame implements ActionListener{
 	private ButtonGroup mark;
 	JButton startGame;
 	JRadioButton x, o;
-	JMenuBar gameMenu = new JMenuBar();
-	JMenu help = new JMenu("Help");
-	JMenuItem viewHelp = new JMenuItem("View Help");
-	
 
 	public PlayerOptionMenu(){
-		setTitle("Tic Tac Toe");	
-		setBounds(100, 100, 524, 304);
-		setLocationRelativeTo(null);
+		initialize();
+		mnNewGame.setVisible(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gameMenu.add(help);
-		help.add(viewHelp);
-		viewHelp.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				Help.getHelp();
-			}
-		});
 		formPanel = new JPanel();
-		new Help();
-		setJMenuBar(gameMenu);
 		formPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
