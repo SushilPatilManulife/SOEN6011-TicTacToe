@@ -8,7 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+/*
+ * GUIParent.java 
+ * This class is a GUI for Menu bar. 
+ *@version 1.0 
+ */
 public class GUIParent extends JFrame{
 	JMenuBar gameMenu = new JMenuBar();
 	JMenu file = new JMenu("File");

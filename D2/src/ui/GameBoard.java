@@ -259,7 +259,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 					btnOnGameBoard[line[j]].setBackground(Color.blue);
 		}
 		//TODO:Label instead of message , turn wins round #
-		JOptionPane.showMessageDialog(null, turn + "wins this round!.\nClick OK to continue.");
+		JOptionPane.showMessageDialog(null, turn + " wins this round!.\nClick OK to continue.");
         nextRound.setVisible(true);
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
@@ -267,7 +267,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 	
 	public static void roundTie(){
 		//TODO:Label instead of message , round # is a tie
-		JOptionPane.showMessageDialog(null,  "It's a tie!\nClick OK to continue.");
+		JOptionPane.showMessageDialog(null,  "It's a tie! \n Click OK to continue.");
         nextRound.setVisible(true);
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
