@@ -187,9 +187,10 @@ public class GameBoard extends GUIParent implements ActionListener{
 					btnValue[i] = mark2;
 					token = mark2;
 				}
+				Controller.checkStatus(btnValue, token, checkPlayer);
 				changePlayerTurn();
 				checkPlayer++;
-				Controller.checkStatus(btnValue, token, checkPlayer);
+				
 			}
 		}
 		}

@@ -8,16 +8,16 @@ public class Controller {
 
 	static Player player1;
 	static Player player2;
-	static Player player3;
+	private static int tie;
 	private static int totalRound;
 	private static int currentRound;
 	//TODO: singleton?
 	public Controller(String name1, String name2, String mark1, String mark2, int totalRound){
 		currentRound = 1;
+		tie = 0;
 		Controller.totalRound = totalRound;
 		player1 = new Player(name1, mark1);
 		player2 = new Player(name2, mark2);
-		player3 = new Player("", "");
 		GameBoard.main();
 	}
 	
@@ -45,6 +45,9 @@ public class Controller {
 		return totalRound;
 	}
 	public static void checkStatus(String btnValue[], String token, int checkPlayer){
+		/**
+		 * Win scenario
+		 */
 		boolean won = GameLogic.isWon(btnValue, token);
 		if(won)
 		{
@@ -58,13 +61,16 @@ public class Controller {
 			currentRound++;
 			checkResult();
 		}
-		else if (checkPlayer==9){
-			player3.incrementScore();
+		/**
+		 * Tie scenario
+		 */
+		else if (checkPlayer==8){
+			tie++;
 			GameBoard.roundTie();
 			currentRound++;
 			checkResult();
 		}
-		GameBoard.updateScoreboard(player1.getScore(), player2.getScore(), player3.getScore());
+		GameBoard.updateScoreboard(player1.getScore(), player2.getScore(), tie);
 	}
 	private static void checkResult()
 	{
