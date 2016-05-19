@@ -29,7 +29,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import control.Controller;
-
+/*
+ * PlayerOptionMenu.java
+ * PlayerOptionMenu class is a GUI program displayed to the user when the application is opened.
+ * Players name and mark will be selected using this.
+ * Players can start the game using this menu.
+ */
 public class PlayerOptionMenu extends GUIParent implements ActionListener{
 
 	private JPanel formPanel;
