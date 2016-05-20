@@ -1,11 +1,6 @@
 package model;
 /**
- * Player.java
- * This is a POJO class for players which includes following methods
- * getName();
- * getToken(); 
- * getScore();
- * resetScore();
+ *  This is a POJO class for players 
  * @version 1.0
  * */
 public class Player {

@@ -10,8 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 /**
- * GUIParent.java 
- * This class is the parent GUI for Menu bar and shared properties. 
+ *  This class is the parent GUI for Menu bar and shared properties. 
  *@version 1.0 
  */
 public class GUIParent extends JFrame{
@@ -32,7 +31,6 @@ public class GUIParent extends JFrame{
 		setResizable(false);
 		ImageIcon icon = new ImageIcon("src/icon.gif");
 		setIconImage(icon.getImage());
-		//TODO: setBackground
 		setBounds(100, 100, 600, 350);
 		setLocationRelativeTo(null);
 		new Help();

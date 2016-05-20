@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 /**
- *Help.java
  *This class displays help for player. 
  */
 public class Help extends JPanel{
@@ -60,8 +59,7 @@ public class Help extends JPanel{
 		helpDg.pack();
 	}
 	/**
-	 * method to display help
-	 * @return the dialog with help content 
+	 * method to display the dialog with help content 
 	 */
 	public static void getHelp(){
 		helpDg.setVisible(true);

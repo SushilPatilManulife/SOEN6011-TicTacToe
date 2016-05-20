@@ -23,8 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import control.Controller;
 /**
- * GameBoard.java
- * GameBoard class is a GUI program to display 3*3 board, reset the board and display player's turn. 
+ *  GameBoard class is a GUI program to display 3*3 board, reset the board and display player's turn. 
  * @version 1.0
  */
 public class GameBoard extends GUIParent implements ActionListener{

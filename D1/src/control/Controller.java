@@ -6,21 +6,20 @@ import ui.GameBoard;
 import ui.PlayerOptionMenu;
 /** <h1>Tic Tac Toe</h1> 
  * Deliverable 1 is a stand-alone Java application that is able to show 3*3 board of tic tac toe game.
- * Functional requirements Completed are  1) Display 3*3 Board. 
- *  									  2) Player can choose the "X" or "O" mark.
- * 										  3) Player can reset the game.
- * 										  4) Players can set name.
- * 										  5) Draw an “X” or an “O” on cell where the user clicks only if it's empty.
- * 										  6) switch user turns.
- * 										  7) Player can exit the game. Confirmation is needed when game is in progress 
- * 										  8) Display help
- * Controller.java - This class is main controller class to start a application.
+ * Functional requirements Completed are  <ol><li> Display 3*3 Board. </li>
+ *  									  <li> Player can choose the "X" or "O" mark.</li>
+ * 										  <li> Player can reset the game.</li>
+ * 										  <li> Players can set name.</li>
+ * 										  <li> Draw an “X” or an “O” on cell where the user clicks only if it's empty.</li>
+ * 										  <li> switch user turns.</li>
+ * 										  <li> Player can exit the game. Confirmation is needed when game is in progress </li>
+ * 										  <li> Display help</li></ol>
+ * <br>Controller.java - This class is main controller class to start a application.
  * @author Shidokht Hejazi Sepehr
  * @author Sushil Patil
  * @author Beerpreet Singh Guliani
  * @author Amir Hakim
  * @version 1.0
- * @Since 12-05-2016
  */
 public class Controller {
 
