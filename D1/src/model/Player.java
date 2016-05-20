@@ -30,7 +30,7 @@ public class Player {
 	
 	/**
 	 *  Getter for property mark.
-	 * @return String Name of current player. 
+	 * @return String mark of current player. 
 	 * */
 	public String getToken(){ return token; }
 	
