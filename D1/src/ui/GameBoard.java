@@ -2,12 +2,20 @@ package ui;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+<<<<<<< HEAD
+=======
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,9 +24,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import control.Controller;
+<<<<<<< HEAD
 
 /**
  * This class to display GUI for 3*3 board, reset game and players turn. 
+=======
+/**
+ *  GameBoard class is a GUI program to display 3*3 board, reset the board and display player's turn. 
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
  * @version 1.0
  * @see ui
  */
@@ -38,9 +51,16 @@ public class GameBoard extends GUIParent implements ActionListener{
 	 */
 	int checkPlayer=0;
 	String turn, name1, name2, mark1, mark2, mark, markColor;
+<<<<<<< HEAD
 	/**
 	 * Main mehtod
 	 */
+=======
+/**
+ * main method is a public method used to initialize the window by a caller.
+ * it calls the constructor and sets visibility
+ */
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -55,12 +75,26 @@ public class GameBoard extends GUIParent implements ActionListener{
 	}
 
 	/**
-	 * Constructor to initialize Game Board
+	 * Constructor to initialize Window, create the board
 	 */
-	public GameBoard() {
+	private GameBoard() {
 		initialize();
+		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		contentPane = new JPanel();
+		contentPane = new JPanel(){	 
+		public void paintComponent (Graphics g)
+		{
+			super.paintComponent(g);
+			 try {
+				g.drawImage(ImageIO.read(new File ("src/bg2.jpg")), 0, 0, null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		};
+		
+		playerTurnPannel.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -80,6 +114,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 		resetPnl.add(reset);
 		resetPnl.setVisible(true);
 		contentPane.add(resetPnl);
+		resetPnl.setOpaque(false);
 		
 		exit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -100,8 +135,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 		lblPlayerMove.setIcon(imageIcon);
 		playerTurnPannel.setBounds(363, 160, 250, 95);
 		playerTurnPannel.setLayout(null);
-		lblPlayerMove.setBounds(10, 11, 250, 60);
-		
+		lblPlayerMove.setBounds(10, 11, 250, 60);	
 		playerTurnPannel.add(lblPlayerMove);
 		contentPane.add(playerTurnPannel);
 
@@ -117,7 +151,9 @@ public class GameBoard extends GUIParent implements ActionListener{
 		}
 		
 	}
-	
+	/**
+	 * actionPerformed for each board cell
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton checkClick=(JButton) e.getSource();
@@ -143,9 +179,13 @@ public class GameBoard extends GUIParent implements ActionListener{
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * This method set player names and marks 
+=======
+	 * Setter for property player names and marks 
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	 */
-	public void setPlayers(){
+	private void setPlayers(){
 		name1 = Controller.getPlayer1Name();
 		name2 = Controller.getPlayer2Name();
 		mark1 = Controller.getPlayer1Mark();
@@ -155,9 +195,13 @@ public class GameBoard extends GUIParent implements ActionListener{
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Method to switch the turn of player. 
+=======
+	 * Method to switch the turn of player when a move is made. 
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	 */
-	public void changePlayerTurn() {
+	private void changePlayerTurn() {
 		if(checkPlayer % 2 == 0) {
 		turn = name2;
 		mark=mark2;
@@ -171,20 +215,28 @@ public class GameBoard extends GUIParent implements ActionListener{
 		lblPlayerMove.setText(turn + "'s turn" );
 		lblPlayerMove.setIcon(imageIcon);
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	/**
 	 * Method to exit from game. Takes confirmation before exiting. 
 	 */
-	public void exitGame(){
+	private void exitGame(){
 		int res = JOptionPane.showConfirmDialog(null, "There is a game in progress. Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
 		if (res == JOptionPane.YES_OPTION)
 			System.exit(1);
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * This method resets the game board.  
+=======
+	/**
+	 * method to reset the game board to initial empty value.  
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	 */
-	public void resetBoard(){
+	private void resetBoard(){
 		for(int i = 0 ; i < 9 ; i++){
 		btnOnGameBoard[i].setText("");
 		btnOnGameBoard[i].setEnabled(true);

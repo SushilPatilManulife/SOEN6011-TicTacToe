@@ -463,7 +463,10 @@ Table styles
 .useSummary td, .constantsSummary td, .deprecatedSummary td {
     text-align:left;
     padding:0px 0px 12px 10px;
+<<<<<<< HEAD
     width:100%;
+=======
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 }
 th.colOne, th.colFirst, th.colLast, .useSummary th, .constantsSummary th,
 td.colOne, td.colFirst, td.colLast, .useSummary td, .constantsSummary td{
@@ -488,6 +491,10 @@ td.colOne, th.colOne {
     font-size:13px;
 }
 .overviewSummary td.colFirst, .overviewSummary th.colFirst,
+<<<<<<< HEAD
+=======
+.useSummary td.colFirst, .useSummary th.colFirst,
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 .overviewSummary td.colOne, .overviewSummary th.colOne,
 .memberSummary td.colFirst, .memberSummary th.colFirst,
 .memberSummary td.colOne, .memberSummary th.colOne,

@@ -1,40 +1,41 @@
 package ui;
-import control.Controller;
-
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import javax.swing.border.EtchedBorder;
 
 import control.Controller;
 /**
+<<<<<<< HEAD
  * This class is a GUI program displayed to the user when the application is opened.
  * players name and mark will be selected using this.
  * players can start the game using this menu.
  * @version 1.0
  * @see ui
+=======
+ * PlayerOptionMenu class is a GUI program displayed to the user when the application is opened.
+ * Players name and mark will be selected using this.
+ * Players can start the game using this menu.
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
  */
 public class PlayerOptionMenu extends GUIParent implements ActionListener{
 
@@ -48,14 +49,31 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 	JRadioButton x, o, b1, b3, b5;
 	JLabel p1Image, p2Image;
 	JLabel name;
+<<<<<<< HEAD
 	/**
 	 * Constructor for displaying first screen which players will see when the start the game.
 	 */
+=======
+/**
+ * constructor method
+ */
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	public PlayerOptionMenu(){
 		initialize();
 		mnNewGame.setVisible(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		formPanel = new JPanel();
+		formPanel = new JPanel(){	 
+			public void paintComponent (Graphics g)
+			{
+				super.paintComponent(g);
+				 try {
+					g.drawImage(ImageIO.read(new File ("src/bg1.jpg")), 0, 0, null);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			};
 		formPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
@@ -73,6 +91,7 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		pnl1.add(x);
 		pnl1.add(o);
 		c.gridx++;
+		pnl1.setOpaque(false);
 		formPanel.add(pnl1, c);
 		
 		c.gridx--;
@@ -92,8 +111,12 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		pnl0.add(b5);
 		b3.setSelected(true);
 		c.gridx++;
+<<<<<<< HEAD
 		//TODO: add in deliverable 2
 		//formPanel.add(pnl0, c);
+=======
+		
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 		p1Image = new JLabel();
 		p2Image = new JLabel();
 		ImageIcon xIcon = new ImageIcon(new ImageIcon("src/X.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
@@ -132,7 +155,8 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		po.gridx = 0;
 		po.gridy = 0;
 		po.anchor = GridBagConstraints.PAGE_START;
-		player1Panel.setBackground(Color.GRAY);
+		player1Panel.setBackground(new Color(230,230,230));
+		player1Panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		player1Panel.add(new JLabel ("First player"),po);
 		po.gridx = 0;
 		po.gridy = 1;
@@ -154,13 +178,14 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		
 		player2Panel = new JPanel();
 		player2Panel.setLayout(new GridBagLayout());
+		player2Panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		GridBagConstraints pt = new GridBagConstraints();
 		pt.gridwidth = 3;
 		pt.fill = GridBagConstraints.CENTER;
 		pt.insets = new Insets(5,5,5,5);
 		pt.gridx = 0;
 		pt.gridy = 0;
-		player2Panel.setBackground(Color.GRAY);
+		player2Panel.setBackground(new Color(230,230,230));
 		player2Panel.add(new JLabel ("Second player"),pt);
 		pt.gridx = 0;
 		pt.gridy = 1;
@@ -180,7 +205,14 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		formPanel.add(player2Panel,c);
 		packFrame();
 	}
+<<<<<<< HEAD
 	
+=======
+	/**
+	 * actionPerformed after clicking the "start game" button
+	 * makes sure players have unique names
+	 */
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String name1 = player1.getText();

@@ -37,7 +37,11 @@ public class Help extends JPanel{
 "( in this case the result is draw)</li></ol>"+
 "</html>";
 	/**
+<<<<<<< HEAD
 	 * Constructor - Displays the help panel.
+=======
+	 * Constructor for help class
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	 */
 	public Help(){
 		helpPnl = new JPanel();
@@ -49,7 +53,7 @@ public class Help extends JPanel{
 		helpPnl.setLayout(null);
 
 		helpPnl.setLayout(new BorderLayout());
-		helpDg.setLocationRelativeTo(null);
+
 
 		//content.setText(helpPage);
 		helpPnl.add(content);
@@ -60,7 +64,11 @@ public class Help extends JPanel{
 		helpDg.pack();
 	}
 	/**
+<<<<<<< HEAD
 	 * Method to Display help panel.
+=======
+	 * method to display the dialog with help content 
+>>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	 */
 	public static void getHelp(){
 		helpDg.setVisible(true);
