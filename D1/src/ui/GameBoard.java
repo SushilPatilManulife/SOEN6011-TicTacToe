@@ -21,11 +21,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import control.Controller;
+
 /**
- *  GameBoard class is a GUI program to display 3*3 board, reset the board and display player's turn. 
+ * This class to display GUI for 3*3 board, reset game and players turn. 
  * @version 1.0
+ * @see ui
  */
 public class GameBoard extends GUIParent implements ActionListener{
 	
@@ -43,10 +44,6 @@ public class GameBoard extends GUIParent implements ActionListener{
 	 */
 	int checkPlayer=0;
 	String turn, name1, name2, mark1, mark2, mark, markColor;
-/**
- * main method is a public method used to initialize the window by a caller.
- * it calls the constructor and sets visibility
- */
 	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -166,7 +163,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 	}
 	
 	/**
-	 * Setter for property player names and marks 
+	 * This method set player names and marks 
 	 */
 	private void setPlayers(){
 		name1 = Controller.getPlayer1Name();
@@ -184,7 +181,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 	}
 	
 	/**
-	 * Method to switch the turn of player when a move is made. 
+	 * Method to switch the turn of player. 
 	 */
 	private void changePlayerTurn() {
 		if(checkPlayer % 2 == 0) {
@@ -209,7 +206,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 			System.exit(1);
 	}
 	/**
-	 * method to reset the game board to initial empty value.  
+	 * This method resets the game board.  
 	 */
 	private void resetBoard(){
 		for(int i = 0 ; i < 9 ; i++){

@@ -26,9 +26,11 @@ import javax.swing.border.EtchedBorder;
 
 import control.Controller;
 /**
- * PlayerOptionMenu class is a GUI program displayed to the user when the application is opened.
- * Players name and mark will be selected using this.
- * Players can start the game using this menu.
+ * This class is a GUI program displayed to the user when the application is opened.
+ * players name and mark will be selected using this.
+ * players can start the game using this menu.
+ * @version 1.0
+ * @see ui
  */
 public class PlayerOptionMenu extends GUIParent implements ActionListener{
 
@@ -42,10 +44,13 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 	JRadioButton x, o, b1, b3, b5;
 	JLabel p1Image, p2Image;
 	JLabel name;
+
 	URL Ximage, Yimage;
-/**
- * constructor method
- */
+
+	/**
+	 * Constructor for displaying first screen which players will see when the start the game.
+	 */
+
 	public PlayerOptionMenu(){
 		initialize();
 		mnNewGame.setVisible(false);
@@ -99,7 +104,8 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		pnl0.add(b5);
 		b3.setSelected(true);
 		c.gridx++;
-		
+		//TODO: add in deliverable 2
+		//formPanel.add(pnl0, c);
 		p1Image = new JLabel();
 		p2Image = new JLabel();
 		Ximage = getClass().getResource("/X.png");
@@ -190,6 +196,7 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		formPanel.add(player2Panel,c);
 		packFrame();
 	}
+	
 	/**
 	 * actionPerformed after clicking the "start game" button
 	 * makes sure players have unique names
