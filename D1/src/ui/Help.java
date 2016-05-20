@@ -36,13 +36,10 @@ public class Help extends JPanel{
 "<br><li> The game ends when either one player wins or it is not longer possible for a player to win a game "+
 "( in this case the result is draw)</li></ol>"+
 "</html>";
+
 	/**
-<<<<<<< HEAD
-	 * Constructor - Displays the help panel.
-=======
-	 * Constructor for help class
->>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
-	 */
+	* Constructor for help class
+	*/
 	public Help(){
 		helpPnl = new JPanel();
 	    helpDg = new JDialog();
@@ -64,11 +61,7 @@ public class Help extends JPanel{
 		helpDg.pack();
 	}
 	/**
-<<<<<<< HEAD
-	 * Method to Display help panel.
-=======
 	 * method to display the dialog with help content 
->>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	 */
 	public static void getHelp(){
 		helpDg.setVisible(true);

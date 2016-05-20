@@ -25,17 +25,11 @@ import javax.swing.border.EtchedBorder;
 
 import control.Controller;
 /**
-<<<<<<< HEAD
  * This class is a GUI program displayed to the user when the application is opened.
  * players name and mark will be selected using this.
  * players can start the game using this menu.
  * @version 1.0
  * @see ui
-=======
- * PlayerOptionMenu class is a GUI program displayed to the user when the application is opened.
- * Players name and mark will be selected using this.
- * Players can start the game using this menu.
->>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
  */
 public class PlayerOptionMenu extends GUIParent implements ActionListener{
 
@@ -49,15 +43,9 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 	JRadioButton x, o, b1, b3, b5;
 	JLabel p1Image, p2Image;
 	JLabel name;
-<<<<<<< HEAD
 	/**
 	 * Constructor for displaying first screen which players will see when the start the game.
 	 */
-=======
-/**
- * constructor method
- */
->>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	public PlayerOptionMenu(){
 		initialize();
 		mnNewGame.setVisible(false);
@@ -111,12 +99,8 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		pnl0.add(b5);
 		b3.setSelected(true);
 		c.gridx++;
-<<<<<<< HEAD
 		//TODO: add in deliverable 2
 		//formPanel.add(pnl0, c);
-=======
-		
->>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 		p1Image = new JLabel();
 		p2Image = new JLabel();
 		ImageIcon xIcon = new ImageIcon(new ImageIcon("src/X.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
@@ -205,14 +189,11 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		formPanel.add(player2Panel,c);
 		packFrame();
 	}
-<<<<<<< HEAD
 	
-=======
 	/**
 	 * actionPerformed after clicking the "start game" button
 	 * makes sure players have unique names
 	 */
->>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String name1 = player1.getText();

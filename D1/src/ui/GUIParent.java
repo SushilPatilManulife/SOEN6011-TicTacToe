@@ -8,17 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-<<<<<<< HEAD
+
 
 /** 
  * This class is to display GUI of menu bar. 
  * @version 1.0 
  * @see ui
-=======
-/**
- *  This class is the parent GUI for Menu bar and shared properties. 
- *@version 1.0 
->>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
  */
 public class GUIParent extends JFrame{
 	ImageIcon bgImage;
@@ -29,16 +24,10 @@ public class GUIParent extends JFrame{
 	exit = new JMenuItem("Exit"),
 	viewHelp = new JMenuItem("View Help"),
 	about = new JMenuItem("About");
-<<<<<<< HEAD
-	/**
-	 * Display the menu bar.
-	 */
-=======
 	JLabel bgImageLabel;
-/**
- * this method creates the frame and sets common properties
- */
->>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
+	/**
+	 * this method creates the frame and sets common properties
+	 */
 	public void initialize(){
 		setTitle("Tic Tac Toe");
 		setResizable(false);
@@ -60,15 +49,10 @@ public class GUIParent extends JFrame{
 		});
 
 	}
-	/**
-<<<<<<< HEAD
-	 * pack frame
-	 */
-=======
-	 * method to resize frame
-	 */
 
->>>>>>> 90c82befe8495ae71366f17e46fee36c8b43f895
+	/**
+	 * method to resize frame
+	*/
 	public void packFrame(){
 		pack();
 	}
