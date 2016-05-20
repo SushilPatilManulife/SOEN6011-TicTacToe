@@ -2,16 +2,16 @@ package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-/*
- * GUIParent.java 
- * This class is a GUI for Menu bar. 
- *@version 1.0 
+
+/** 
+ * This class is to display GUI of menu bar. 
+ * @version 1.0 
+ * @see ui
  */
 public class GUIParent extends JFrame{
 	JMenuBar gameMenu = new JMenuBar();
@@ -21,6 +21,9 @@ public class GUIParent extends JFrame{
 	exit = new JMenuItem("Exit"),
 	viewHelp = new JMenuItem("View Help"),
 	about = new JMenuItem("About");
+	/**
+	 * Display the menu bar.
+	 */
 	public void initialize(){
 		setTitle("Tic Tac Toe");
 		ImageIcon icon = new ImageIcon("src/icon.gif");
@@ -42,11 +45,10 @@ public class GUIParent extends JFrame{
 		});
 
 	}
-	
-	
+	/**
+	 * pack frame
+	 */
 	public void packFrame(){
 		pack();
 	}
-	
-	
 }

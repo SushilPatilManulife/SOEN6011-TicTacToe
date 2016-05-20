@@ -4,7 +4,7 @@ import javax.swing.SwingUtilities;
 import model.Player;
 import ui.GameBoard;
 import ui.PlayerOptionMenu;
-/* <h1>Tic Tac Toe</h1> 
+/** <h1>Tic Tac Toe</h1> 
  * Deliverable 1 is a stand-alone Java application that is able to show 3*3 board of tic tac toe game.
  * Functional requirements Completed are 1) Display 3*3 Board. 
  *  									  2) Player can choose the "X" or "O" mark.
@@ -19,13 +19,20 @@ import ui.PlayerOptionMenu;
  * @author Beerpreet Singh Guliani
  * @author Amir Hakim
  * @version 1.0
- * @Since 12-05-2016
+ * @since 2016-05-10
  */
 public class Controller {
 
+	/**
+	 * player 1
+	 */
 	static Player player1;
+	/**
+	 * player 2
+	 */
 	static Player player2;
-	/* Constructor for initializing the new player entity with some unique name and mark.
+	
+	/** Constructor - for initializing the new player entity with some unique name and mark.
 	 * @param name1 Name of Player 1
 	 * @param name2 Name of Player 2
 	 * @param mark1 Mark for Player 1
@@ -44,29 +51,32 @@ public class Controller {
 			}
 		});
 	}
-	/*
-	 * This method is used to return current player 1 name
-	 * @return String Player 1 name.
+	
+	/**
+	 * This method returns player 1's name
+	 * @return String player 1 name.
 	 */
 	public static String getPlayer1Name(){
 		return player1.getName();
 	}
-	/*
-	 * This method is used to return current player 2 name
-	 * @return String Player 2 name.
+	
+	/**
+	 * This method returns player 2's name
+	 * @return String player 2 name.
 	 */
 	public static String getPlayer2Name(){
 		return player2.getName();
 	}
-	/*
-	 * This method is used to return current player 1 name
+	
+	/**
+	 * This method returns player 1's mark
 	 * @return String Mark for player 1.
 	 */
 	public static String getPlayer1Mark(){
 		return player1.getToken();
 	}
-	/*
-	 * This method is used to return current player 1 name
+	/**
+	 * This method returns player 2's mark
 	 * @return String Mark for player 2.
 	 */
 	public static String getPlayer2Mark(){

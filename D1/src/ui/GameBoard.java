@@ -8,24 +8,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-
 import control.Controller;
-/*
- * GameBoard.java
- * GameBoard class is a GUI program for 3*3 board, reset game and players turn. 
+
+/**
+ * This class to display GUI for 3*3 board, reset game and players turn. 
  * @version 1.0
+ * @see ui
  */
 public class GameBoard extends GUIParent implements ActionListener{
 	
@@ -38,12 +33,14 @@ public class GameBoard extends GUIParent implements ActionListener{
 	JLabel lblPlayerMove = new JLabel("");
 	
 	
-	/**
+	/*
 	 * checkPlayer counts number of moves and is used to set turn
 	 */
 	int checkPlayer=0;
 	String turn, name1, name2, mark1, mark2, mark, markColor;
-	
+	/**
+	 * Main mehtod
+	 */
 	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -108,7 +105,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 		playerTurnPannel.add(lblPlayerMove);
 		contentPane.add(playerTurnPannel);
 
-		/**
+		/*
 		 * create 3*3 board				
 		 */
 		for(int i = 0 ; i < 9 ; i++){
@@ -145,8 +142,8 @@ public class GameBoard extends GUIParent implements ActionListener{
 		
 	}
 	
-	/*
-	 * Setter for property player names and marks 
+	/**
+	 * This method set player names and marks 
 	 */
 	public void setPlayers(){
 		name1 = Controller.getPlayer1Name();
@@ -157,7 +154,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 		mark = mark1;
 	}
 	
-	/*
+	/**
 	 * Method to switch the turn of player. 
 	 */
 	public void changePlayerTurn() {
@@ -174,7 +171,8 @@ public class GameBoard extends GUIParent implements ActionListener{
 		lblPlayerMove.setText(turn + "'s turn" );
 		lblPlayerMove.setIcon(imageIcon);
 	}
-	/*
+	
+	/**
 	 * Method to exit from game. Takes confirmation before exiting. 
 	 */
 	public void exitGame(){
@@ -182,7 +180,8 @@ public class GameBoard extends GUIParent implements ActionListener{
 		if (res == JOptionPane.YES_OPTION)
 			System.exit(1);
 	}
-	/*
+	
+	/**
 	 * This method resets the game board.  
 	 */
 	public void resetBoard(){

@@ -10,9 +10,9 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-/*
- *Help.java
+/**
  *This class displays help for player. 
+ *@version 1.0
  */
 public class Help extends JPanel{
 
@@ -36,8 +36,8 @@ public class Help extends JPanel{
 "<br><li> The game ends when either one player wins or it is not longer possible for a player to win a game "+
 "( in this case the result is draw)</li></ol>"+
 "</html>";
-	/*
-	 * Constructor for this class
+	/**
+	 * Constructor - Displays the help panel.
 	 */
 	public Help(){
 		helpPnl = new JPanel();
@@ -59,6 +59,9 @@ public class Help extends JPanel{
 		helpPnl.setVisible(true);
 		helpDg.pack();
 	}
+	/**
+	 * Method to Display help panel.
+	 */
 	public static void getHelp(){
 		helpDg.setVisible(true);
 	}
