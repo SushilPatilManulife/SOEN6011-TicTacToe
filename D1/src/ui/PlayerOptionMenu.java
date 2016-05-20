@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -41,6 +42,7 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 	JRadioButton x, o, b1, b3, b5;
 	JLabel p1Image, p2Image;
 	JLabel name;
+	URL Ximage, Yimage;
 /**
  * constructor method
  */
@@ -53,7 +55,7 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 			{
 				super.paintComponent(g);
 				 try {
-					g.drawImage(ImageIO.read(new File ("src/bg1.jpg")), 0, 0, null);
+					g.drawImage(ImageIO.read(getClass().getResource("/bg1.jpg")), 0, 0, null);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -100,8 +102,10 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		
 		p1Image = new JLabel();
 		p2Image = new JLabel();
-		ImageIcon xIcon = new ImageIcon(new ImageIcon("src/X.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-		ImageIcon oIcon = new ImageIcon(new ImageIcon("src/O.png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		Ximage = getClass().getResource("/X.png");
+		Yimage = getClass().getResource("/O.png");
+		ImageIcon xIcon = new ImageIcon(new ImageIcon(Ximage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		ImageIcon oIcon = new ImageIcon(new ImageIcon(Yimage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 		x.setSelected(true);
 		p1Image.setIcon(xIcon);
 		p2Image.setIcon(oIcon);

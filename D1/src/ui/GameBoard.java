@@ -11,6 +11,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -35,8 +36,8 @@ public class GameBoard extends GUIParent implements ActionListener{
 	scoreBoardPannel = new JPanel(),
 	playerTurnPannel = new JPanel();
 	JLabel lblPlayerMove = new JLabel("");
-	
-	
+	URL turnImage;
+	Color color1, color2;
 	/*
 	 * checkPlayer counts number of moves and is used to set turn
 	 */
@@ -71,7 +72,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 		{
 			super.paintComponent(g);
 			 try {
-				g.drawImage(ImageIO.read(new File ("src/bg2.jpg")), 0, 0, null);
+				g.drawImage(ImageIO.read(getClass().getResource ("/bg2.jpg")), 0, 0, null);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -115,7 +116,8 @@ public class GameBoard extends GUIParent implements ActionListener{
 		});
 		
 		setPlayers();
-		ImageIcon imageIcon = new ImageIcon (new ImageIcon("src/" + mark + ".png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		turnImage = getClass().getResource("/"+mark+".png");
+		ImageIcon imageIcon = new ImageIcon (new ImageIcon(turnImage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 		lblPlayerMove.setText(turn + "'s turn" );
 		lblPlayerMove.setIcon(imageIcon);
 		playerTurnPannel.setBounds(363, 160, 250, 95);
@@ -146,12 +148,12 @@ public class GameBoard extends GUIParent implements ActionListener{
 		for (int i = 0; i < 9 ; i++) {
 			if(checkClick==btnOnGameBoard[i] && checkPlayer < 9 ){
 				if(checkPlayer % 2 == 0){
-					btnOnGameBoard[i].setForeground(new Color(247,247,242));
+					btnOnGameBoard[i].setForeground(color1);
 					btnOnGameBoard[i].setText(mark1);
 					
 				}
 				else{
-					btnOnGameBoard[i].setForeground(new Color(246,31,74));
+					btnOnGameBoard[i].setForeground(color2);
 					btnOnGameBoard[i].setText(mark2);
 			
 				}
@@ -171,6 +173,12 @@ public class GameBoard extends GUIParent implements ActionListener{
 		name2 = Controller.getPlayer2Name();
 		mark1 = Controller.getPlayer1Mark();
 		mark2 = Controller.getPlayer2Mark();
+		color1 = new Color(247,247,242);
+		color2 = new Color(246,31,74);
+		if(mark1 == "O"){
+			color1 = new Color(246,31,74);
+			color2 = new Color(247,247,242);
+		}
 		turn = name1;
 		mark = mark1;
 	}
@@ -187,8 +195,8 @@ public class GameBoard extends GUIParent implements ActionListener{
 		turn = name1;
 		mark=mark1;
 		}
-
-		ImageIcon imageIcon = new ImageIcon (new ImageIcon("src/" + mark + ".png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		turnImage = getClass().getResource("/"+mark+".png");
+		ImageIcon imageIcon = new ImageIcon (new ImageIcon(turnImage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 		lblPlayerMove.setText(turn + "'s turn" );
 		lblPlayerMove.setIcon(imageIcon);
 	}
@@ -211,7 +219,8 @@ public class GameBoard extends GUIParent implements ActionListener{
 		}
 		turn = name1;
 		mark = mark1;
-		ImageIcon imageIcon = new ImageIcon (new ImageIcon("src/" + mark + ".png").getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		turnImage = getClass().getResource("/"+mark+".png");
+		ImageIcon imageIcon = new ImageIcon (new ImageIcon(turnImage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 		lblPlayerMove.setText(turn + "'s turn" );
 		lblPlayerMove.setIcon(imageIcon);
 		checkPlayer = 0;
