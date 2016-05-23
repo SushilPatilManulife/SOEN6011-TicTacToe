@@ -202,7 +202,7 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 			mark1 = "O";
 			mark2 = "X";
 		}	
-		 for (Enumeration<AbstractButton> buttons = rounds.getElements(); buttons.hasMoreElements();) {
+		for (Enumeration<AbstractButton> buttons = rounds.getElements(); buttons.hasMoreElements();) {
 	            AbstractButton button = buttons.nextElement();
 
 	            if (button.isSelected()) {
