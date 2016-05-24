@@ -59,23 +59,29 @@ public class Controller {
 			line = GameLogic.getLine();
 			GameBoard.roundWon(line);
 			currentRound++;
-			checkResult();
+			if(currentRound > totalRound){
+			String result = checkResult();
+			GameBoard.gameWon(result);
+			}
 		}
 		/**
 		 * Tie scenario
 		 */
-		else if (checkPlayer==8){
+		else if (GameLogic.isTie(checkPlayer)){
 			tie++;
 			GameBoard.roundTie();
 			currentRound++;
-			checkResult();
+			if(currentRound > totalRound){
+			String result = checkResult();
+			GameBoard.gameWon(result);
+			}
 		}
 		GameBoard.updateScoreboard(player1.getScore(), player2.getScore(), tie);
 	}
-	private static void checkResult()
+	private static String checkResult()
 	{
 		//TODO: format of displaying results
-		if(currentRound > totalRound){
+		
 			int max = player1.getScore();
 			String result = player1.getName() +  " is the winner with score of "+ player1.getScore()+" out of "+ totalRound;
 			
@@ -85,8 +91,8 @@ public class Controller {
 			else if(player2.getScore()== max){
 				result = player2.getName() + " and "+ player1.getName()+ " are tied each with a score of "+ player2.getScore()+" out of "+ totalRound;
 			}
-			GameBoard.gameWon(result);
-		}
+			return result;
+		
 	}
 	
 	

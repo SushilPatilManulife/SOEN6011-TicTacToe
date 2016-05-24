@@ -48,6 +48,11 @@ public class GameLogic {
 		return false;
 		
 	}
+	public static boolean isTie(int checkPlayer){
+		if (checkPlayer==8)
+			return true;
+		else return false;
+	}
 	public static int[] getLine(){
 		return line;
 	}

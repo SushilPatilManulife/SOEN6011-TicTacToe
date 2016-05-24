@@ -152,10 +152,8 @@ public class GameBoard extends GUIParent implements ActionListener{
 		
 		
 		currentRound = 1;
-		turnImage = getClass().getResource("/"+mark+".png");
-		ImageIcon imageIcon = new ImageIcon (new ImageIcon(turnImage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 		lblPlayerMove.setText(turn + "'s turn" );
-		lblPlayerMove.setIcon(imageIcon);
+		lblPlayerMove.setIcon(updateIcon());
 		playerTurnPannel.setBounds(363, 160, 250, 95);
 		playerTurnPannel.setLayout(null);
 		lblPlayerMove.setBounds(0, 11, 250, 60);
@@ -191,6 +189,23 @@ public class GameBoard extends GUIParent implements ActionListener{
 		String token;
 		JButton checkClick=(JButton) e.getSource();
 		if(checkClick.getText()== ""){
+				token = updateBoard(checkClick);
+				Controller.checkStatus(btnValue, token, checkPlayer);
+				changePlayerTurn();
+				checkPlayer++;
+		}
+		else {
+			invalidMove.setVisible(true);
+		}
+	}
+	public static ImageIcon updateIcon()
+	{
+		turnImage = GameBoard.class.getResource("/"+mark+".png");
+		ImageIcon imageIcon = new ImageIcon (new ImageIcon(turnImage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		return imageIcon;
+	}
+	public String updateBoard(JButton checkClick){
+		String token = null;
 		for (int i = 0; i < 9 ; i++) {
 			if(checkClick==btnOnGameBoard[i] && checkPlayer < 9 ){
 				if(checkPlayer % 2 == 0){
@@ -205,18 +220,10 @@ public class GameBoard extends GUIParent implements ActionListener{
 					btnValue[i] = mark2;
 					token = mark2;
 				}
-				Controller.checkStatus(btnValue, token, checkPlayer);
-				changePlayerTurn();
-				checkPlayer++;
-				
 			}
 		}
-		}
-		else {
-			invalidMove.setVisible(true);
-		}
+				return token;
 	}
-	
 	private void setPlayers(){
 		name1 = Controller.getPlayer1Name();
 		name2 = Controller.getPlayer2Name();
@@ -243,10 +250,8 @@ public class GameBoard extends GUIParent implements ActionListener{
 		mark=mark1;
 		}
 
-		turnImage = GameBoard.class.getResource("/"+mark+".png");
-		ImageIcon imageIcon = new ImageIcon (new ImageIcon(turnImage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 		lblPlayerMove.setText(turn + "'s turn" );
-		lblPlayerMove.setIcon(imageIcon);
+		lblPlayerMove.setIcon(updateIcon());
 	}
 	
 	private void exitGame(){
@@ -263,10 +268,8 @@ public class GameBoard extends GUIParent implements ActionListener{
 		}
 		turn = name1;
 		mark = mark1;
-		turnImage = GameBoard.class.getResource("/"+mark+".png");
-		ImageIcon imageIcon = new ImageIcon (new ImageIcon(turnImage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 		lblPlayerMove.setText(turn + "'s turn" );
-		lblPlayerMove.setIcon(imageIcon);
+		lblPlayerMove.setIcon(updateIcon());
 		checkPlayer = 0;
 	}
 	private void startNextRound(){
