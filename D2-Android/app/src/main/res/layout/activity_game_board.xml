@@ -120,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Player 1: 0"
-                        android:id="@+id/player1ScoreTextView2"
+                        android:id="@+id/player1ScoreTextView"
                         android:textColor="#fe0105" />
                 </LinearLayout>
 
@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Player 2: 0"
-                        android:id="@+id/player2ScoreTextView3"
+                        android:id="@+id/player2ScoreTextView"
                         android:textColor="#0224fe" />
                 </LinearLayout>
 

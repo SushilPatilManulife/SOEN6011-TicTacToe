@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.xogeeks.game.model.Player;
+import com.xogeeks.game.tictactoe.GameBoard;
 
 /**
  * Created by Sushilpatil on 2016-05-22.
@@ -38,6 +39,25 @@ public class Controller extends Activity {
     }
     public static int getTotalRound(){
         return totalRound;
+    }
+    public static void checkStatus(String btnValue[], String token, int checkPlayer){
+        boolean won = GameLogic.isWon(btnValue, token);
+        if(won){
+            if (player1.getToken() == token)
+                player1.incrementScore();
+            else
+                player2.incrementScore();
+            currentRound++;
+            int[] line = new int [3];
+            line = GameLogic.getLine();
+            GameBoard.roundWon(line,token);
+            currentRound++;
+        }
+        else if (checkPlayer==8){
+            tie++;
+            GameBoard.roundTie();
+            currentRound++;
+        }
     }
 
 }
