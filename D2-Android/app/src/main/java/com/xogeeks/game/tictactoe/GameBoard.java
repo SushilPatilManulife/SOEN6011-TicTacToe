@@ -2,6 +2,8 @@ package com.xogeeks.game.tictactoe;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Process;
 import android.renderscript.Short4;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +25,9 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
     TextView player1ScoreTextView,
              player2ScoreTextView,
              playersTurnTextView;
-    Button checkButton1;
+    Button checkButton1,
+            backButton,
+            exitButton;
     ImageView xImageView;
     static int checkPlayer=0;
     static String turn;
@@ -52,6 +56,10 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         for(int i=0;i<9;i++)
         gameBoardButton[i].setOnClickListener(this);
 
+        backButton=(Button)findViewById(R.id.backButton);
+        exitButton=(Button)findViewById(R.id.exitButton);
+        backButton.setOnClickListener(this);
+        exitButton.setOnClickListener(this);
     }
     public void setPlayers(){
         name1 = Controller.getPlayer1Name();
@@ -77,8 +85,8 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         xImageView=(ImageView)findViewById(R.id.xImageView);
         if(mark1=="O")
             xImageView.setImageResource(R.drawable.o);
-
         checkButton();
+
     }
 
     public void setMarks(){
@@ -115,21 +123,23 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         AlertDialog dialog=builder.create();
         dialog.show();
     }
+    public void askC(String title, String message){
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("Ok",null);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog,int which){
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog=builder.create();
+        dialog.show();
+    }
     public static void roundWon(int[] line,String token){
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(GameBoard.context);
-//        alertDialogBuilder.setTitle("Result");
-//        alertDialogBuilder
-//                .setMessage("It's a Tie \n click OK to continue")
-//                .setNegativeButton("Ok",new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        // if this button is clicked, just close
-//                        // the dialog box and do nothing
-//                        dialog.cancel();
-//                    }
-//                });
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//        alertDialog.show();
-        gameBoard.showAlert("Result","Win");
+
+        gameBoard.showAlert("Result","Congratulations!! "+token+" Won this round");
         for (int j = 0; j < 3 ; j++) {
             if(token.equals("X"))
                 gameBoardButton[line[j]].setBackgroundResource(R.drawable.xwin);
@@ -138,7 +148,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         }
     }
     public static void roundTie(){
-
+            gameBoard.showAlert("Result","It's a Tie!!!");
     }
     @Override
     public void onClick(View v) {
@@ -149,11 +159,13 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
             if(checkButton1==gameBoardButton[i]&& checkPlayer < 9){
                 if(checkPlayer % 2 == 0){
                     gameBoardButton[i].setBackgroundResource(setImageX);
+                    gameBoardButton[i].setEnabled(false);
                     btnValue[i] = mark1;
                     token = mark1;
                 }
                 else{
                     gameBoardButton[i].setBackgroundResource(setImageO);
+                    gameBoardButton[i].setEnabled(false);
                     btnValue[i] = mark2;
                     token = mark2;
                 }
@@ -162,5 +174,57 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
                 checkPlayer++;
             }
         }
+        if(v.getId()==R.id.backButton){
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("Return to Menu ");
+            builder
+                    .setMessage("Are you Sure? \n you want to end your game")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            for(int i = 0 ; i < 9 ; i++){
+                                gameBoardButton[i].setEnabled(true);
+                                btnValue[i]="";
+                                checkPlayer=0;
+                            }
+                            Intent goBack=new Intent("android.intent.action.PLAYERPROPERTIES");
+                            finish();
+                            startActivity(goBack);
+                        }
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+        if(v.getId()==R.id.exitButton){
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("Exit Game");
+            builder
+                    .setMessage("Are you Sure? \n you want to Exit")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            for(int i = 0 ; i < 9 ; i++){
+                                gameBoardButton[i].setEnabled(true);
+                                btnValue[i]="";
+                                checkPlayer=0;
+                            }
+                           finish();
+                            moveTaskToBack(true);
+                        }
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
     }
+
 }
