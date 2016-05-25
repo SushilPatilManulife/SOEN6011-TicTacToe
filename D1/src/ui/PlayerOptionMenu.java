@@ -35,8 +35,8 @@ import control.Controller;
 public class PlayerOptionMenu extends GUIParent implements ActionListener{
 
 	private JPanel formPanel;
-	private JPanel player1Panel;
-	private JPanel player2Panel;
+	private JPanel player1Panel, player2Panel;
+	private JPanel playerNumberPanel;
 	private JTextField player1;
 	private JTextField player2;
 	private ButtonGroup mark, rounds;
@@ -50,6 +50,7 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 	/**
 	 * Constructor for displaying first screen which players will see when the start the game.
 	 */
+	
 
 	public PlayerOptionMenu(){
 		initialize();
@@ -110,8 +111,8 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		p2Image = new JLabel();
 		Ximage = getClass().getResource("/X.png");
 		Yimage = getClass().getResource("/O.png");
-		ImageIcon xIcon = new ImageIcon(new ImageIcon(Ximage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-		ImageIcon oIcon = new ImageIcon(new ImageIcon(Yimage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		final ImageIcon xIcon = new ImageIcon(new ImageIcon(Ximage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		final ImageIcon oIcon = new ImageIcon(new ImageIcon(Yimage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
 		x.setSelected(true);
 		p1Image.setIcon(xIcon);
 		p2Image.setIcon(oIcon);
@@ -195,6 +196,10 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		c.gridx++;
 		formPanel.add(player2Panel,c);
 		packFrame();
+	}
+	
+	public void PlayerChoiceMenu(){
+		
 	}
 	
 	/**

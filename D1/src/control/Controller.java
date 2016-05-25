@@ -2,6 +2,7 @@ package control;
 import javax.swing.SwingUtilities;
 
 import model.Player;
+import ui.Cards;
 import ui.GameBoard;
 import ui.PlayerOptionMenu;
 /** <h1>Tic Tac Toe</h1> 
@@ -10,7 +11,7 @@ import ui.PlayerOptionMenu;
  *  									  <li> Player can choose the "X" or "O" mark.</li>
  * 										  <li> Player can reset the game.</li>
  * 										  <li> Players can set name.</li>
- * 										  <li> Draw an “X” or an “O” on cell where the user clicks only if it's empty.</li>
+ * 										  <li> Draw an ï¿½Xï¿½ or an ï¿½Oï¿½ on cell where the user clicks only if it's empty.</li>
  * 										  <li> switch user turns.</li>
  * 										  <li> Player can exit the game. Confirmation is needed when game is in progress </li>
  * 										  <li> Display help</li></ol>
@@ -49,7 +50,8 @@ public class Controller {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
-				new PlayerOptionMenu().setVisible(true);
+				// new PlayerOptionMenu().setVisible(true);
+				Cards.createAndShowGUI();
 			}
 		});
 	}
