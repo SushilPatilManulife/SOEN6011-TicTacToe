@@ -1,7 +1,6 @@
 package com.xogeeks.game.tictactoe;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,7 +37,6 @@ public class PlayerProperties extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_properties);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         startNewGame();
     }
     @Override
@@ -71,7 +69,6 @@ public class PlayerProperties extends AppCompatActivity implements View.OnClickL
                     new Controller(name1,name2,mark1,mark2,roundNum);
                     //Toast.makeText(PlayerProperties.this,""+name1+name2+mark1+mark2+roundNum,Toast.LENGTH_SHORT).show();
                     Intent startGame = new Intent("android.intent.action.GAMEBOARD");
-                    startGame.putExtra("rounds",roundNum);
                     startActivity(startGame);
                 }
                 else
