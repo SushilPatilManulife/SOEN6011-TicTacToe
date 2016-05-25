@@ -39,14 +39,7 @@ public class Controller {
 	public static String getPlayer2Name(){
 		return player2.getName();
 	}
-	//
-	public static String getPlayer1Mark(){
-		return player1.getToken();
-	}
-	//
-	public static String getPlayer2Mark(){
-		return player2.getToken();
-	}
+
 	public static int getTotalRound(){
 		return totalRound;
 	}

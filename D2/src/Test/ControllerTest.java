@@ -34,8 +34,6 @@ public class ControllerTest extends TestCase {
 		new Controller("player 1", "player 2", "X", "O", 3);
 		assertEquals( "player 1", Controller.getPlayer1Name());
 		assertEquals( "player 2", Controller.getPlayer2Name());
-		assertEquals(  "X", Controller.getPlayer1Mark());
-		assertEquals( "O", Controller.getPlayer2Mark());
 		assertEquals( 3, Controller.getTotalRound());
 	}
 	
