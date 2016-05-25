@@ -50,8 +50,8 @@ public class Controller {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
-				// new PlayerOptionMenu().setVisible(true);
-				Cards.createAndShowGUI();
+				new PlayerOptionMenu().setVisible(true);
+				// Cards.createAndShowGUI();
 			}
 		});
 	}
