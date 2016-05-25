@@ -1,9 +1,7 @@
 package ui;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,15 +23,14 @@ import javax.swing.border.LineBorder;
 
 import control.Controller;
 
-public class GameBoard extends GUIParent implements ActionListener{
+public class GameBoard extends GUIParent {
 	
 
 	private JPanel contentPane;
 	//?//
-	static JButton btnOnGameBoard[] = new JButton[9];
 	
-	JPanel gameBoardPannel = new JPanel(),
-	scoreBoardPannel = new JPanel(),
+	
+	JPanel scoreBoardPannel = new JPanel(),
 	playerTurnPannel = new JPanel();
 	static JLabel lblPlayerMove = new JLabel(""),
 	
@@ -45,16 +42,15 @@ public class GameBoard extends GUIParent implements ActionListener{
 	 
 	static JButton nextRound = new JButton("Start next round"); 
 	static URL turnImage;
-	Color color1, color2;
+	static Color color1;
+	static Color color2;
 	/**
 	 * checkPlayer counts number of moves and is used to set turn
 	 */
 	static int checkPlayer=0;
 	static String turn;
 	static String name1, name2;
-	static String mark1;
-	static String mark2;
-	static String mark;
+	static String mark = "X";
 	static String btnValue[] = new String[9];
 	
 	static int currentRound;
@@ -97,9 +93,9 @@ public class GameBoard extends GUIParent implements ActionListener{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 			
-		gameBoardPannel.setBounds(25, 25, 314, 191);
-		contentPane.add(gameBoardPannel);
-		gameBoardPannel.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		contentPane.add(new Board());
+		
 		
 		JPanel validateMove = new JPanel();
 		validateMove.setOpaque(false);
@@ -134,7 +130,10 @@ public class GameBoard extends GUIParent implements ActionListener{
 		scoreBoardPannel.setBounds(373, 56, 131, 105);
 		contentPane.add(scoreBoardPannel);
 		scoreBoardPannel.setLayout(null);
-				
+		
+		name1 = Controller.getPlayer1Name();
+		name2 = Controller.getPlayer2Name();
+		
 		lblPlayer2Score.setBounds(23, 58, 108, 14);
 		scoreBoardPannel.add(lblPlayer2Score);
 		lblPlayer2Score.setText(name2 + " : 0");
@@ -152,7 +151,7 @@ public class GameBoard extends GUIParent implements ActionListener{
 		
 		
 		currentRound = 1;
-		lblPlayerMove.setText(turn + "'s turn" );
+		lblPlayerMove.setText(name1 + "'s turn" );
 		lblPlayerMove.setIcon(updateIcon());
 		playerTurnPannel.setBounds(363, 160, 250, 95);
 		playerTurnPannel.setLayout(null);
@@ -168,87 +167,64 @@ public class GameBoard extends GUIParent implements ActionListener{
 		});
 		contentPane.add(playerTurnPannel);
 		
-		/**
-		 * create board				
-		 */
-		for(int i = 0 ; i < 9 ; i++){
-			btnOnGameBoard[i]=new JButton();	
-			btnOnGameBoard[i].setFont(new Font("Tahoma", Font.BOLD, 40));
-			btnOnGameBoard[i].setText("");
-			btnOnGameBoard[i].addActionListener(this);
-			btnOnGameBoard[i].setBackground(new Color(32,22,63));
-			gameBoardPannel.add(btnOnGameBoard[i]);			
-		}
 		checkPlayer=0;
 
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	
+	public static void cellClicked(JButton checkClick) {
 		invalidMove.setVisible(false);
-		String token;
-		JButton checkClick=(JButton) e.getSource();
-		if(checkClick.getText()== ""){
-				token = updateBoard(checkClick);
-				Controller.checkStatus(btnValue, token, checkPlayer);
-				changePlayerTurn();
-				checkPlayer++;
-		}
-		else {
+		if(!addMove(checkClick))
 			invalidMove.setVisible(true);
-		}
+		
+	}
+	public static boolean addMove(JButton checkClick){
+		if(checkClick.getText()== ""){
+		    updateBoard(checkClick);
+			Controller.checkStatus(btnValue, mark, checkPlayer);
+			changePlayerTurn();
+			checkPlayer++;
+			return true;
+	}
+		else
+			return false;
 	}
 	public static ImageIcon updateIcon()
 	{
 		turnImage = GameBoard.class.getResource("/"+mark+".png");
 		ImageIcon imageIcon = new ImageIcon (new ImageIcon(turnImage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		imageIcon.setDescription(mark+" symbol");
 		return imageIcon;
 	}
-	public String updateBoard(JButton checkClick){
-		String token = null;
-		for (int i = 0; i < 9 ; i++) {
-			if(checkClick==btnOnGameBoard[i] && checkPlayer < 9 ){
+	public static void updateBoard(JButton checkClick){
+			if(checkPlayer < 9 ){
 				if(checkPlayer % 2 == 0){
-					btnOnGameBoard[i].setForeground(color1);
-					btnOnGameBoard[i].setText(mark1);
-					btnValue[i] = mark1;
-					token = mark1;
+					int i = Board.update(checkClick, color1, mark);
+					btnValue[i] = mark;
 				}
 				else{
-					btnOnGameBoard[i].setForeground(color2);
-					btnOnGameBoard[i].setText(mark2);
-					btnValue[i] = mark2;
-					token = mark2;
+					int i = Board.update(checkClick, color2, mark);
+					btnValue[i] = mark;
 				}
 			}
-		}
-				return token;
 	}
 	private void setPlayers(){
-		name1 = Controller.getPlayer1Name();
-		name2 = Controller.getPlayer2Name();
-		mark1 = Controller.getPlayer1Mark();
-		mark2 = Controller.getPlayer2Mark();
+		mark = Controller.getCurrentPlayerMark();
 		color1 = new Color(247,247,242);
 		color2 = new Color(246,31,74);
-		if(mark1 == "O"){
+		if(mark == "O"){
 			color1 = new Color(246,31,74);
 			color2 = new Color(247,247,242);
 		}
-		turn = name1;
-		mark = mark1;
+		turn = Controller.getCurrentPlayerName();
 		totalRound = Controller.getTotalRound();
 	}
 	
 	private static void changePlayerTurn() {
-		if(checkPlayer % 2 == 0) {
-		turn = name2;
-		mark=mark2;
-		} 
-		else {
-		turn = name1;
-		mark=mark1;
-		}
+		Controller.changeTurn();
+		
+		turn = Controller.getCurrentPlayerName();
+		mark = Controller.getCurrentPlayerMark();
 
 		lblPlayerMove.setText(turn + "'s turn" );
 		lblPlayerMove.setIcon(updateIcon());
@@ -261,13 +237,10 @@ public class GameBoard extends GUIParent implements ActionListener{
 	}
 	
 	private static void resetBoard(){
-		for(int i = 0 ; i < 9 ; i++){
-		btnOnGameBoard[i].setText("");
-		btnOnGameBoard[i].setEnabled(true);
-		btnOnGameBoard[i].setBackground(new Color(32,22,63));
-		}
-		turn = name1;
-		mark = mark1;
+		Board.reset();
+		Controller.resetTurn();
+		turn = Controller.getCurrentPlayerName();
+		mark = Controller.getCurrentPlayerMark();
 		lblPlayerMove.setText(turn + "'s turn" );
 		lblPlayerMove.setIcon(updateIcon());
 		checkPlayer = 0;
@@ -281,12 +254,7 @@ public class GameBoard extends GUIParent implements ActionListener{
         lblPlayerMove.setVisible(true);
 	}
 	public static void roundWon(int[] line){
-		for (int i = 0; i < 9 ; i++) {
-					btnOnGameBoard[i].setEnabled(false);
-		}
-		for (int j = 0; j < 3 ; j++) {
-					btnOnGameBoard[line[j]].setBackground(Color.blue);
-		}
+		Board.displayRoundResult(line);
 		//TODO:Label instead of message , turn wins round #
 		JOptionPane.showMessageDialog(null, turn + " wins this round!.\nClick OK to continue.");
         nextRound.setVisible(true);
@@ -302,7 +270,7 @@ public class GameBoard extends GUIParent implements ActionListener{
         invalidMove.setVisible(false);
 	}
 	public static void gameWon(String result){
-		//TODO: new game button, disable game board, display scores
+		//TODO: new game button, disable game board, display 
 		JOptionPane.showMessageDialog(null, result);
         nextRound.setVisible(false);
         lblPlayerMove.setVisible(false);
