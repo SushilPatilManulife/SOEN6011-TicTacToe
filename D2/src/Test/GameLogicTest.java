@@ -1,5 +1,7 @@
 package Test;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import control.GameLogic;
@@ -39,39 +41,39 @@ public class GameLogicTest extends TestCase {
 		String[] btnValue1 = {"X","X","X","O","O",null,null,null,null};
 		String token = "X";
 		boolean result = GameLogic.isWon(btnValue1, token);
-		assertEquals(true, result);
+		assertTrue(result);
 		//diagonal
 		String[] btnValue2 = {"X","O","O","O","X",null,null,null,"X"};
 		result = GameLogic.isWon(btnValue2, token);
-		assertEquals(true, result);
+		assertTrue( result);
 		//diagonal
 		String[] btnValue5 = {"X","O","O","O","X",null,null,null,null};
 		result = GameLogic.isWon(btnValue5, token);
-		assertEquals(false, result);
+		assertFalse( result);
 		//vertical
 		String[] btnValue3 = {"X","O","O","X","X",null,"X",null,"O"};
 		result = GameLogic.isWon(btnValue3, token);
-		assertEquals(true, result);
+		assertTrue( result);
 		//vertical
 		String[] btnValue4 = {"X","O","O","X","X",null,null,null,"O"};
 		result = GameLogic.isWon(btnValue4, token);
-		assertEquals(false, result);
+		assertFalse( result);
 		//diagonal
 		String[] btnValue6 = {null,"O","X",null,"X",null,"X",null,"O"};
 		result = GameLogic.isWon(btnValue6, token);
-		assertEquals(true, result);
+		assertTrue(result);
 		//diagonal
 		String[] btnValue7 = {null,"O","X",null,null ,null,"X",null,"O"};
 		result = GameLogic.isWon(btnValue7, token);
-		assertEquals(false, result);
+		assertFalse(result);
 		//diagonal
 		String[] btnValue9 = {null,"O","X",null,"X" ,null,null,null,"O"};
 		result = GameLogic.isWon(btnValue9, token);
-		assertEquals(false, result);
+		assertFalse(result);
 		//diagonal
 		String[] btnValue8 = {"X","O","X",null,null ,null,"X",null,"O"};
 		result = GameLogic.isWon(btnValue8, token);
-		assertEquals(false, result);
+		assertFalse(result);
 	}
 	
 
@@ -79,20 +81,22 @@ public class GameLogicTest extends TestCase {
 		public void testIsTie() {
 			int checkPlayer=5;
 	        boolean b = GameLogic.isTie(checkPlayer);
-	        assertEquals(false, b);
+	        assertFalse (b);
 	        checkPlayer=8;
 	        boolean c = GameLogic.isTie(checkPlayer);
-	        assertEquals(true, c);
+	        assertTrue (c);
 		}
 		@Test
 		public void testGetLine(){
 			int line[]=new int[3];
 			String[] btnValue3 = {"O","O","O","X","X",null,"X",null,"O"};
+			GameLogic gm = new GameLogic();
 			Boolean result = GameLogic.isWon(btnValue3, "O");
 			assertTrue(result);
 			int temp[]={0,1,2};
 	        line = GameLogic.getLine();
-	        assertEquals(temp, line);
+	        Boolean b = Arrays.equals(line, temp);
+	        assertTrue(b);
 		}
 }
 
