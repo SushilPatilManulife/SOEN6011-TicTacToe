@@ -49,6 +49,7 @@ public class PlayerProperties extends AppCompatActivity implements View.OnClickL
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         startNewGame();
     }
+
     @Override
     public void onClick(View v){
         int roundNum =1;

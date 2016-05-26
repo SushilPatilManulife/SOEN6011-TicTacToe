@@ -4,14 +4,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Process;
 import android.renderscript.Short4;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -123,6 +128,37 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
             turn = name1;
             mark=mark1;
         }
+    }
+    public void showGifts(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        final AlertDialog dialog = builder.create();
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.go_pro_dialog_layout, null);
+        dialog.setView(dialogLayout);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        dialog.show();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface d) {
+                ImageView image = (ImageView) dialog.findViewById(R.id.goProDialogImage);
+                Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                        R.drawable.whygoprodialogimage);
+                float imageWidthInPX = (float)image.getWidth();
+
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Math.round(imageWidthInPX),
+                        Math.round(imageWidthInPX * (float)icon.getHeight() / (float)icon.getWidth()));
+                image.setLayoutParams(layoutParams);
+            }
+        });
     }
     public void showAlert(String title, String message){
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
