@@ -36,6 +36,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Cards implements ItemListener {
+	static JFrame frame;
     JPanel cards; //a panel that uses CardLayout
     final static String BUTTONPANEL = "Two Players";
     final static String TEXTPANEL = "One Player";
@@ -76,7 +77,7 @@ public class Cards implements ItemListener {
      */
     public static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("CardLayoutDemo");
+        frame = new JFrame("Tic Tac Toe");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Create and set up the content pane.
@@ -87,4 +88,5 @@ public class Cards implements ItemListener {
         frame.pack();
         frame.setVisible(true);
     }
+    
 }

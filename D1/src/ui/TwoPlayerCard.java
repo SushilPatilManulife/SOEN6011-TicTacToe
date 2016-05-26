@@ -182,6 +182,7 @@ public class TwoPlayerCard extends JPanel {
 				mark2 = "X";
 			}		
 			new Controller(name1, name2, mark1, mark2);
+			Cards.frame.dispose();
 			}
 			else{
 				JOptionPane.showMessageDialog(null, "please pick unique names!");
