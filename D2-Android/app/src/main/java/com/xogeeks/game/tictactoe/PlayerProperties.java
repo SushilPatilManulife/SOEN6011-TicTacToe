@@ -1,7 +1,9 @@
 package com.xogeeks.game.tictactoe;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +17,9 @@ import android.widget.Toast;
 import com.xogeeks.game.control.Controller;
 
 public class PlayerProperties extends AppCompatActivity implements View.OnClickListener {
-    public Button startGameButton;
+    public Button startGameButton,
+                  exitButton,
+                  helpButton;
     EditText player1Name;
     EditText player2Name;
     RadioGroup selectXorORadioButton,
@@ -31,8 +35,12 @@ public class PlayerProperties extends AppCompatActivity implements View.OnClickL
         startGameButton.setOnClickListener(this);
         selectOasRadioButton=(RadioButton)findViewById(R.id.selectOasRadioButton);
         selectXasRadioButton=(RadioButton)findViewById(R.id.selectXasRadioButton);
+        exitButton=(Button)findViewById(R.id.exitButton);
+        helpButton=(Button)findViewById(R.id.helpButton);
         selectOasRadioButton.setOnClickListener(this);
         selectXasRadioButton.setOnClickListener(this);
+        exitButton.setOnClickListener(this);
+        helpButton.setOnClickListener(this);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +92,30 @@ public class PlayerProperties extends AppCompatActivity implements View.OnClickL
             case R.id.selectXasRadioButton:
                     player1MarkImageView.setImageResource(R.drawable.x);
                     player2MarkImageView.setImageResource(R.drawable.o);
+                break;
+            case R.id.exitButton:
+                AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                builder.setTitle("Exit Game");
+                builder
+                        .setMessage("Are you Sure? \n you want to Exit")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                finish();
+                                moveTaskToBack(true);
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                break;
+            case R.id.helpButton:
+                Intent help=new Intent("android.intent.action.HELP");
+                startActivity(help);
                 break;
         }
 

@@ -44,7 +44,6 @@ public class Controller extends Activity {
                 player1.incrementScore();
             else
                 player2.incrementScore();
-            currentRound++;
             int[] line = new int [3];
             line = GameLogic.getLine();
             GameBoard.roundWon(line,token);
@@ -57,15 +56,18 @@ public class Controller extends Activity {
             currentRound++;
             checkResult();
         }
+        GameBoard.updateScoreboard(player1.getScore(), player2.getScore(), tie);
     }
     private static void checkResult() {
-        if (currentRound > totalRound) {
+        if(currentRound > totalRound){
             int max = player1.getScore();
-            String result = player1.getName() + " is the winner with score of " + player1.getScore() + " out of " + totalRound;
-            if (player2.getScore() > max) {
-                result = player2.getName() + " is the winner with score of " + player2.getScore() + " out of " + totalRound;
-            } else if (player2.getScore() == max) {
-                result = player2.getName() + " and " + player1.getName() + " are tied each with a score of " + player2.getScore() + " out of " + totalRound;
+            String result = player1.getName() +  " is the winner with score of "+ player1.getScore()+" out of "+ totalRound;
+
+            if(player2.getScore()> max){
+                result = player2.getName() + " is the winner with score of "+ player2.getScore()+" out of "+ totalRound;
+            }
+            else if(player2.getScore()== max){
+                result = player2.getName() + " and "+ player1.getName()+ " are tied each with a score of "+ player2.getScore()+" out of "+ totalRound;
             }
             GameBoard.gameWon(result);
         }
