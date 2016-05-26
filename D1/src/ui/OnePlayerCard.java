@@ -41,6 +41,11 @@ public class OnePlayerCard extends JPanel {
 	URL Ximage, Yimage;
 	
 	public OnePlayerCard() {
+		Ximage = getClass().getResource("/X.png");
+		Yimage = getClass().getResource("/O.png");
+		final ImageIcon xIcon = new ImageIcon(new ImageIcon(Ximage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		final ImageIcon oIcon = new ImageIcon(new ImageIcon(Yimage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
@@ -50,13 +55,15 @@ public class OnePlayerCard extends JPanel {
 		c.gridy++;
 		this.add(new JLabel ("First move"), c);
 		mark = new ButtonGroup();
-		x = new JRadioButton("X");
-		o = new JRadioButton("O");
+		x = new JRadioButton();
+		o = new JRadioButton();
 		mark.add(x);
 		mark.add(o);
 		JPanel pnl1 = new JPanel();
 		pnl1.add(x);
+		pnl1.add(new  JLabel(xIcon));
 		pnl1.add(o);
+		pnl1.add(new  JLabel(oIcon));
 		c.gridx++;
 		pnl1.setOpaque(false);
 		this.add(pnl1, c);
@@ -82,10 +89,7 @@ public class OnePlayerCard extends JPanel {
 		this.add(pnl0, c);
 		p1Image = new JLabel();
 		p2Image = new JLabel();
-		Ximage = getClass().getResource("/X.png");
-		Yimage = getClass().getResource("/O.png");
-		final ImageIcon xIcon = new ImageIcon(new ImageIcon(Ximage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-		final ImageIcon oIcon = new ImageIcon(new ImageIcon(Yimage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+
 		x.setSelected(true);
 		p1Image.setIcon(xIcon);
 		p2Image.setIcon(oIcon);
