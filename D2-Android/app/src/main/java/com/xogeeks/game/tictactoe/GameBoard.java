@@ -3,6 +3,7 @@ package com.xogeeks.game.tictactoe;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Process;
 import android.renderscript.Short4;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 import com.xogeeks.game.control.Controller;
 
+import java.util.Arrays;
+
 public class GameBoard extends AppCompatActivity implements View.OnClickListener {
     //int turn=1;
     static Context context;
@@ -27,8 +30,10 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
              playersTurnTextView;
     Button checkButton1,
             backButton,
-            exitButton;
+            exitButton,
+            nextRound;
     ImageView xImageView;
+    static int currentRound;
     static int checkPlayer=0;
     static String turn;
     static String name1, name2;
@@ -58,8 +63,10 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
 
         backButton=(Button)findViewById(R.id.backButton);
         exitButton=(Button)findViewById(R.id.exitButton);
+        nextRound=(Button)findViewById(R.id.startNextRoundButton);
         backButton.setOnClickListener(this);
         exitButton.setOnClickListener(this);
+        nextRound.setOnClickListener(this);
     }
     public void setPlayers(){
         name1 = Controller.getPlayer1Name();
@@ -75,6 +82,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_board);
         //String name1=getIntent().getExtras().getString("name1");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setPlayers();
         player1ScoreTextView=(TextView)findViewById(R.id.player1ScoreTextView);
         player2ScoreTextView=(TextView)findViewById(R.id.player2ScoreTextView);
@@ -85,6 +93,8 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         xImageView=(ImageView)findViewById(R.id.xImageView);
         if(mark1=="O")
             xImageView.setImageResource(R.drawable.o);
+        nextRound=(Button)findViewById(R.id.startNextRoundButton);
+        nextRound.setVisibility(View.INVISIBLE);
         checkButton();
 
     }
@@ -139,16 +149,33 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
     }
     public static void roundWon(int[] line,String token){
 
-        gameBoard.showAlert("Result","Congratulations!! "+token+" Won this round");
+        gameBoard.showAlert("Result","Congratulations!! "+turn+" wins this round");
         for (int j = 0; j < 3 ; j++) {
             if(token.equals("X"))
                 gameBoardButton[line[j]].setBackgroundResource(R.drawable.xwin);
             else
                 gameBoardButton[line[j]].setBackgroundResource(R.drawable.owin);
         }
+        gameBoard.nextRound.setVisibility(View.VISIBLE);
     }
+
     public static void roundTie(){
             gameBoard.showAlert("Result","It's a Tie!!!");
+    }
+    public static void gameWon(String result){
+        gameBoard.showAlert("Game Winner",result);
+        gameBoard.nextRound.setVisibility(View.INVISIBLE);
+    }
+    private void startNextRound(){
+        changePlayerTurn();
+        //resetBoard();
+        Arrays.fill(btnValue, null);
+        checkPlayer=0;
+        currentRound++;
+        nextRound.setVisibility(View.INVISIBLE);
+    }
+    public static void updateScoreboard(int score1, int score2, int score3){
+
     }
     @Override
     public void onClick(View v) {
@@ -171,8 +198,19 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
                 }
                 Controller.checkStatus(btnValue, token, checkPlayer);
                 changePlayerTurn();
+                if(mark=="X") {
+                    xImageView.setImageResource(R.drawable.x);
+                }
+                else {
+                    xImageView.setImageResource(R.drawable.o);
+                }
+                playersTurnTextView.setText(turn+"'s turn");
                 checkPlayer++;
             }
+        }
+        if(v.getId()==R.id.startNextRoundButton){
+            startNextRound();
+            recreate();
         }
         if(v.getId()==R.id.backButton){
             AlertDialog.Builder builder=new AlertDialog.Builder(this);
@@ -226,5 +264,6 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
             alertDialog.show();
         }
     }
+
 
 }
