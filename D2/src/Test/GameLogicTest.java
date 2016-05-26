@@ -73,5 +73,26 @@ public class GameLogicTest extends TestCase {
 		result = GameLogic.isWon(btnValue8, token);
 		assertEquals(false, result);
 	}
+	
+
+		@Test
+		public void testIsTie() {
+			int checkPlayer=5;
+	        boolean b = GameLogic.isTie(checkPlayer);
+	        assertEquals(false, b);
+	        checkPlayer=8;
+	        boolean c = GameLogic.isTie(checkPlayer);
+	        assertEquals(true, c);
+		}
+		@Test
+		public void testGetLine(){
+			int line[]=new int[3];
+			String[] btnValue3 = {"O","O","O","X","X",null,"X",null,"O"};
+			Boolean result = GameLogic.isWon(btnValue3, "O");
+			assertTrue(result);
+			int temp[]={0,1,2};
+	        line = GameLogic.getLine();
+	        assertEquals(temp, line);
+		}
 }
 
