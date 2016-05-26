@@ -21,9 +21,6 @@ public class Controller extends Activity {
         Controller.totalRound = totalRound;
         player1 = new Player(name1, mark1);
         player2 = new Player(name2, mark2);
-//        Intent startGame = new Intent("android.intent.action.GAMEBOARD");
-//                //startActivity(startGame););
-//        startActivity(startGame);
     }
     public static String getPlayer1Name(){
         return player1.getName();
@@ -52,12 +49,25 @@ public class Controller extends Activity {
             line = GameLogic.getLine();
             GameBoard.roundWon(line,token);
             currentRound++;
+            checkResult();
         }
         else if (checkPlayer==8){
             tie++;
             GameBoard.roundTie();
             currentRound++;
+            checkResult();
         }
     }
-
+    private static void checkResult() {
+        if (currentRound > totalRound) {
+            int max = player1.getScore();
+            String result = player1.getName() + " is the winner with score of " + player1.getScore() + " out of " + totalRound;
+            if (player2.getScore() > max) {
+                result = player2.getName() + " is the winner with score of " + player2.getScore() + " out of " + totalRound;
+            } else if (player2.getScore() == max) {
+                result = player2.getName() + " and " + player1.getName() + " are tied each with a score of " + player2.getScore() + " out of " + totalRound;
+            }
+            GameBoard.gameWon(result);
+        }
+    }
 }

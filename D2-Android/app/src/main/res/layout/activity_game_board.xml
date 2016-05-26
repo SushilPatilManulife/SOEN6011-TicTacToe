@@ -155,7 +155,7 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Ties : 0"
                         android:id="@+id/tiesScoreTextView"
-                        android:textColor="#ffe203" />
+                        android:textColor="#4e1b0a" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
