@@ -37,13 +37,13 @@ import javax.swing.*;
 
 public class Cards implements ItemListener {
     JPanel cards; //a panel that uses CardLayout
-    final static String BUTTONPANEL = "Card with JButtons";
-    final static String TEXTPANEL = "Card with JTextField";
+    final static String BUTTONPANEL = "Two Players";
+    final static String TEXTPANEL = "One Player";
     
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
         JPanel comboBoxPane = new JPanel(); //use FlowLayout
-        String comboBoxItems[] = { BUTTONPANEL, TEXTPANEL };
+        String comboBoxItems[] = { TEXTPANEL, BUTTONPANEL };
         JComboBox cb = new JComboBox(comboBoxItems);
         cb.setEditable(false);
         cb.addItemListener(this);
@@ -51,15 +51,14 @@ public class Cards implements ItemListener {
         
         //Create the "cards".
         TwoPlayerCard card1 = new TwoPlayerCard();
-
-        
-        JPanel card2 = new JPanel();
-        card2.add(new JTextField("TextField", 20));
+        OnePlayerCard card2 = new OnePlayerCard();
         
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
-        cards.add(card1, BUTTONPANEL);
+        
         cards.add(card2, TEXTPANEL);
+        cards.add(card1, BUTTONPANEL);
+        
         
         pane.add(comboBoxPane, BorderLayout.PAGE_START);
         pane.add(cards, BorderLayout.CENTER);
