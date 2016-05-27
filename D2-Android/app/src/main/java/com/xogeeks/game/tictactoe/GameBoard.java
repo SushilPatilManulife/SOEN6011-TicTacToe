@@ -166,6 +166,28 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
             }
         });
     }
+    public void showWinner(String title, String message){
+
+        // TODO Auto-generated method stub
+        android.app.AlertDialog.Builder alertadd = new android.app.AlertDialog.Builder(this);
+        alertadd.setTitle(title);
+        alertadd.setMessage(message);
+        LayoutInflater factory = LayoutInflater.from(this);
+        final View view = factory.inflate(R.layout.dialog_main, null);
+
+        pl.droidsonroids.gif.GifTextView image= (pl.droidsonroids.gif.GifTextView) view.findViewById(R.id.imageView);
+        //image.setImageResource(R.drawable.fireworks);
+
+        alertadd.setView(view);
+        alertadd.setNeutralButton("ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dlg, int sumthin) {
+                showGifts("Your Gift","Enjoy your Gift!!! ");
+            }
+        });
+
+        alertadd.show();
+
+    }
 
     public static void roundWon(int[] line,String token){
 
@@ -188,7 +210,8 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
              gameBoard.nextRound.setVisibility(View.INVISIBLE);
     }
     public static void gameWon(String result){
-        gameBoard.showGifts("Game Winner",result);
+        //gameBoard.showGifts("Game Winner",result);
+        gameBoard.showWinner("Game Winner",result);
         gameBoard.nextRound.setVisibility(View.INVISIBLE);
     }
     private void startNextRound(){
@@ -243,32 +266,35 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         setMarks();
         String token;
         checkButton1=(Button)findViewById(v.getId());
-        for (int i = 0; i < 9 ; i++) {
-            if(checkButton1==gameBoardButton[i]&& checkPlayer < 9){
-                if(checkPlayer % 2 == 0){
-                    gameBoardButton[i].setBackgroundResource(setImageX);
-                    gameBoardButton[i].setEnabled(false);
-                    btnValue[i] = mark1;
-                    token = mark1;
+        if(checkButton1.isClickable()) {
+
+            for (int i = 0; i < 9; i++) {
+                if (checkButton1 == gameBoardButton[i] && checkPlayer < 9) {
+                    if (checkPlayer % 2 == 0) {
+                        gameBoardButton[i].setBackgroundResource(setImageX);
+                        gameBoardButton[i].setEnabled(false);
+                        btnValue[i] = mark1;
+                        token = mark1;
+                    } else {
+                        gameBoardButton[i].setBackgroundResource(setImageO);
+                        gameBoardButton[i].setEnabled(false);
+                        btnValue[i] = mark2;
+                        token = mark2;
+                    }
+                    Controller.checkStatus(btnValue, token, checkPlayer);
+                    changePlayerTurn();
+                    if (mark == "X") {
+                        xImageView.setImageResource(R.drawable.x);
+                    } else {
+                        xImageView.setImageResource(R.drawable.o);
+                    }
+                    playersTurnTextView.setText(turn + "'s turn");
+                    checkPlayer++;
                 }
-                else{
-                    gameBoardButton[i].setBackgroundResource(setImageO);
-                    gameBoardButton[i].setEnabled(false);
-                    btnValue[i] = mark2;
-                    token = mark2;
-                }
-                Controller.checkStatus(btnValue, token, checkPlayer);
-                changePlayerTurn();
-                if(mark=="X") {
-                    xImageView.setImageResource(R.drawable.x);
-                }
-                else {
-                    xImageView.setImageResource(R.drawable.o);
-                }
-                playersTurnTextView.setText(turn+"'s turn");
-                checkPlayer++;
             }
         }
+        else
+            Toast.makeText(this,"No",Toast.LENGTH_LONG);
         if(v.getId()==R.id.startNextRoundButton){
             startNextRound();
         }
