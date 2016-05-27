@@ -198,6 +198,8 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
                 gameBoardButton[line[j]].setBackgroundResource(R.drawable.owin);
         }
         //gameBoard.showAlert("Result","Congratulations!! "+turn+" wins this round");
+        for(int i = 0; i < 9 ; i++)
+            gameBoardButton[i].setEnabled(false);
         gameBoard.roundWinner.setText(turn+" wins this round");
         gameBoard.roundWinner.setVisibility(View.VISIBLE);
         gameBoard.nextRound.setVisibility(View.VISIBLE);
@@ -266,35 +268,33 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         setMarks();
         String token;
         checkButton1=(Button)findViewById(v.getId());
-        if(checkButton1.isClickable()) {
-
-            for (int i = 0; i < 9; i++) {
-                if (checkButton1 == gameBoardButton[i] && checkPlayer < 9) {
-                    if (checkPlayer % 2 == 0) {
-                        gameBoardButton[i].setBackgroundResource(setImageX);
-                        gameBoardButton[i].setEnabled(false);
-                        btnValue[i] = mark1;
-                        token = mark1;
-                    } else {
-                        gameBoardButton[i].setBackgroundResource(setImageO);
-                        gameBoardButton[i].setEnabled(false);
-                        btnValue[i] = mark2;
-                        token = mark2;
-                    }
-                    Controller.checkStatus(btnValue, token, checkPlayer);
-                    changePlayerTurn();
-                    if (mark == "X") {
-                        xImageView.setImageResource(R.drawable.x);
-                    } else {
-                        xImageView.setImageResource(R.drawable.o);
-                    }
-                    playersTurnTextView.setText(turn + "'s turn");
-                    checkPlayer++;
+        //if(checkButton1.isClickable()) {
+        for (int i = 0; i < 9; i++) {
+            if (checkButton1 == gameBoardButton[i] && checkPlayer < 9 && btnValue[i] == null) {
+                if (checkPlayer % 2 == 0) {
+                    gameBoardButton[i].setBackgroundResource(setImageX);
+                    gameBoardButton[i].setEnabled(false);
+                    btnValue[i] = mark1;
+                    token = mark1;
+                } else {
+                    gameBoardButton[i].setBackgroundResource(setImageO);
+                    gameBoardButton[i].setEnabled(false);
+                    btnValue[i] = mark2;
+                    token = mark2;
                 }
-            }
+                Controller.checkStatus(btnValue, token, checkPlayer);
+                changePlayerTurn();
+                if (mark == "X") {
+                    xImageView.setImageResource(R.drawable.x);
+                } else {
+                    xImageView.setImageResource(R.drawable.o);
+                }
+                playersTurnTextView.setText(turn + "'s turn");
+                checkPlayer++;
+            } else
+                Toast.makeText(this, "No", Toast.LENGTH_LONG);
         }
-        else
-            Toast.makeText(this,"No",Toast.LENGTH_LONG);
+
         if(v.getId()==R.id.startNextRoundButton){
             startNextRound();
         }
