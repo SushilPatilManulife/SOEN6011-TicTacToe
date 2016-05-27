@@ -71,8 +71,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
 
         for(int i=0;i<9;i++)
         gameBoardButton[i].setOnClickListener(this);
-        player1ScoreTextView=(TextView)findViewById(R.id.player1ScoreTextView);
-        player2ScoreTextView=(TextView)findViewById(R.id.player2ScoreTextView);
+
         tieScoreTextView=(TextView)findViewById(R.id.tiesScoreTextView);
         changeRound=(TextView)findViewById(R.id.roundNumberTextView);
         backButton=(Button)findViewById(R.id.backButton);
@@ -88,6 +87,8 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
     public void setPlayers(){
         mark = Controller.getCurrentPlayerMark();
         turn = Controller.getCurrentPlayerName();
+        name1 = Controller.getPlayer1Name();
+        name2 = Controller.getPlayer2Name();
         totalRound = Controller.getTotalRound();
     }
     @Override
@@ -96,11 +97,14 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_game_board);
         //String name1=getIntent().getExtras().getString("name1");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        name1 = Controller.getPlayer1Name();
-        name2 = Controller.getPlayer2Name();
+
         setPlayers();
         gameBoard.currentRound=1;
         playersTurnTextView=(TextView)findViewById(R.id.playersTurnTextView);
+        player1ScoreTextView=(TextView)findViewById(R.id.player1ScoreTextView);
+        player2ScoreTextView=(TextView)findViewById(R.id.player2ScoreTextView);
+        player1ScoreTextView.setText(name1+": 0");
+        player2ScoreTextView.setText(name2+": 0");
         playersTurnTextView.setText(turn+"'s turn");
         xImageView=(ImageView)findViewById(R.id.xImageView);
         if(mark=="O")
