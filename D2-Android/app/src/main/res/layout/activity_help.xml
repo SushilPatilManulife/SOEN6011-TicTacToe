@@ -17,13 +17,32 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:gravity="center">
 
             <Button
                 android:layout_width="47dp"
                 android:layout_height="50dp"
                 android:id="@+id/backButton"
                 android:background="@drawable/back" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="218dp"
+                    android:layout_height="40dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="In the options menu:"
+                    android:id="@+id/helpTextView"
+                    android:textStyle="bold"
+                    android:textColor="#5d0406" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -34,7 +53,7 @@
 
             <ScrollView
                 android:layout_width="326dp"
-                android:layout_height="match_parent"
+                android:layout_height="441dp"
                 android:id="@+id/scrollView"
                 android:layout_gravity="center_horizontal"
                 android:fillViewport="true" >
@@ -43,21 +62,13 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="103dp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="This is an application for playing the interesting Tic-Tac-Toe game. In the options menu:"
-                        android:id="@+id/helpTextView"
-                        android:textStyle="bold"
-                        android:textColor="#5d0406" />
+                    android:weightSum="1"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="171dp">
+                        android:layout_height="190dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -75,7 +86,7 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="116dp"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="3)players can choose the number of rounds they wants to play in a game."
                             android:id="@+id/textView3" />
@@ -91,8 +102,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_weight="0.24">
+                            android:gravity="center">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -119,20 +129,24 @@
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
-                            android:layout_height="31dp" >
+                            android:layout_height="31dp"
+                            android:weightSum="1"
+                            android:layout_weight="0.28">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:text="2) A piece may be placed on any empty space"
-                                android:id="@+id/textView6" />
+                                android:id="@+id/textView6"
+                                android:layout_weight="5.70" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
-                            android:layout_height="31dp" >
+                            android:layout_height="31dp"
+                            android:layout_weight="0.84">
 
                             <TextView
                                 android:layout_width="wrap_content"

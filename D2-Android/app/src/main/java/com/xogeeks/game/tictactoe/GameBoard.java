@@ -181,7 +181,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         alertadd.setView(view);
         alertadd.setNeutralButton("ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dlg, int sumthin) {
-                showGifts("Your Gift","Enjoy your Gift!!! ");
+                showGifts("Congratulations","Enjoy your Gift!!! ");
             }
         });
 
@@ -216,12 +216,22 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         gameBoard.showWinner("Game Winner",result);
         gameBoard.nextRound.setVisibility(View.INVISIBLE);
     }
-    private void startNextRound(){
-        changePlayerTurn();
+    private static void resetBoard(){
         for(int i=0; i < 9; i++) {
             gameBoardButton[i].setEnabled(true);
             gameBoardButton[i].setBackgroundResource(R.drawable.xoplain);
         }
+        turn = name1;
+        mark = mark1;
+        gameBoard.playersTurnTextView.setText(turn+"'s turn");
+        if(mark1=="O")
+            gameBoard.xImageView.setImageResource(R.drawable.o);
+        else
+            gameBoard.xImageView.setImageResource(R.drawable.x);
+    }
+    private void startNextRound(){
+        changePlayerTurn();
+        resetBoard();
         Arrays.fill(btnValue, null);
         checkPlayer=0;
         currentRound++;
