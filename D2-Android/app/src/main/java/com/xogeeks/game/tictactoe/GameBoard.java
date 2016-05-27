@@ -156,9 +156,8 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface d) {
-                ImageView image = (ImageView) dialog.findViewById(R.id.goProDialogImage);
-                Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
-                        R.drawable.whygoprodialogimage);
+               ImageView image = (ImageView) dialog.findViewById(R.id.goProDialogImage);
+                Bitmap icon = BitmapFactory.decodeResource(context.getResources(),R.drawable.fireworks);
                 float imageWidthInPX = (float)image.getWidth();
 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Math.round(imageWidthInPX),
@@ -226,9 +225,9 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
                             btnValue[i]=null;
                             checkPlayer=0;
                         }
-                       Intent goBack=new Intent("android.intent.action.PLAYERPROPERTIES");
+                     //  Intent goBack=new Intent("android.intent.action.PLAYERPROPERTIES");
                         finish();
-                        startActivity(goBack);
+                       // startActivity(goBack);
                     }
                 })
                 .setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -286,9 +285,9 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
                                 btnValue[i]=null;
                                 checkPlayer=0;
                             }
-                            Intent goBack=new Intent("android.intent.action.PLAYERPROPERTIES");
+                           // Intent goBack=new Intent("android.intent.action.PLAYERPROPERTIES");
                             finish();
-                            startActivity(goBack);
+                            //startActivity(goBack);
                         }
                     })
                     .setNegativeButton("No",new DialogInterface.OnClickListener() {
