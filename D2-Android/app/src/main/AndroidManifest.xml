@@ -31,7 +31,7 @@
         </activity>
         <activity android:name=".Help">
             <intent-filter>
-                 <action android:name="android.intent.action.HELP" />
+                <action android:name="android.intent.action.HELP" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
