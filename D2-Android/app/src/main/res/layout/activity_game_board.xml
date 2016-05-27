@@ -351,18 +351,29 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/StartNextRound"
             android:weightSum="1"
-            android:gravity="end">
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/roundWinnerTextView"
+                android:layout_weight="0.70"
+                android:text="Player1 wins this round"
+                android:textColor="#fb0303"
+                android:textStyle="bold" />
 
             <Button
                 android:layout_width="102dp"
                 android:layout_height="46dp"
                 android:id="@+id/startNextRoundButton"
                 android:background="@drawable/nextround" />
+
         </LinearLayout>
 
     </LinearLayout>
