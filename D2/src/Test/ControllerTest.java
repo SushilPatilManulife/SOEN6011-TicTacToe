@@ -51,7 +51,9 @@ public class ControllerTest extends TestCase {
 		Controller.changeTurn();
 		name = Controller.getCurrentPlayerName();
 		assertEquals("p2",name);
-		
+		Controller.changeTurn();
+		name = Controller.getCurrentPlayerName();
+		assertEquals("p1",name);
 	}
 	@Test
 	public void testgetCurrentPlayerMark(){
