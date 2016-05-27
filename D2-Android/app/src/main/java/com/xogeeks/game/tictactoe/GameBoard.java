@@ -192,7 +192,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
             gameBoard.nextRound.setVisibility(View.INVISIBLE);
     }
     public static void gameWon(String result){
-        gameBoard.showAlert("Game Winner",result);
+        gameBoard.showGifts("Game Winner",result);
         gameBoard.nextRound.setVisibility(View.INVISIBLE);
     }
     private void startNextRound(){
