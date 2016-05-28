@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Process;
 import android.renderscript.Short4;
 import android.support.v7.app.AlertDialog;
@@ -37,6 +38,8 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
 
     static Context context;
     int setImageX,setImageO;
+    MediaPlayer cheer=null;
+    MediaPlayer crack=null;
     private static int buttonLength=9;
     public static Button gameBoardButton[]=new Button[buttonLength];
     TextView player1ScoreTextView,
@@ -90,6 +93,8 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         roundWinner=(TextView)findViewById(R.id.roundWinnerTextView);
         nextRound.setVisibility(View.INVISIBLE);
         roundWinner.setVisibility(View.INVISIBLE);
+        cheer=MediaPlayer.create(this,R.raw.cheer);
+        crack=MediaPlayer.create(this,R.raw.crakers);
         checkButton();
         setMarks();
     }
@@ -213,6 +218,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         alertadd.setView(view);
         alertadd.setNeutralButton("ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dlg, int sumthin) {
+                gameBoard.crack.stop();
                 showGifts("Congratulations","Enjoy your Gift!!! ");
             }
         });
@@ -232,7 +238,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
             else
                 gameBoardButton[line[j]].setBackgroundResource(R.drawable.owin);
         }
-
+        gameBoard.cheer.start();
         for(int i = 0; i < 9 ; i++)
             gameBoardButton[i].setEnabled(false);
         gameBoard.roundWinner.setText(turn+" wins this round");
@@ -255,7 +261,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
      * @param result Final result of all rounds.
      */
     public static void gameWon(String result){
-
+        gameBoard.crack.start();
         gameBoard.showWinner("Game Winner",result);
         gameBoard.nextRound.setVisibility(View.INVISIBLE);
     }
