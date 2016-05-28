@@ -1,4 +1,5 @@
 package control;
+import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
 import model.Player;
