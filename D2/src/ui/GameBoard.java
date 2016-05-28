@@ -257,6 +257,7 @@ public class GameBoard extends GUIParent {
 	public static void roundWon(int[] line){
 		Board.displayRoundResult(line);
 		//TODO:Label instead of message , turn wins round #
+		Toolkit.getDefaultToolkit().beep();
 		JOptionPane.showMessageDialog(null, turn + " wins this round!.\nClick OK to continue.");
         nextRound.setVisible(true);
         lblPlayerMove.setVisible(false);
@@ -265,6 +266,7 @@ public class GameBoard extends GUIParent {
 	
 	public static void roundTie(){
 		//TODO:Label instead of message , round # is a tie
+		Toolkit.getDefaultToolkit().beep();
 		JOptionPane.showMessageDialog(null,  "It's a tie! \n Click OK to continue.");
         nextRound.setVisible(true);
         lblPlayerMove.setVisible(false);
