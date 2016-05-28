@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -270,7 +271,8 @@ public class GameBoard extends GUIParent {
         invalidMove.setVisible(false);
 	}
 	public static void gameWon(String result){
-		//TODO: new game button, disable game board, display 
+		//TODO: new game button, disable game board, display
+		Toolkit.getDefaultToolkit().beep();
 		JOptionPane.showMessageDialog(null, result);
         nextRound.setVisible(false);
         lblPlayerMove.setVisible(false);
