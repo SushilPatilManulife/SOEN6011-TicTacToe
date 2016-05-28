@@ -25,9 +25,16 @@ import android.widget.Toast;
 import com.xogeeks.game.control.Controller;
 
 import java.util.Arrays;
-
+/**
+ * This class to display GUI for 3*3 board where players can play game.
+ * Other than game board players can see scores, current round and players turn with mark.
+ * If player has selected 3/5 rounds mode, then after each round players are able to see start new round button.
+ * After each round winner of that round is displayed and according to mode 3/5, best of Game will be displayed after finishing all rounds.
+ * Winner will get some Gift!!!
+ * @version 2.0
+ */
 public class GameBoard extends AppCompatActivity implements View.OnClickListener {
-    //int turn=1;
+
     static Context context;
     int setImageX,setImageO;
     private static int buttonLength=9;
@@ -48,8 +55,6 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
     static int checkPlayer=0;
     static String turn;
     static String name1, name2;
-    //static String mark1;
-    //static String mark2;
     static String mark;
     static String btnValue[] = new String[9];
     int totalRound;
@@ -57,6 +62,40 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
     GameBoard(){
         gameBoard=GameBoard.this;
     }
+
+    /**
+     * This is first method created after starting this activity.
+     * Some contents are initialized in this method.
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game_board);
+        //String name1=getIntent().getExtras().getString("name1");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        setPlayers();
+        gameBoard.currentRound=1;
+        playersTurnTextView=(TextView)findViewById(R.id.playersTurnTextView);
+        player1ScoreTextView=(TextView)findViewById(R.id.player1ScoreTextView);
+        player2ScoreTextView=(TextView)findViewById(R.id.player2ScoreTextView);
+        player1ScoreTextView.setText(name1+": 0");
+        player2ScoreTextView.setText(name2+": 0");
+        playersTurnTextView.setText(turn+"'s turn");
+        xImageView=(ImageView)findViewById(R.id.xImageView);
+        if(mark=="O")
+            xImageView.setImageResource(R.drawable.o);
+        nextRound=(Button)findViewById(R.id.startNextRoundButton);
+        roundWinner=(TextView)findViewById(R.id.roundWinnerTextView);
+        nextRound.setVisibility(View.INVISIBLE);
+        roundWinner.setVisibility(View.INVISIBLE);
+        checkButton();
+        setMarks();
+    }
+    /**
+     * This method is initialise all buttons on this GUI and set action listeners.
+     */
     public void checkButton() {
 
         gameBoardButton[0] = (Button) findViewById(R.id.boardButton1);
@@ -84,6 +123,10 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         nextRound.setOnClickListener(this);
         helpButton.setOnClickListener(this);
     }
+
+    /**
+     * This method is used to get player properties such as name, mark and total rounds.
+     */
     public void setPlayers(){
         mark = Controller.getCurrentPlayerMark();
         turn = Controller.getCurrentPlayerName();
@@ -91,32 +134,10 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         name2 = Controller.getPlayer2Name();
         totalRound = Controller.getTotalRound();
     }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_board);
-        //String name1=getIntent().getExtras().getString("name1");
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        setPlayers();
-        gameBoard.currentRound=1;
-        playersTurnTextView=(TextView)findViewById(R.id.playersTurnTextView);
-        player1ScoreTextView=(TextView)findViewById(R.id.player1ScoreTextView);
-        player2ScoreTextView=(TextView)findViewById(R.id.player2ScoreTextView);
-        player1ScoreTextView.setText(name1+": 0");
-        player2ScoreTextView.setText(name2+": 0");
-        playersTurnTextView.setText(turn+"'s turn");
-        xImageView=(ImageView)findViewById(R.id.xImageView);
-        if(mark=="O")
-            xImageView.setImageResource(R.drawable.o);
-        nextRound=(Button)findViewById(R.id.startNextRoundButton);
-        roundWinner=(TextView)findViewById(R.id.roundWinnerTextView);
-        nextRound.setVisibility(View.INVISIBLE);
-        roundWinner.setVisibility(View.INVISIBLE);
-        checkButton();
-        setMarks();
-    }
-
+    /**
+     * This method sets mark X or O for players.
+     */
     public void setMarks(){
         if(mark==("X")) {
             setImageX = R.drawable.xnew;
@@ -127,12 +148,22 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
             setImageO = R.drawable.xnew;
         }
     }
+
+    /**
+     * This method used for changing players turn after player places mark on board.
+     */
     private static void changePlayerTurn() {
         Controller.changeTurn();
 
         turn = Controller.getCurrentPlayerName();
         mark = Controller.getCurrentPlayerMark();
     }
+
+    /**
+     * This method is displays Gift for player.
+     * @param title
+     * @param message
+     */
     public void showGifts(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
@@ -164,9 +195,14 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
             }
         });
     }
+
+    /**
+     * This method is used to display Final winner of the Game.
+     * @param title For message box
+     * @param message Winner name.
+     */
     public void showWinner(String title, String message){
 
-        // TODO Auto-generated method stub
         android.app.AlertDialog.Builder alertadd = new android.app.AlertDialog.Builder(this);
         alertadd.setTitle(title);
         alertadd.setMessage(message);
@@ -174,19 +210,20 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         final View view = factory.inflate(R.layout.dialog_main, null);
 
         pl.droidsonroids.gif.GifTextView image= (pl.droidsonroids.gif.GifTextView) view.findViewById(R.id.imageView);
-        //image.setImageResource(R.drawable.fireworks);
-
         alertadd.setView(view);
         alertadd.setNeutralButton("ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dlg, int sumthin) {
                 showGifts("Congratulations","Enjoy your Gift!!! ");
             }
         });
-
         alertadd.show();
-
     }
 
+    /**
+     * This method displays winner of round.
+     * @param line To highlight wining position on 3*3 board.
+     * @param token Mark is either X or O.
+     */
     public static void roundWon(int[] line,String token){
 
         for (int j = 0; j < 3 ; j++) {
@@ -195,7 +232,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
             else
                 gameBoardButton[line[j]].setBackgroundResource(R.drawable.owin);
         }
-        //gameBoard.showAlert("Result","Congratulations!! "+turn+" wins this round");
+
         for(int i = 0; i < 9 ; i++)
             gameBoardButton[i].setEnabled(false);
         gameBoard.roundWinner.setText(turn+" wins this round");
@@ -203,17 +240,29 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         gameBoard.nextRound.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Displayed when round is tie.
+     */
     public static void roundTie(){
             // gameBoard.showAlert("Result","It's a Tie!!!");
              gameBoard.roundWinner.setText(" It's a Tie!!!");
              gameBoard.roundWinner.setVisibility(View.VISIBLE);
              gameBoard.nextRound.setVisibility(View.VISIBLE);
     }
+
+    /**
+     * Displayed when player wins the Game.
+     * @param result Final result of all rounds.
+     */
     public static void gameWon(String result){
-        //gameBoard.showGifts("Game Winner",result);
+
         gameBoard.showWinner("Game Winner",result);
         gameBoard.nextRound.setVisibility(View.INVISIBLE);
     }
+
+    /**
+     * Reset Board while starting new game.
+     */
     private static void resetBoard(){
         for(int i=0; i < 9; i++) {
             gameBoardButton[i].setEnabled(true);
@@ -228,6 +277,10 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         else
             gameBoard.xImageView.setImageResource(R.drawable.x);
     }
+
+    /**
+     * This method starts new round.
+     */
     private void startNextRound(){
         changePlayerTurn();
         resetBoard();
@@ -238,6 +291,13 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         nextRound.setVisibility(View.INVISIBLE);
         roundWinner.setVisibility(View.INVISIBLE);
     }
+
+    /**
+     * This method updates score on score board.
+     * @param score1 Player 1 score.
+     * @param score2 Player 2 score.
+     * @param score3 Tie score.
+     */
     public static void updateScoreboard(int score1, int score2, int score3){
 
         gameBoard.player1ScoreTextView.setText(name1+": "+score1);
@@ -259,9 +319,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
                             btnValue[i]=null;
                             checkPlayer=0;
                         }
-                     //  Intent goBack=new Intent("android.intent.action.PLAYERPROPERTIES");
                         finish();
-                       // startActivity(goBack);
                     }
                 })
                 .setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -272,6 +330,11 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+    /**
+     * This method is Onclick listener. Player can click on 3*3 board, Help button, Back to main menu or Exit button.
+     * @param v Dependent on players click event actions are performed.
+     */
     @Override
     public void onClick(View v) {
        // setMarks();

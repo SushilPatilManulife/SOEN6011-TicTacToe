@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ *This class displays help for player.
+ *@version 2.0
+ */
 public class Help extends AppCompatActivity {
     Button back;
     public void backNow(){

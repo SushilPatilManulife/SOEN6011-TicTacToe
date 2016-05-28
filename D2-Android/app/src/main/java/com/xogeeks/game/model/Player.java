@@ -1,8 +1,13 @@
 package com.xogeeks.game.model;
 
 /**
- * Created by Sushilpatil on 2016-05-22.
- */
+ * This is a POJO class for players which includes following methods
+ * getName();
+ * getToken();
+ * getScore();
+ * resetScore();
+ * @version 2.0
+ * */
 public class Player {
     protected String name;
     protected String token;

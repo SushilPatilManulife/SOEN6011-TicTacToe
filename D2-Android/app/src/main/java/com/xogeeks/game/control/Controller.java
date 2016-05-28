@@ -7,7 +7,8 @@ import com.xogeeks.game.model.Player;
 import com.xogeeks.game.tictactoe.GameBoard;
 
 /**
- * Created by Sushilpatil on 2016-05-22.
+ * This class is overall controller of the game like check status of game, changing turn and calculate results of the round.
+ * @version 2.0
  */
 public class Controller extends Activity {
     static Player player1;
@@ -17,6 +18,15 @@ public class Controller extends Activity {
     private static int turn;
     private static int totalRound;
     private static int currentRound;
+
+    /**
+     * Constructor of class to initialize all parameters.
+     * @param name1 Player 1 name.
+     * @param name2 Player 2 name.
+     * @param mark1 Player 1 mark.
+     * @param mark2 Player 2 mark.
+     * @param totalRound Rounds which player selected.
+     */
     public Controller(String name1, String name2, String mark1, String mark2, int totalRound){
         currentRound = 1;
         tie = 0;
@@ -26,21 +36,46 @@ public class Controller extends Activity {
         turn = 1;
         currentPlayer = player1;
     }
+
+    /**
+     * Getters property to get player 1's name.
+     * @return Player 1 name
+     */
     public static String getPlayer1Name(){
         return player1.getName();
     }
+    /**
+     * Getters property to get player 2's name.
+     * @return Player 2 name
+     */
     public static String getPlayer2Name(){
         return player2.getName();
     }
+    /**
+     * Getters property to get number of rounds.
+     * @return Total rounds
+     */
     public static int getTotalRound(){
         return totalRound;
     }
+    /**
+     * Getters property to get current player's name.
+     * @return Name of Current player.
+     */
     public static String getCurrentPlayerName(){
         return currentPlayer.getName();
     }
+    /**
+     * Getters property to get current player's mark.
+     * @return Mark of Current player.
+     */
     public static String getCurrentPlayerMark(){
         return currentPlayer.getToken();
     }
+
+    /**
+     * This method switches turn between players.
+     */
     public static void changeTurn(){
         if (turn == 1)
         {
@@ -53,10 +88,21 @@ public class Controller extends Activity {
             currentPlayer = player1;
         }
     }
+
+    /**
+     * This method resets turn
+     */
     public static void resetTurn(){
         turn = 1;
         currentPlayer = player1;
     }
+
+    /**
+     * This method checks status of the round.
+     * @param btnValue Cells where values of 3*3 are stored.
+     * @param token X or O value
+     * @param checkPlayer Number of moves.
+     */
     public static void checkStatus(String btnValue[], String token, int checkPlayer){
         boolean won = GameLogic.isWon(btnValue, token);
         if(won){
@@ -80,6 +126,11 @@ public class Controller extends Activity {
         }
         GameBoard.updateScoreboard(player1.getScore(), player2.getScore(), tie);
     }
+
+    /**
+     * This method check result of the overall game.
+     * @return Game result win or tie.
+     */
     private static String checkResult() {
 
         int max = player1.getScore();
