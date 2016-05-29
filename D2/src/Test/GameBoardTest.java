@@ -38,7 +38,7 @@ public class GameBoardTest extends TestCase {
 		JButton checkClick = new JButton();
 		checkClick.setText("X");
 		boolean b = GameBoard.addMove (checkClick);
-		assertEquals(false, b);
+		assertFalse(b);
 	}
 	public void testUpdateIcon(){
 		String description = "X symbol";
