@@ -7,7 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Arrays;
 
@@ -21,6 +24,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 import control.Controller;
 
 public class GameBoard extends GUIParent {
@@ -296,6 +303,29 @@ public class GameBoard extends GUIParent {
 		lblPlayer2Score.setText(name2 + " : " + score2);
 		lblPlayer1Score.setText(name1 + " : " + score1);
 		lblTiesScore.setText("Ties : " + score3);
+	}
+	public static void playMusic() 
+	{       
+	    AudioPlayer MGP = AudioPlayer.player;
+	    AudioStream BGM;
+	    AudioData MD;
+	    ContinuousAudioDataStream loop = null;
+
+	    try
+	    {
+	        InputStream test = new FileInputStream("cheering.wav");
+	        BGM = new AudioStream(test);
+	        AudioPlayer.player.start(BGM);
+	        
+	    }
+	    catch(FileNotFoundException e){
+	        System.out.print(e.toString());
+	    }
+	    catch(IOException error)
+	    {
+	        System.out.print(error.toString());
+	    }
+	    MGP.start(loop);
 	}
 
 
