@@ -35,6 +35,7 @@ public class PlayerProperties extends AppCompatActivity implements View.OnClickL
                 selectXasRadioButton;
     ImageView player1MarkImageView,
               player2MarkImageView;
+    CustomizeDialog customizeDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,24 +94,10 @@ public class PlayerProperties extends AppCompatActivity implements View.OnClickL
                     player2MarkImageView.setImageResource(R.drawable.o);
                 break;
             case R.id.exitButton:
-                AlertDialog.Builder builder=new AlertDialog.Builder(this);
-                builder.setTitle("Exit Game");
-                builder
-                        .setMessage("Are you Sure? \n you want to Exit")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                finish();
-                                moveTaskToBack(true);
-                            }
-                        })
-                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                customizeDialog = new CustomizeDialog(this,"exit");
+                customizeDialog.setTitle("Exit Game");
+                customizeDialog.setMessage("Are you Sure? \n you want to Exit from game ");
+                customizeDialog.show();
                 break;
             case R.id.helpButton:
                 Intent help=new Intent("android.intent.action.HELP");

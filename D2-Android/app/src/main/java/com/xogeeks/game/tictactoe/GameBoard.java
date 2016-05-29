@@ -1,5 +1,6 @@
 package com.xogeeks.game.tictactoe;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -42,6 +43,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
     MediaPlayer crack=null;
     private static int buttonLength=9;
     public static Button gameBoardButton[]=new Button[buttonLength];
+    CustomizeDialog customizeDialog = null;
     TextView player1ScoreTextView,
              player2ScoreTextView,
              tieScoreTextView,
@@ -87,6 +89,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         player2ScoreTextView.setText(name2+": 0");
         playersTurnTextView.setText(turn+"'s turn");
         xImageView=(ImageView)findViewById(R.id.xImageView);
+
         if(mark=="O")
             xImageView.setImageResource(R.drawable.o);
         nextRound=(Button)findViewById(R.id.startNextRoundButton);
@@ -96,6 +99,11 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         cheer=MediaPlayer.create(this,R.raw.cheer);
         crack=MediaPlayer.create(this,R.raw.crakers);
         checkButton();
+        for(int i = 0 ; i < 9 ; i++){
+            gameBoardButton[i].setEnabled(true);
+            btnValue[i]=null;
+            checkPlayer=0;
+        }
         setMarks();
     }
     /**
@@ -213,7 +221,6 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
         alertadd.setMessage(message);
         LayoutInflater factory = LayoutInflater.from(this);
         final View view = factory.inflate(R.layout.dialog_main, null);
-
         pl.droidsonroids.gif.GifTextView image= (pl.droidsonroids.gif.GifTextView) view.findViewById(R.id.imageView);
         alertadd.setView(view);
         alertadd.setNeutralButton("ok", new DialogInterface.OnClickListener() {
@@ -313,28 +320,10 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onBackPressed()
     {
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        builder.setTitle("Return to Menu ");
-        builder
-                .setMessage("Are you Sure? \n you want to end your game")
-                .setCancelable(false)
-                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        for(int i = 0 ; i < 9 ; i++){
-                            gameBoardButton[i].setEnabled(true);
-                            btnValue[i]=null;
-                            checkPlayer=0;
-                        }
-                        finish();
-                    }
-                })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        customizeDialog = new CustomizeDialog(this,"back");
+        customizeDialog.setTitle("Return to Menu");
+        customizeDialog.setMessage("Are you Sure? \n you want to end this round");
+        customizeDialog.show();
     }
 
     /**
@@ -376,61 +365,17 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
             startNextRound();
         }
         if(v.getId()==R.id.backButton){
-            AlertDialog.Builder builder=new AlertDialog.Builder(this);
-            builder.setTitle("Return to Menu ");
-            builder
-                    .setMessage("Are you Sure? \n you want to end your game")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,int id) {
-                            for(int i = 0 ; i < 9 ; i++){
-                                gameBoardButton[i].setEnabled(true);
-                                btnValue[i]=null;
-                                checkPlayer=0;
-                            }
-                           // Intent goBack=new Intent("android.intent.action.PLAYERPROPERTIES");
-                            finish();
-                            //startActivity(goBack);
-                        }
-                    })
-                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
+            customizeDialog = new CustomizeDialog(this,"back");
+            customizeDialog.setTitle("Return to Menu");
+            customizeDialog.setMessage("Are you Sure? \n you want to end this round");
+            customizeDialog.show();
         }
         if(v.getId()==R.id.exitButton){
-            AlertDialog.Builder builder=new AlertDialog.Builder(this);
-            builder.setTitle("Exit Game");
-            builder
-                    .setMessage("Are you Sure? \n you want to Exit")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,int id) {
-                            for(int i = 0 ; i < 9 ; i++){
-                                gameBoardButton[i].setEnabled(true);
-                                btnValue[i]=null;
-                                checkPlayer=0;
-                            }
-                           finish();
-                            moveTaskToBack(true);
-                        }
-                    })
-                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-
-        }
-        if(v.getId()==R.id.helpButton){
-            Intent help=new Intent("android.intent.action.HELP");
-            startActivity(help);
-        }
+            customizeDialog = new CustomizeDialog(this,"exit");
+            customizeDialog.setTitle("Exit Game");
+            customizeDialog.setMessage("Are you Sure? \n you want to Exit from game ");
+            customizeDialog.show();
+       }
     }
 
 
