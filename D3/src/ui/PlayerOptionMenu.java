@@ -192,6 +192,7 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		int roundNum =1;
 		String name1 = player1.getText();
 		String name2 = player2.getText();
@@ -209,7 +210,9 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 	                roundNum = Integer.parseInt(button.getText());
 	            }
 	        }
-		new Controller(name1, name2, mark1, mark2, roundNum);
+		 //TODO: get radio button value for level
+		//new Controller(name1, name2, mark1, mark2, roundNum);
+		 new Controller( name1,  mark1,  mark2,  roundNum, 1,  "medium");
 		dispose();
 		}
 		else{
