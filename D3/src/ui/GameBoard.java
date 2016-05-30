@@ -176,7 +176,9 @@ public class GameBoard extends GUIParent {
 		contentPane.add(playerTurnPannel);
 		
 		checkPlayer=0;
-
+		if( mode == 1 && turn == "Computer"){
+			Controller.notifyComputer(btnValue);
+		}
 	}
 	
 
@@ -264,11 +266,16 @@ public class GameBoard extends GUIParent {
 		lblPlayerMove.setIcon(updateIcon());
 		checkPlayer = 0;
 		boardEnable = true;
-	}
+
+		}
+
 	private void startNextRound(){
 		changePlayerTurn(); 
 		resetBoard(); 
 		Arrays.fill(btnValue, null);
+		if( mode == 1 && turn == "Computer"){
+			Controller.notifyComputer(btnValue);
+		}
 		currentRound++;
         nextRound.setVisible(false);
         lblPlayerMove.setVisible(true);

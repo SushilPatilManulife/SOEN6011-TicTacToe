@@ -191,9 +191,16 @@ public class TwoPlayerCard extends JPanel {
 				mark1 = "O";
 				mark2 = "X";
 			}	
+			 for (Enumeration<AbstractButton> buttons = rounds.getElements(); buttons.hasMoreElements();) {
+		            AbstractButton button = buttons.nextElement();
+
+		            if (button.isSelected()) {
+		                roundNum = Integer.parseInt(button.getText());
+		            }
+		        }
 
 		    new Controller( name1,  name2,  mark1,  mark2, roundNum);
-			//Cards.getFrames().length;
+			
 			}
 			else{
 				JOptionPane.showMessageDialog(null, "please pick unique names!");
