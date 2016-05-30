@@ -64,7 +64,7 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
     static String btnValue[] = new String[9];
     int totalRound;
     private static GameBoard gameBoard=null;
-    GameBoard(){
+    public GameBoard(){
         gameBoard=GameBoard.this;
     }
 
@@ -376,6 +376,10 @@ public class GameBoard extends AppCompatActivity implements View.OnClickListener
             customizeDialog.setMessage("Are you Sure? \n you want to Exit from game ");
             customizeDialog.show();
        }
+        if(v.getId()==R.id.helpButton){
+            Intent help=new Intent("android.intent.action.HELP");
+            startActivity(help);
+        }
     }
 
 
