@@ -1,23 +1,20 @@
 package ui;
+
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 
-import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,11 +24,11 @@ import javax.swing.border.EtchedBorder;
 
 import control.Controller;
 
-public class PlayerOptionMenu extends GUIParent implements ActionListener{
-
-	private JPanel formPanel;
-	private JPanel player1Panel;
-	private JPanel player2Panel;
+public class TwoPlayerCard extends JPanel {
+	
+	private static final long serialVersionUID = 8353620773890305366L;
+	private JPanel player1Panel, player2Panel;
+	private JPanel playerNumberPanel;
 	private JTextField player1;
 	private JTextField player2;
 	private ButtonGroup mark, rounds;
@@ -39,50 +36,43 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 	JRadioButton x, o, b1, b3, b5;
 	JLabel p1Image, p2Image;
 	JLabel name;
+
 	URL Ximage, Yimage;
-/**
- * constructor method
- */
-	public PlayerOptionMenu(){
-		initialize();
-		mnNewGame.setVisible(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		formPanel = new JPanel(){	 
-			public void paintComponent (Graphics g)
-			{
-				super.paintComponent(g);
-				 try {
-					g.drawImage(ImageIO.read(getClass().getResource("/bg1.jpg")), 0, 0, null);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			};
-		formPanel.setLayout(new GridBagLayout());
+	
+	public TwoPlayerCard() {
+		
+		Ximage = getClass().getResource("/X.png");
+		Yimage = getClass().getResource("/O.png");
+		final ImageIcon xIcon = new ImageIcon(new ImageIcon(Ximage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		final ImageIcon oIcon = new ImageIcon(new ImageIcon(Yimage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
 		c.insets = new Insets(10,10,10,10);
-		c.anchor = GridBagConstraints.CENTER;
+		c.anchor = GridBagConstraints.LINE_START;
 		c.gridy++;
-		formPanel.add(new JLabel ("First move"), c);
+		this.add(new JLabel ("First move"), c);
 		mark = new ButtonGroup();
-		x = new JRadioButton("X");
-		o = new JRadioButton("O");
+		x = new JRadioButton();
+		o = new JRadioButton();
 		mark.add(x);
 		mark.add(o);
 		JPanel pnl1 = new JPanel();
 		pnl1.add(x);
+		pnl1.add(new  JLabel(xIcon));
 		pnl1.add(o);
+		pnl1.add(new  JLabel(oIcon));
 		c.gridx++;
-		c.anchor = GridBagConstraints.LINE_START;
-		formPanel.add(pnl1, c);
+		x.setOpaque(false);
+		o.setOpaque(false);
+		pnl1.setOpaque(false);
+		this.add(pnl1, c);
 		
 		c.gridx--;
 		c.gridy++;
-		c.anchor = GridBagConstraints.CENTER;
-		formPanel.add(new JLabel ("Number of Rounds"), c);
+		
+		this.add(new JLabel ("Number of Rounds"), c);
 		rounds = new ButtonGroup();
 		b1 = new JRadioButton("1");
 		b3 = new JRadioButton("3");
@@ -94,18 +84,17 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		pnl0.add(b1);
 		pnl0.add(b3);
 		pnl0.add(b5);
+		pnl0.setOpaque(false);
+		b1.setOpaque(false);
+		b3.setOpaque(false);
+		b5.setOpaque(false);
 		b3.setSelected(true);
 		c.gridx++;
-		c.anchor = GridBagConstraints.LINE_START;
-		formPanel.add(pnl0, c);
-
-		c.anchor = GridBagConstraints.CENTER;
+		
+		this.add(pnl0, c);
 		p1Image = new JLabel();
 		p2Image = new JLabel();
-		Ximage = getClass().getResource("/X.png");
-		Yimage = getClass().getResource("/O.png");
-		ImageIcon xIcon = new ImageIcon(new ImageIcon(Ximage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
-		ImageIcon oIcon = new ImageIcon(new ImageIcon(Yimage).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+
 		x.setSelected(true);
 		p1Image.setIcon(xIcon);
 		p2Image.setIcon(oIcon);
@@ -126,9 +115,8 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		c.gridy++;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridwidth = 2;
-		formPanel.add(startGame = new JButton("Start game"), c);
-		startGame.addActionListener(this);
-		this.add(formPanel);
+		this.add(startGame = new JButton("Start game"), c);
+		startGame.addActionListener(actionListener);
 		c.fill = GridBagConstraints.NONE;
 		c.gridwidth = 1;
 		player1Panel = new JPanel();
@@ -159,7 +147,7 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		player1Panel.add(p1Image,po);
 		c.gridy=0;
 		c.gridx=0;
-		formPanel.add(player1Panel,c);
+		this.add(player1Panel,c);
 		
 		player2Panel = new JPanel();
 		player2Panel.setLayout(new GridBagLayout());
@@ -187,37 +175,30 @@ public class PlayerOptionMenu extends GUIParent implements ActionListener{
 		pt.fill = GridBagConstraints.CENTER;
 		player2Panel.add(p2Image,pt);
 		c.gridx++;
-		formPanel.add(player2Panel,c);
-		packFrame();
+		this.add(player2Panel,c);
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		int roundNum =1;
-		String name1 = player1.getText();
-		String name2 = player2.getText();
-		if(!name1.equals(name2)){
-		String mark1 = "X";
-		String mark2 = "O";
-		if (o.isSelected()){
-			mark1 = "O";
-			mark2 = "X";
-		}	
-		 for (Enumeration<AbstractButton> buttons = rounds.getElements(); buttons.hasMoreElements();) {
-	            AbstractButton button = buttons.nextElement();
+	
+	ActionListener actionListener = new ActionListener() {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+	    	int roundNum =1;
+	    	String name1 = player1.getText();
+			String name2 = player2.getText();
+			if(!name1.equals(name2)){
+			String mark1 = "X";
+			String mark2 = "O";
+			if (o.isSelected()){
+				mark1 = "O";
+				mark2 = "X";
+			}	
 
-	            if (button.isSelected()) {
-	                roundNum = Integer.parseInt(button.getText());
-	            }
-	        }
-		 //TODO: get radio button value for level
-		//new Controller(name1, name2, mark1, mark2, roundNum);
-		 new Controller( name1,  mark1,  mark2,  roundNum, 1,  "medium");
-		dispose();
-		}
-		else{
-			JOptionPane.showMessageDialog(null, "please pick unique names!");
-		}
-	}
+		    new Controller( name1,  name2,  mark1,  mark2, roundNum);
+			//Cards.getFrames().length;
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "please pick unique names!");
+			}
+	    }
+	};
 
 }

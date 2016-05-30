@@ -6,8 +6,8 @@ import model.ComputerPlayer;
 import model.HumanPlayer;
 import model.Player;
 import ui.Board;
+import ui.Cards;
 import ui.GameBoard;
-import ui.PlayerOptionMenu;
 public class Controller {
 
 	static Player player1;
@@ -18,8 +18,10 @@ public class Controller {
 	private static int turn;
 	private static int currentRound;
 	private static MoveStrategyContext ctx;
-	//TODO: singleton?
+	private static Cards c;
+	
 	public Controller(String name1, String name2, String mark1, String mark2, int totalRound){
+		c.dispose();
 		currentRound = 1;
 		tie = 0;
 		Controller.totalRound = totalRound;
@@ -32,6 +34,7 @@ public class Controller {
 	}
 	//TODO
 	public Controller(String name, String mark1, String mark2, int totalRound, int HumanTurn, String level){
+		c.dispose();
 		currentRound = 1;
 		tie = 0;
 		Controller.totalRound = totalRound;
@@ -59,7 +62,9 @@ public class Controller {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
-				new PlayerOptionMenu().setVisible(true);
+				//new PlayerOptionMenu().setVisible(true);
+				c = new Cards();
+				c.createAndShowGUI();
 			}
 		});
 	}

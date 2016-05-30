@@ -24,9 +24,10 @@ public class Hard implements MoveStrategy {
 		}
 		return emptyVal;
 	}
-	public static int minimax(int depth, String playerMark){
+	public static int minimax(int depth, String playerMark, String computerMark, String humanMark){
 		ArrayList<Integer>  emptyCell = new ArrayList <>();
 		int score;
+		String opponentMark = (playerMark == "X") ? "O" : "X";
 		/*
 		 * keep score list for children
 		 * different states will have different scores
@@ -34,23 +35,34 @@ public class Hard implements MoveStrategy {
 		 */
 		ArrayList<Integer> scoreList = new ArrayList<>();
 		//assign human and computer(X) tokens
-		if(GameLogic.isWon(btnVal, "X"))
+		if(GameLogic.isWon(btnVal, computerMark))
 			return 1;
-		if(GameLogic.isWon(btnVal, "O"))
+		if(GameLogic.isWon(btnVal, humanMark))
 			return -1;
 		emptyCell = getEmptyCells();
 		if(emptyCell.isEmpty())
 			return 0;
 		
 		for(int i=0; i<emptyCell.size();i++){
-			//
-			if(playerMark == "X"){
+			btnVal[emptyCell.get(i)]=playerMark;
+			score = minimax(depth+1, opponentMark, computerMark, humanMark);
+			scoreList.add(score);
+			
+			if( depth == 0) {
+				pointScore.put(emptyCell.get(i), score);
+			}
+		    for(int j=0;j<emptyCell.size();j++)
+				btnVal[emptyCell.get(j)]=null;
+				}
+		return playerMark == computerMark? max(scoreList):min(scoreList);
+			/*if(playerMark == "X"){
 				btnVal[emptyCell.get(i)]="X";
 				score = minimax(depth+1, "O");
 				scoreList.add(score);
-				/*
+				
+				
 				 * top node, add children result values to pick the best move
-				 */
+				 
 				//
 				if( depth == 0) {
 					pointScore.put(emptyCell.get(i), score);
@@ -64,7 +76,7 @@ public class Hard implements MoveStrategy {
         for(int j=0;j<emptyCell.size();j++)
 		btnVal[emptyCell.get(j)]=null;
 		}
-		return playerMark == "X"? max(scoreList):min(scoreList);
+		return playerMark == "X"? max(scoreList):min(scoreList);*/
 		
 	}
 	public static int max (List<Integer> score)
@@ -104,8 +116,9 @@ public class Hard implements MoveStrategy {
 	public int selectMove(String[] btnValue) {
 		pointScore = new Hashtable<Integer, Integer>();
 		setBtnValue(btnValue);
-		//Computer Token
-		minimax(0, "X");
+		String computerToken = Controller.getCurrentPlayerMark();
+	    String humanMark = (computerToken == "X") ? "O" : "X";
+		minimax(0, computerToken, computerToken, humanMark);
 		return bestMove();
 	}
 }

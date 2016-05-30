@@ -22,7 +22,7 @@ public class GUIParent extends JFrame{
 		ImageIcon icon = new ImageIcon("src/icon.gif");
 		setIconImage(icon.getImage());
 		//TODO: setBackground
-		setBounds(100, 100, 600, 350);
+     	setBounds(100, 100, 600, 350);
 		setLocationRelativeTo(null);
 		new Help();
 		gameMenu.add(file);
