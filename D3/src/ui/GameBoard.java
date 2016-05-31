@@ -46,7 +46,7 @@ public class GameBoard extends GUIParent {
 	lblTiesScore	= new JLabel(""),
 	lblScoreBoard = new JLabel("Score Board"),
 	invalidMove = new JLabel("Invalid move! Choose an empty square.");
-	 
+	private static GameBoard gameBoard=null; 
 	static JButton nextRound = new JButton("Start next round"); 
 	static URL turnImage;
 	static Color color1;
@@ -80,6 +80,7 @@ public class GameBoard extends GUIParent {
 	 * Create the frame.
 	 */
 	public GameBoard() {
+		gameBoard=GameBoard.this;
 		initialize();
 		setPlayers();
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -284,7 +285,9 @@ public class GameBoard extends GUIParent {
 		//TODO: Remove this Comment to play the music // playMusic();
 		Board.displayRoundResult(line);
 		//TODO:Label instead of message , turn wins round #
-		JOptionPane.showMessageDialog(null, turn + " wins this round!.\nClick OK to continue.");
+		ImageIcon ii = new ImageIcon(gameBoard.getClass().getResource("/fireworks.gif"));
+		System.out.println(ii);
+		JOptionPane.showMessageDialog(null,"", turn + " wins this round!.\nClick OK to continue.",JOptionPane.INFORMATION_MESSAGE,ii);
         nextRound.setVisible(true);
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
