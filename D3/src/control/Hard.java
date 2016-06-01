@@ -108,7 +108,7 @@ public class Hard implements MoveStrategy {
 				max = pointScore.get(i);
 				point=i;
 			}
-			
+			//TODO randomly
 		}
 		return point;
 	}

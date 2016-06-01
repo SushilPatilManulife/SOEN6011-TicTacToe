@@ -304,6 +304,7 @@ public class GameBoard extends GUIParent {
 	}
 	public static void gameWon(String result){
 		//TODO: new game button, disable game board, display 
+		playMusic();
 		JOptionPane.showMessageDialog(null, result);
         nextRound.setVisible(false);
         lblPlayerMove.setVisible(false);
