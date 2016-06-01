@@ -29,7 +29,14 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import sun.audio.ContinuousAudioDataStream;
 import control.Controller;
-
+/**
+ * This class to display GUI for 3*3 board where players can play game.
+ * Other than game board players can see scores, current round and players turn with mark.
+ * If player has selected 3/5 rounds mode, then after each round players are able to see start new round button.
+ * After each round winner of that round is displayed and according to mode 3/5, best of Game will be displayed after finishing all rounds.
+ * Winner will get some Gift!!!
+ * @version 2.0
+ */
 public class GameBoard extends GUIParent {
 	
 
@@ -224,7 +231,9 @@ public class GameBoard extends GUIParent {
 				}
 			}
 	}
-
+	/**
+     * This method is used to get player properties such as name, mark and total rounds.
+     */
 	private void setPlayers(){
 		mark = Controller.getCurrentPlayerMark();
 		color1 = new Color(247,247,242);
@@ -236,7 +245,9 @@ public class GameBoard extends GUIParent {
 		turn = Controller.getCurrentPlayerName();
 		totalRound = Controller.getTotalRound();
 	}
-
+	/**
+     * This method used for changing players turn after player places mark on board.
+     */
 	private static void changePlayerTurn() {
 		Controller.changeTurn();
 		
@@ -253,7 +264,9 @@ public class GameBoard extends GUIParent {
 		if (res == JOptionPane.YES_OPTION)
 			System.exit(1);
 	}
-
+	/**
+     * Reset Board while starting new game.
+     */
 	private static void resetBoard(){
 		Board.reset();
 		
@@ -269,7 +282,9 @@ public class GameBoard extends GUIParent {
 		boardEnable = true;
 
 		}
-
+	/**
+     * This method starts new round.
+     */
 	private void startNextRound(){
 		changePlayerTurn(); 
 		resetBoard(); 
@@ -281,6 +296,11 @@ public class GameBoard extends GUIParent {
         nextRound.setVisible(false);
         lblPlayerMove.setVisible(true);
 	}
+	/**
+     * This method displays winner of round.
+     * @param line To highlight wining position on 3*3 board.
+     * @param token Mark is either X or O.
+     */
 	public static void roundWon(int[] line){
 		//TODO: Remove this Comment to play the music // playMusic();
 		Board.displayRoundResult(line);
@@ -293,7 +313,9 @@ public class GameBoard extends GUIParent {
         invalidMove.setVisible(false);
         boardEnable = false;
 	}
-	
+	/**
+     * Displayed when round is tie.
+     */
 	public static void roundTie(){
 		//TODO:Label instead of message , round # is a tie
 		JOptionPane.showMessageDialog(null,  "It's a tie! \n Click OK to continue.");
@@ -302,6 +324,10 @@ public class GameBoard extends GUIParent {
         invalidMove.setVisible(false);
         boardEnable = false;
 	}
+	/**
+     * Displayed when player wins the Game.
+     * @param result Final result of all rounds.
+     */
 	public static void gameWon(String result){
 		//TODO: new game button, disable game board, display 
 		playMusic();
@@ -311,6 +337,12 @@ public class GameBoard extends GUIParent {
         invalidMove.setVisible(false);
         boardEnable = false;
 	}
+	/**
+     * This method updates score on score board.
+     * @param score1 Player 1 score.
+     * @param score2 Player 2 score.
+     * @param score3 Tie score.
+     */
 	public static void updateScoreboard(int score1, int score2, int score3){
 		lblPlayer2Score.setText(name2 + " : " + score2);
 		lblPlayer1Score.setText(name1 + " : " + score1);
