@@ -44,7 +44,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import ui.GameBoard;
 public class Cards extends GUIParent implements ItemListener {
 	//static JFrame frame;
     JPanel cards, formPanel; //a panel that uses CardLayout
@@ -103,6 +103,7 @@ public class Cards extends GUIParent implements ItemListener {
 				super.paintComponent(g);
 				 try {
 					g.drawImage(ImageIO.read(getClass().getResource("/bg1.jpg")), 0, 0, null);
+					GameBoard.playMusic("background_player.wav");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -350,7 +350,7 @@ public class GameBoard extends GUIParent {
      */
 	public static void gameWon(String result) throws HeadlessException, IOException{
 		//TODO: new game button, disable game board, display 
-		//playMusic();
+		playMusic("cheering.wav");
 		String[] option=new String[2];
 		option[0]="New Game";
 		option[1]="Cancel";
@@ -385,7 +385,7 @@ public class GameBoard extends GUIParent {
 	/**
 	 * This method is used to run music.
 	 */
-	public static void playMusic() 
+	public static void playMusic(String music) 
 	{       
 	    AudioPlayer MGP = AudioPlayer.player;
 	    AudioStream BGM;
@@ -394,9 +394,11 @@ public class GameBoard extends GUIParent {
 
 	    try
 	    {
-	        InputStream test = new FileInputStream("cheering.wav");
+	        InputStream test = new FileInputStream(music);
 	        BGM = new AudioStream(test);
-	        AudioPlayer.player.start(BGM);
+	       	MD=BGM.getData();
+	       	loop= new ContinuousAudioDataStream(MD);
+	       //AudioPlayer.player.start(BGM);
 	        
 	    }
 	    catch(FileNotFoundException e){
