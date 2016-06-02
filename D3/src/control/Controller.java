@@ -1,4 +1,7 @@
 package control;
+import java.awt.HeadlessException;
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
@@ -135,10 +138,10 @@ public class Controller {
 		turn = 1;
 		currentPlayer = player1;
 	}
-	public static void notifyComputer(String btnValue[]){
+	public static void notifyComputer(String btnValue[]) throws HeadlessException, IOException{
 		ComputerPlayer.notifyTurn(btnValue, ctx);
 	}
-	public static void makeMove(int p){
+	public static void makeMove(int p) throws HeadlessException, IOException{
 		JButton button = Board.getButton(p);
 		GameBoard.addMove(button);
 	}
@@ -147,8 +150,10 @@ public class Controller {
      * @param btnValue Cells where values of 3*3 are stored.
      * @param token X or O value
      * @param checkPlayer Number of moves.
+	 * @throws IOException 
+	 * @throws HeadlessException 
      */
-	public static void checkStatus(String btnValue[], String token, int checkPlayer){
+	public static void checkStatus(String btnValue[], String token, int checkPlayer) throws HeadlessException, IOException{
 		/**
 		 * Win scenario
 		 */
