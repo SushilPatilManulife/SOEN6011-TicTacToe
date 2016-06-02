@@ -405,10 +405,10 @@ public class GameBoard extends GUIParent {
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
         boardEnable = false;
-        if(!result.substring(0).contains("Computer"))
-        	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result,"/winner.gif"),"Game Result",JOptionPane.INFORMATION_MESSAGE);
-        else 
-        	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result,"") ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
+//        if(!result.substring(0).contains("Computer"))
+//        	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result,"/winner.gif"),"Game Result",JOptionPane.INFORMATION_MESSAGE);
+//        else 
+//        	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result,"") ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
 
         if(mode==1 && turn == "Computer")
         	JOptionPane.showMessageDialog(null, result ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
