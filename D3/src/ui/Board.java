@@ -3,8 +3,10 @@ package ui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -30,7 +32,15 @@ public class Board extends JPanel implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
 		JButton checkClick=(JButton) e.getSource();
-	    GameBoard.cellClicked(checkClick);
+	    try {
+			GameBoard.cellClicked(checkClick);
+		} catch (HeadlessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	public static int update(JButton checkClick, Color color, String mark){
 		int index = 0;

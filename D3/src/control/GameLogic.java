@@ -48,11 +48,20 @@ public class GameLogic {
 		return false;
 		
 	}
+	/**
+     * This method is used to check whether its tie or not.
+     * @param checkPlayer
+     * @return true if its tie otherwise false.
+     */
 	public static boolean isTie(int checkPlayer){
 		if (checkPlayer==8)
 			return true;
 		else return false;
 	}
+	/**
+     * This method returns winning position of the board.
+     * @return array of 3 winning cells.
+     */
 	public static int[] getLine(){
 		return line;
 	}

@@ -1,5 +1,14 @@
 package model;
 
+/**
+ * This is a POJO class for players which includes following methods
+ * getName();
+ * getToken();
+ * getScore();
+ * resetScore();
+ * @version 2.0
+ * */
+
 public class Player {
 	protected String name;
 	protected String token;

@@ -1,7 +1,9 @@
 package ui;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,12 +17,14 @@ import java.net.URL;
 import java.util.Arrays;
 
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -29,7 +33,14 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import sun.audio.ContinuousAudioDataStream;
 import control.Controller;
-
+/**
+ * This class to display GUI for 3*3 board where players can play game.
+ * Other than game board players can see scores, current round and players turn with mark.
+ * If player has selected 3/5 rounds mode, then after each round players are able to see start new round button.
+ * After each round winner of that round is displayed and according to mode 3/5, best of Game will be displayed after finishing all rounds.
+ * Winner will get some Gift!!!
+ * @version 2.0
+ */
 public class GameBoard extends GUIParent {
 	
 
@@ -78,8 +89,10 @@ public class GameBoard extends GUIParent {
 
 	/**
 	 * Create the frame.
+	 * @throws IOException 
+	 * @throws HeadlessException 
 	 */
-	public GameBoard() {
+	public GameBoard() throws HeadlessException, IOException {
 		gameBoard=GameBoard.this;
 		initialize();
 		setPlayers();
@@ -171,7 +184,15 @@ public class GameBoard extends GUIParent {
 		nextRound.setVisible(false);
 		nextRound.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				startNextRound();
+				try {
+					startNextRound();
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		contentPane.add(playerTurnPannel);
@@ -183,7 +204,7 @@ public class GameBoard extends GUIParent {
 	}
 	
 
-	public static void cellClicked(JButton checkClick) {
+	public static void cellClicked(JButton checkClick) throws HeadlessException, IOException {
 		invalidMove.setVisible(false);
 		if( mode == 1 && turn == "Computer")
 			return;
@@ -194,7 +215,7 @@ public class GameBoard extends GUIParent {
 		}
 		
 	}
-	public static boolean addMove(JButton checkClick){
+	public static boolean addMove(JButton checkClick) throws HeadlessException, IOException{
 		if(checkClick.getText()== ""){
 		    updateBoard(checkClick);
 			Controller.checkStatus(btnValue, mark, checkPlayer);
@@ -224,7 +245,9 @@ public class GameBoard extends GUIParent {
 				}
 			}
 	}
-
+	/**
+     * This method is used to get player properties such as name, mark and total rounds.
+     */
 	private void setPlayers(){
 		mark = Controller.getCurrentPlayerMark();
 		color1 = new Color(247,247,242);
@@ -236,7 +259,9 @@ public class GameBoard extends GUIParent {
 		turn = Controller.getCurrentPlayerName();
 		totalRound = Controller.getTotalRound();
 	}
-
+	/**
+     * This method used for changing players turn after player places mark on board.
+     */
 	private static void changePlayerTurn() {
 		Controller.changeTurn();
 		
@@ -253,7 +278,9 @@ public class GameBoard extends GUIParent {
 		if (res == JOptionPane.YES_OPTION)
 			System.exit(1);
 	}
-
+	/**
+     * Reset Board while starting new game.
+     */
 	private static void resetBoard(){
 		Board.reset();
 		
@@ -269,8 +296,12 @@ public class GameBoard extends GUIParent {
 		boardEnable = true;
 
 		}
-
-	private void startNextRound(){
+	/**
+     * This method starts new round.
+	 * @throws IOException 
+	 * @throws HeadlessException 
+     */
+	private void startNextRound() throws HeadlessException, IOException{
 		changePlayerTurn(); 
 		resetBoard(); 
 		Arrays.fill(btnValue, null);
@@ -281,19 +312,28 @@ public class GameBoard extends GUIParent {
         nextRound.setVisible(false);
         lblPlayerMove.setVisible(true);
 	}
+	/**
+     * This method displays winner of round.
+     * @param line To highlight wining position on 3*3 board.
+     * @param token Mark is either X or O.
+     */
 	public static void roundWon(int[] line){
 		//TODO: Remove this Comment to play the music // playMusic();
 		Board.displayRoundResult(line);
 		//TODO:Label instead of message , turn wins round #
 		//ImageIcon ii = new ImageIcon(gameBoard.getClass().getResource("/fireworks.gif"));
 		//System.out.println(ii);
+
 		//JOptionPane.showMessageDialog(null,"", turn + " wins this round!.\nClick OK to continue.",JOptionPane.INFORMATION_MESSAGE,ii);
+
         nextRound.setVisible(true);
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
         boardEnable = false;
 	}
-	
+	/**
+     * Displayed when round is tie.
+     */
 	public static void roundTie(){
 		//TODO:Label instead of message , round # is a tie
 		JOptionPane.showMessageDialog(null,  "It's a tie! \n Click OK to continue.");
@@ -302,20 +342,49 @@ public class GameBoard extends GUIParent {
         invalidMove.setVisible(false);
         boardEnable = false;
 	}
-	public static void gameWon(String result){
+	/**
+     * Displayed when player wins the Game.
+     * @param result Final result of all rounds.
+	 * @throws IOException 
+	 * @throws HeadlessException 
+     */
+	public static void gameWon(String result) throws HeadlessException, IOException{
 		//TODO: new game button, disable game board, display 
-		playMusic();
-		JOptionPane.showMessageDialog(null, result);
-        nextRound.setVisible(false);
+		//playMusic();
+		String[] option=new String[2];
+		option[0]="New Game";
+		option[1]="Cancel";
+		int userChoise=JOptionPane.showOptionDialog(null, gameBoard.getPanel(result),"Game Result",0,JOptionPane.INFORMATION_MESSAGE,null,option,null);
+		switch (userChoise) {
+		case 0:
+			//TODO: Add code for new game
+			JOptionPane.showMessageDialog(null, "New Game!");
+			break;
+
+		case 1:
+			//TODO: Add code for cancel 
+			JOptionPane.showMessageDialog(null, "Cancel!");
+			break;
+		}
+		nextRound.setVisible(false);
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
         boardEnable = false;
 	}
+	/**
+     * This method updates score on score board.
+     * @param score1 Player 1 score.
+     * @param score2 Player 2 score.
+     * @param score3 Tie score.
+     */
 	public static void updateScoreboard(int score1, int score2, int score3){
 		lblPlayer2Score.setText(name2 + " : " + score2);
 		lblPlayer1Score.setText(name1 + " : " + score1);
 		lblTiesScore.setText("Ties : " + score3);
 	}
+	/**
+	 * This method is used to run music.
+	 */
 	public static void playMusic() 
 	{       
 	    AudioPlayer MGP = AudioPlayer.player;
@@ -339,7 +408,27 @@ public class GameBoard extends GUIParent {
 	    }
 	    MGP.start(loop);
 	}
+	/**
+	 * This method is used to modify Message box
+	 * @param result Result of the game to be displayed using message box.
+	 * @return Modified message box.
+	 * @throws IOException 
+	 */
+	private JPanel getPanel(String result) throws IOException {
+        JPanel msgBoxPanel = new JPanel();
+        JLabel msgBoxAnimationLabel = new JLabel(""),
+        msgBoxResultLabel=new JLabel(result);
+        
+        msgBoxResultLabel.setFont(new Font("Lucida Calligraphy", Font.BOLD, 20));
+        msgBoxResultLabel.setForeground(Color.RED);
+        ImageIcon image = null;
+        image = new ImageIcon(this.getClass().getResource("/winner.gif"));
+        msgBoxAnimationLabel.setIcon(image);
+        msgBoxPanel.add(msgBoxAnimationLabel);
+        msgBoxPanel.add(msgBoxResultLabel);
 
+        return msgBoxPanel;
+    }
 
 }
 
