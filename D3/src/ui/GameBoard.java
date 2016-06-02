@@ -390,23 +390,14 @@ public class GameBoard extends GUIParent {
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
         boardEnable = false;
-/*		String[] option=new String[2];
-		option[0]="New Game";
-		option[1]="Cancel";*/
-        /*if(mode==1 && turn == "Computer")
-        	JOptionPane.showMessageDialog(null,  result);
-        else
-		*/JOptionPane.showMessageDialog(null, gameBoard.getPanel(result),"Game Result",JOptionPane.INFORMATION_MESSAGE);
-/*		switch (userChoise) {
-		case 0:
-			mnNewGame.doClick();
-			break;
 
-		case 1:
-			//TODO: Add code for cancel 
-			JOptionPane.showMessageDialog(null, "Cancel!");
-			break;
-		}*/
+        if(mode==1 && turn == "Computer")
+        	JOptionPane.showMessageDialog(null, result ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
+
+        else
+        	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result),"Game Result",JOptionPane.INFORMATION_MESSAGE);
+        
+
 
 	}
 	/**
