@@ -1,4 +1,6 @@
 package ui;
+import control.PlayMusic;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -62,6 +64,8 @@ public class GameBoard extends GUIParent {
 	static Color color1;
 	static Color color2;
 	 public static int mode;
+	 public static int playOption;
+	 public static String music;
 	/**
 	 * checkPlayer counts number of moves and is used to set turn
 	 */
@@ -73,12 +77,22 @@ public class GameBoard extends GUIParent {
 	static boolean boardEnable = true;
 	//static int currentRound;
 	static int totalRound;
+	static PlayMusic ls;
 	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					if(mode==1){
+						music="background_computer.wav";
+					}
+					else{
+						music="background_player.wav";
+					}
+					ls=new PlayMusic(music);
+					ls.play();
 					GameBoard frame = new GameBoard();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -143,6 +157,7 @@ public class GameBoard extends GUIParent {
 				String[] args = {};
 				dispose();
 				Controller.main(args);
+				ls.stop();
 			}
 		});
 		addWindowListener(new WindowAdapter(){
@@ -390,24 +405,11 @@ public class GameBoard extends GUIParent {
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
         boardEnable = false;
-/*		String[] option=new String[2];
-
-		option[0]="New Game";
-		option[1]="Cancel";*/
-        if(!result.substring(0, 8).equals("Computer"))
-        	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result),"Game Result",JOptionPane.INFORMATION_MESSAGE);
+        
+        if(!result.substring(0).contains("Computer"))
+        	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result,"/winner.gif"),"Game Result",JOptionPane.INFORMATION_MESSAGE);
         else 
-        	JOptionPane.showMessageDialog(null, result ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
-/*		switch (userChoise) {
-		case 0:
-			mnNewGame.doClick();
-			break;
-
-		case 1:
-			//TODO: Add code for cancel 
-			JOptionPane.showMessageDialog(null, "Cancel!");
-			break;
-		}*/
+        	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result,"") ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
 
 	}
 	/**
@@ -421,41 +423,14 @@ public class GameBoard extends GUIParent {
 		lblPlayer1Score.setText(name1 + " : " + score1);
 		lblTiesScore.setText("Ties : " + score3);
 	}
-	/**
-	 * This method is used to run music.
-	 */
-	public static void playMusic(String music) 
-	{       
-	    AudioPlayer MGP = AudioPlayer.player;
-	    AudioStream BGM;
-	    AudioData MD;
-	    ContinuousAudioDataStream loop = null;
 
-	    try
-	    {
-	        InputStream test = new FileInputStream(music);
-	        BGM = new AudioStream(test);
-	       	MD=BGM.getData();
-	       	loop= new ContinuousAudioDataStream(MD);
-	       //AudioPlayer.player.start(BGM);
-	        
-	    }
-	    catch(FileNotFoundException e){
-	        System.out.print(e.toString());
-	    }
-	    catch(IOException error)
-	    {
-	        System.out.print(error.toString());
-	    }
-	    MGP.start(loop);
-	}
 	/**
 	 * This method is used to modify Message box
 	 * @param result Result of the game to be displayed using message box.
 	 * @return Modified message box.
 	 * @throws IOException 
 	 */
-	private JPanel getPanel(String result) throws IOException {
+	private JPanel getPanel(String result, String winnerImage) throws IOException {
         JPanel msgBoxPanel = new JPanel();
         JLabel msgBoxAnimationLabel = new JLabel(""),
         msgBoxResultLabel=new JLabel(result);
@@ -463,13 +438,12 @@ public class GameBoard extends GUIParent {
         msgBoxResultLabel.setFont(new Font("Lucida Calligraphy", Font.BOLD, 18));
         msgBoxResultLabel.setForeground(Color.RED);
         ImageIcon image = null;
-        image = new ImageIcon(this.getClass().getResource("/winner.gif"));
+        image = new ImageIcon(this.getClass().getResource(winnerImage));
         msgBoxAnimationLabel.setIcon(image);
         msgBoxPanel.add(msgBoxAnimationLabel);
         msgBoxPanel.add(msgBoxResultLabel);
 
         return msgBoxPanel;
     }
-
 }
 

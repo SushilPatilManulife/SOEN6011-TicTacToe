@@ -96,8 +96,8 @@ public class Cards extends GUIParent implements ItemListener {
    
     public void itemStateChanged(ItemEvent evt) {
         CardLayout cl = (CardLayout)(cards.getLayout());
-        if(cb.getSelectedItem().equals("Two Players"))
-        	music="background_player.wav";
+//        if(cb.getSelectedItem().equals("Two Players"))
+//        	music="background_player.wav";
         cl.show(cards, (String)evt.getItem());
     }
     
@@ -118,7 +118,6 @@ public class Cards extends GUIParent implements ItemListener {
 				super.paintComponent(g);
 				 try {
 					g.drawImage(ImageIO.read(getClass().getResource("/bg1.jpg")), 0, 0, null);
-					GameBoard.playMusic(music);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
