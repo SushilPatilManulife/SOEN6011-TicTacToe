@@ -1,5 +1,7 @@
 package control;
-
+/**
+ * This class holds the logic to determine win or loose or tie scenario
+ */
 public class GameLogic {
 	//TODO
 /*	public static boolean isTie(){

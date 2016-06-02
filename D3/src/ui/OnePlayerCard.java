@@ -25,12 +25,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 
 import control.Controller;
-
+/**
+ * This class is implemented for displaying Player option when one player option is selected
+ * 
+ */
 public class OnePlayerCard extends JPanel {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7021577685334986965L;
 	private JPanel player1Panel, player2Panel;
 	private JPanel playerNumberPanel;
@@ -43,7 +43,9 @@ public class OnePlayerCard extends JPanel {
 	JLabel name;
 	JFrame topFrame;
 	URL Ximage, Yimage;
-	
+	/**
+	 * Represents constructor of the class
+	 */
 	public OnePlayerCard() {
 		Ximage = getClass().getResource("/X.png");
 		Yimage = getClass().getResource("/O.png");

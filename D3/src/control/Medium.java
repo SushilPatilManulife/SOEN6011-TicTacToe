@@ -1,9 +1,21 @@
 package control;
 
 import java.util.Random;
-
+/**
+ * This is the concrete class implementing the medium level of the MoveStrategy
+ */
 public class Medium implements MoveStrategy{
-
+    /**
+     * This method is implemented to pick the next best move by the computer 
+     * by stopping the human player if human player is able to make a win scenario, 
+     * or if the computer is able to make the win scenario , then do it,
+     * or pick the middle cell if empty,
+     * otherwise pick any ramdom empty cell
+     * @param
+     * This method represents the board value
+     * @return
+     * It returns the cell position to make next best move
+     */
 	@Override
 	public int selectMove(String[] btnValue) {
 		String computerToken = Controller.getCurrentPlayerMark();

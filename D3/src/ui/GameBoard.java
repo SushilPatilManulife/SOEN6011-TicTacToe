@@ -230,7 +230,12 @@ public class GameBoard extends GUIParent {
 		}
 	}
 	
-	
+	/**
+	 * This method is called when a button is clicked 
+	 * to perform appropriate actions based on mode and turn
+	 * @param checkClick
+	 * Represents clicked button
+	 */
 	public static void cellClicked(JButton checkClick) throws HeadlessException, IOException {
 		invalidMove.setVisible(false);
 		if( mode == 1 && turn == "Computer")
@@ -242,6 +247,13 @@ public class GameBoard extends GUIParent {
 		}
 		
 	}
+	/**
+	 * This method calls checks the cell if it is empty and updates the board
+	 * @param checkClick
+	 * This represents the button that is clicked
+	 * @return
+	 * Returns if its added or not
+	 */
 	public static boolean addMove(JButton checkClick) throws HeadlessException, IOException{
 		if(checkClick.getText()== ""){
 		    updateBoard(checkClick);
@@ -253,6 +265,11 @@ public class GameBoard extends GUIParent {
 		else
 			return false;
 	}
+	/**
+	 * Based on the players turn it gets the player icon and returns
+	 * @return
+	 * It returns the icon for the player's turn
+	 */
 	public static ImageIcon updateIcon()
 	{
 		turnImage = GameBoard.class.getResource("/"+mark+".png");
@@ -260,18 +277,33 @@ public class GameBoard extends GUIParent {
 		imageIcon.setDescription(mark+" symbol");
 		return imageIcon;
 	}
+	/**
+	 * Sets the icon for number of rounds and returns the icon
+	 * @return
+	 * Returns the icon of player for selected number of rounds
+	 */
 	public static ImageIcon getRoundIcon()
 	{
 		roundImage = GameBoard.class.getResource("/"+totalRound+".jpg");
 		ImageIcon imageIcon = new ImageIcon (new ImageIcon(roundImage).getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		return imageIcon;
 	}
+	/**
+	 * This method sets the round result icon
+	 * @return
+	 * Returns the icon for displaying the round result
+	 */
 	public static ImageIcon getResultIcon()
 	{
 		resultImage = GameBoard.class.getResource("/result.png");
 		ImageIcon imageIcon = new ImageIcon (new ImageIcon(resultImage).getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
 		return imageIcon;
 	}
+	/**
+	 * This method updates the board and array that stores the values for each cell on the board
+	 * @param checkClick
+	 * gets the button that is clicked
+	 */
 	public static void updateBoard(JButton checkClick){
 			if(checkPlayer < 9 ){
 				if(checkPlayer % 2 == 0){
@@ -285,7 +317,7 @@ public class GameBoard extends GUIParent {
 			}
 	}
 	/**
-     * This method is used to get player properties such as name, mark and total rounds.
+     * This method is used to set current player properties such as name, mark, color and total rounds.
      */
 	private void setPlayers(){
 		mark = Controller.getCurrentPlayerMark();
@@ -311,7 +343,9 @@ public class GameBoard extends GUIParent {
 		lblPlayerMove.setIcon(updateIcon());
 
 	}
-	
+	/**
+	 * This method is called when player wants to exit the game
+	 */
 	private void exitGame(){
 		int res = JOptionPane.showConfirmDialog(null, "There is a game in progress. Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
 		if (res == JOptionPane.YES_OPTION)
@@ -430,7 +464,7 @@ public class GameBoard extends GUIParent {
 	}
 
 	/**
-	 * This method is used to modify Message box
+	 * This method is creating Message box
 	 * @param result Result of the game to be displayed using message box.
 	 * @return Modified message box.
 	 * @throws IOException 

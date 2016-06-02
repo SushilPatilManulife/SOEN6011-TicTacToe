@@ -6,6 +6,7 @@ package model;
  * getToken();
  * getScore();
  * resetScore();
+ * incrementScore();
  * @version 2.0
  * */
 

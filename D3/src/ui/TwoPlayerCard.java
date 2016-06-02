@@ -23,7 +23,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
 import control.Controller;
-
+/**
+ * This class is implemented to display the player options when two player mode is selected
+ */
 public class TwoPlayerCard extends JPanel {
 	
 	private static final long serialVersionUID = 8353620773890305366L;
@@ -38,7 +40,9 @@ public class TwoPlayerCard extends JPanel {
 	JLabel name;
 
 	URL Ximage, Yimage;
-	
+	/**
+	 * Represents the constructor of the class
+	 */
 	public TwoPlayerCard() {
 		
 		Ximage = getClass().getResource("/X.png");

@@ -8,7 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+/** 
+ * This class is to display GUI of menu bar. 
+ * @version 1.0 
+ * @see ui
+ */
 public class GUIParent extends JFrame{
 	JMenuBar gameMenu = new JMenuBar();
 	JMenu file = new JMenu("File");
@@ -17,6 +21,9 @@ public class GUIParent extends JFrame{
 	JMenuItem exit = new JMenuItem("Exit");
 	JMenuItem viewHelp = new JMenuItem("View Help");
 	JMenuItem about = new JMenuItem("About");
+	/**
+	 * this method creates the frame and sets common properties
+	 */
 	public void initialize(){
 		setTitle("Tic Tac Toe");
 		ImageIcon icon = new ImageIcon("src/icon.gif");
@@ -38,7 +45,9 @@ public class GUIParent extends JFrame{
 		});
 	}
 	
-	
+	/**
+	 * method to resize frame
+	*/
 	public void packFrame(){
 		pack();
 	}

@@ -10,7 +10,11 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
+/**
+ * Board is displayed on the panel
+ * @author KEERTHANA
+ *
+ */
 public class Board extends JPanel implements ActionListener{
 
 	static JButton btnOnGameBoard[] = new JButton[9];
@@ -27,6 +31,13 @@ public class Board extends JPanel implements ActionListener{
 			this.add(btnOnGameBoard[i]);			
 		}
 	}
+	/**
+	 * This method is used to return ith button on board
+	 * @param i
+	 * represents the variable handling button position
+	 * @return
+	 * Returns the position of button this method returns  
+	 */
 	public static JButton getButton(int i){
 		return btnOnGameBoard [i];
 	}
@@ -42,6 +53,17 @@ public class Board extends JPanel implements ActionListener{
 			e1.printStackTrace();
 		}
 	}
+	/**
+	 * This method updated the board with player's mark
+	 * @param checkClick
+	 * Represents the button need to be updated
+	 * @param color
+	 * Represents the color of the mark
+	 * @param mark
+	 * Represents the mark of the player to be placed on the board
+	 * @return
+	 * Returns the corresponding cell number for the button updated
+	 */
 	public static int update(JButton checkClick, Color color, String mark){
 		int index = 0;
 		for (int i = 0; i < 9 ; i++) {
@@ -53,6 +75,9 @@ public class Board extends JPanel implements ActionListener{
 			}
 	return index;
 	}
+	/**
+	 * This method resets the board to initial state
+	 */
 	public static void reset(){
 		for(int i = 0 ; i < 9 ; i++){
 		btnOnGameBoard[i].setText("");
@@ -60,6 +85,13 @@ public class Board extends JPanel implements ActionListener{
 		btnOnGameBoard[i].setBackground(new Color(32,22,63));
 		}
 	}
+	/**
+	 * This method displays the round result by highlighting 
+	 * the row of marks made by the player who win the round
+	 * @param line
+	 * Represent the number of cell need to be highlighted,
+	 * here it is three
+	 */
 	public static void displayRoundResult(int[] line)
 	{
 		for (int i = 0; i < 9 ; i++) {

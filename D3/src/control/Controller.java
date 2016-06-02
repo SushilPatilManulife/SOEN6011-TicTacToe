@@ -11,6 +11,7 @@ import model.Player;
 import ui.Board;
 import ui.Cards;
 import ui.GameBoard;
+
 public class Controller {
 
 	static Player player1;
@@ -44,7 +45,14 @@ public class Controller {
 		GameBoard.mode = 2;
 		GameBoard.main();
 	}
-	//TODO
+	/**
+     * Constructor of class to initialize all parameters.
+     * @param name1 Player 1 name.
+     * @param name2 Player 1 mark.
+     * @param mark1 Player 2 mark.
+     * @param totalRound Rounds which player selected.
+     * @param level
+     */
 	public Controller(String name, String mark1, String mark2, int totalRound, int HumanTurn, String level){
 		c.dispose();
 		currentRound = 1;

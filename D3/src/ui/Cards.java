@@ -47,6 +47,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import ui.GameBoard;
+/**
+ * This class is implemented to set initial menu options for the game
+ * Based on the one player or two player mode, it shows different components
+ * @author KEERTHANA
+ *
+ */
 public class Cards extends GUIParent implements ItemListener {
 	//static JFrame frame;
     JPanel cards, formPanel; //a panel that uses CardLayout
@@ -56,7 +62,11 @@ public class Cards extends GUIParent implements ItemListener {
     String comboBoxItems[] = { TEXTPANEL, BUTTONPANEL };
     JComboBox cb = new JComboBox(comboBoxItems);
     static String music="background_computer.wav";
-    
+    /**
+     * This method is used to add  component to UI for both one player and two player modes
+     * @param pane
+     * Represents the form panel
+     */
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
         
@@ -93,7 +103,11 @@ public class Cards extends GUIParent implements ItemListener {
         c.gridwidth =1;
         pane.add(cards, c);
     }
-   
+    /**
+     * This method updates the UI based on the selection{one palyer/two player}
+     * @param
+     * Its the event of changing the combo box
+     */
     public void itemStateChanged(ItemEvent evt) {
         CardLayout cl = (CardLayout)(cards.getLayout());
 //        if(cb.getSelectedItem().equals("Two Players"))
