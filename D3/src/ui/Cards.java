@@ -36,6 +36,7 @@ import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
@@ -43,6 +44,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Cards extends GUIParent implements ItemListener {
@@ -58,7 +60,9 @@ public class Cards extends GUIParent implements ItemListener {
         JComboBox cb = new JComboBox(comboBoxItems);
         cb.setEditable(false);
         cb.addItemListener(this);
+        comboBoxPane.add(new JLabel("Game mode"));
         comboBoxPane.add(cb);
+        comboBoxPane.setOpaque(false);
         
         //Create the "cards".
         TwoPlayerCard card1 = new TwoPlayerCard();
@@ -76,8 +80,14 @@ public class Cards extends GUIParent implements ItemListener {
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
+        //c.anchor = GridBagConstraints.LINE_END;
+        //pane.add(new JLabel("Game mode"), c);
+        //c.gridx++;
+        c.gridwidth =2;
         pane.add(comboBoxPane, c);
+        c.gridx = 0;
         c.gridy++;
+        c.gridwidth =1;
         pane.add(cards, c);
     }
     

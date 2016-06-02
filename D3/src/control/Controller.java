@@ -103,6 +103,13 @@ public class Controller {
 		return totalRound;
 	}
 	/**
+     * Getters property to get current round number.
+     * @return current round number
+     */
+	public static int getCurrentRound(){
+		return currentRound;
+	}
+	/**
      * Getters property to get current player's name.
      * @return Name of Current player.
      */
@@ -177,13 +184,13 @@ public class Controller {
 			GameBoard.roundTie();
 			currentRound++;
 			}
-		
+		GameBoard.updateScoreboard(player1.getScore(), player2.getScore(), tie);
 		if(currentRound > totalRound){
 		String result = checkResult();
 		GameBoard.gameWon(result);
 		}
 		
-		GameBoard.updateScoreboard(player1.getScore(), player2.getScore(), tie);
+		
 	}
 	/**
      * This method check result of the overall game.

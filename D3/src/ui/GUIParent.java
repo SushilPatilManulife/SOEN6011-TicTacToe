@@ -13,16 +13,16 @@ public class GUIParent extends JFrame{
 	JMenuBar gameMenu = new JMenuBar();
 	JMenu file = new JMenu("File");
 	JMenu help = new JMenu("Help");
-	JMenuItem mnNewGame = new JMenuItem("New Game"),
-	exit = new JMenuItem("Exit"),
-	viewHelp = new JMenuItem("View Help"),
-	about = new JMenuItem("About");
+	static JMenuItem mnNewGame = new JMenuItem("New Game");
+	JMenuItem exit = new JMenuItem("Exit");
+	JMenuItem viewHelp = new JMenuItem("View Help");
+	JMenuItem about = new JMenuItem("About");
 	public void initialize(){
 		setTitle("Tic Tac Toe");
 		ImageIcon icon = new ImageIcon("src/icon.gif");
 		setIconImage(icon.getImage());
-		//TODO: setBackground
      	setBounds(100, 100, 600, 350);
+     	setResizable(false);
 		setLocationRelativeTo(null);
 		new Help();
 		gameMenu.add(file);
