@@ -394,7 +394,10 @@ public class GameBoard extends GUIParent {
 
 		option[0]="New Game";
 		option[1]="Cancel";*/
-		JOptionPane.showMessageDialog(null, gameBoard.getPanel(result),"Game Result",JOptionPane.INFORMATION_MESSAGE);
+        if(!result.substring(0, 8).equals("Computer"))
+        	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result),"Game Result",JOptionPane.INFORMATION_MESSAGE);
+        else 
+        	JOptionPane.showMessageDialog(null, result ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
 /*		switch (userChoise) {
 		case 0:
 			mnNewGame.doClick();
