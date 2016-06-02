@@ -5,6 +5,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class Hard implements MoveStrategy {
 	
@@ -102,15 +103,20 @@ public class Hard implements MoveStrategy {
 	}
 	public static int bestMove(){
 		int max = Integer.MIN_VALUE;
-		int point = 0;
+		ArrayList <Integer> positions = new ArrayList<Integer>();
 		for (int i:pointScore.keySet()){
 			if (max<pointScore.get(i)){
 				max = pointScore.get(i);
-				point=i;
 			}
-			//TODO randomly
 		}
-		return point;
+		for (int i:pointScore.keySet()){
+			if(pointScore.get(i) == max){
+				positions.add(i);
+			}
+		}
+		Random rand = new Random();
+		int p =  rand.nextInt(positions.size());
+		return positions.get(p);
 	}
 	@Override
 	public int selectMove(String[] btnValue) {
