@@ -52,12 +52,15 @@ public class Cards extends GUIParent implements ItemListener {
     JPanel cards, formPanel; //a panel that uses CardLayout
     final static String BUTTONPANEL = "Two Players";
     final static String TEXTPANEL = "One Player";
+    JPanel comboBoxPane = new JPanel(); //use FlowLayout
+    String comboBoxItems[] = { TEXTPANEL, BUTTONPANEL };
+    JComboBox cb = new JComboBox(comboBoxItems);
+    static String music="background_computer.wav";
     
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
-        JPanel comboBoxPane = new JPanel(); //use FlowLayout
-        String comboBoxItems[] = { TEXTPANEL, BUTTONPANEL };
-        JComboBox cb = new JComboBox(comboBoxItems);
+        
+        
         cb.setEditable(false);
         cb.addItemListener(this);
         comboBoxPane.add(new JLabel("Game mode"));
@@ -90,9 +93,11 @@ public class Cards extends GUIParent implements ItemListener {
         c.gridwidth =1;
         pane.add(cards, c);
     }
-    
+   
     public void itemStateChanged(ItemEvent evt) {
         CardLayout cl = (CardLayout)(cards.getLayout());
+        if(cb.getSelectedItem().equals("Two Players"))
+        	music="background_player.wav";
         cl.show(cards, (String)evt.getItem());
     }
     
@@ -113,7 +118,7 @@ public class Cards extends GUIParent implements ItemListener {
 				super.paintComponent(g);
 				 try {
 					g.drawImage(ImageIO.read(getClass().getResource("/bg1.jpg")), 0, 0, null);
-					GameBoard.playMusic("background_player.wav");
+					GameBoard.playMusic(music);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
