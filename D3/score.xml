@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE roles SYSTEM "score.dtd">
+<roles>
+    <role1>10</role1>
+    <role2>15</role2>
+    <role3>20</role3>
+    <role4>30</role4>
+    <role5>40</role5>
+</roles>
