@@ -285,9 +285,9 @@ public class GameBoard extends GUIParent {
 		//TODO: Remove this Comment to play the music // playMusic();
 		Board.displayRoundResult(line);
 		//TODO:Label instead of message , turn wins round #
-		ImageIcon ii = new ImageIcon(gameBoard.getClass().getResource("/fireworks.gif"));
-		System.out.println(ii);
-		JOptionPane.showMessageDialog(null,"", turn + " wins this round!.\nClick OK to continue.",JOptionPane.INFORMATION_MESSAGE,ii);
+		//ImageIcon ii = new ImageIcon(gameBoard.getClass().getResource("/fireworks.gif"));
+		//System.out.println(ii);
+		//JOptionPane.showMessageDialog(null,"", turn + " wins this round!.\nClick OK to continue.",JOptionPane.INFORMATION_MESSAGE,ii);
         nextRound.setVisible(true);
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
