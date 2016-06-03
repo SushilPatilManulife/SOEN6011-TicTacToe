@@ -53,19 +53,7 @@ public class XmlIO
  
     return xmlInterpreter.unmarshal(xmlReader, c).getValue();
   }
-  /**
-   * this method is used to insert any score or player
-   * @param name is the name of the player
-   * @param score is the score of the player
-   * @throws Exception
-   */
-  public static void addScore(String name, int score) throws Exception{
-	  File xmlFile = new File(fileName);
-	  Score root = new Score();
-    root = readObjectAsXmlFrom(new FileReader(xmlFile.getAbsolutePath()), root.getClass());
-    root.addResult(name,score);
-    writeAsXml(root, new FileWriter(xmlFile));
-  }
+
   /**
    * this method increments wining record if player exist or create new entry if not exist 
    * @param name is the player name
@@ -87,7 +75,7 @@ public class XmlIO
   }
   /**
    * this method selects and returns the top ten players on file
-   * @return Array of top 10 playe name and score
+   * @return Array of top 10 player name and score
    * @throws Exception
    */
   public static ArrayList<String> getTopTen() throws Exception{
