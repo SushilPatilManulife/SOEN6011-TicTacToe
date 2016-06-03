@@ -6,15 +6,13 @@ package model;
  * getScore();
  * resetScore();
  * incrementScore();
- * @version 2.0
+ * @version 3.0
  * */
 public class HumanPlayer extends Player{
     /**
      * Represents the constructor for this class
-     * @param name
-     * It is the name of human player
-     * @param token
-     * It is the icon chosen by the human player
+     * @param name It is the name of human player
+     * @param token It is the icon chosen by the human player
      */
 	public HumanPlayer(String name, String token){
 		this.name = name;

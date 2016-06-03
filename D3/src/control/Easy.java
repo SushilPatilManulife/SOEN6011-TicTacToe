@@ -6,6 +6,11 @@ import java.util.ArrayList;
  * This is the concrete class implementing the easy level of the MoveStrategy
  */
 import java.util.Random;
+/**
+ * Class used while playing with computer in easy mode.
+ * @version 3.0
+ *
+ */
 public class Easy implements MoveStrategy{
 
 	static String[] btnVal = new String [9];

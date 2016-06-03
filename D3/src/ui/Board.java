@@ -12,13 +12,15 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 /**
  * Board is displayed on the panel
- * @author KEERTHANA
+ * @version 3.0
  *
  */
 public class Board extends JPanel implements ActionListener{
 
 	static JButton btnOnGameBoard[] = new JButton[9];
-
+	/**
+	 * Constructor to display 3*3 Board.
+	 */
 	public Board(){
 		setBounds(25, 25, 314, 191);
 		setLayout(new GridLayout(0, 3, 0, 0));

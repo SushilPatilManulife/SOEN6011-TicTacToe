@@ -12,7 +12,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 /**
  *This class displays help for player. 
- *@version 1.0
+ *@version 3.0
  */
 public class Help extends JPanel{
 

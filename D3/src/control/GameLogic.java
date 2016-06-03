@@ -1,12 +1,10 @@
 package control;
 /**
  * This class holds the logic to determine win or loose or tie scenario
+ * @version 3.0
  */
 public class GameLogic {
-	//TODO
-/*	public static boolean isTie(){
-		return false;
-	}*/
+	
 	private static int[] line = new int[3];
 	public static boolean isWon(String btnValue[], String token){	
 		int n=0;

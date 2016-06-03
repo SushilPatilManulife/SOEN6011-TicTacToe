@@ -1,8 +1,7 @@
 package control;
 /**
- * MoveStrategy.java
- * interface class that has following methods
- * @author KEERTHANA
+ *THis interface to select next move.
+ * @version 3.0
  * 
  */
 public interface MoveStrategy {

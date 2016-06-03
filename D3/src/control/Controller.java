@@ -11,7 +11,11 @@ import model.Player;
 import ui.Board;
 import ui.Cards;
 import ui.GameBoard;
-
+/**
+ * This is main controller class to control all backend of game.
+ * @version 3.0
+ *
+ */
 public class Controller {
 
 	static Player player1;

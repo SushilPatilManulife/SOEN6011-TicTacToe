@@ -13,13 +13,12 @@ import ui.GameBoard;
  * getScore();
  * resetScore();
  * incrementScore();
- * @version 2.0
+ * @version 3.0
  * */
 public class ComputerPlayer extends Player{
     /**
      * Represents the constructor for this class
-     * @param mark
-     * Represents the mark chosen by the computer
+     * @param mark Represents the mark chosen by the computer
      */
 	public ComputerPlayer( String mark){
 		this.token = mark;
@@ -28,10 +27,8 @@ public class ComputerPlayer extends Player{
     /**
      * This method is used to notify that computer player turn to play, 
      * and give the next best move to the computer and make the move
-     * @param btnValue
-     * Represents the board value
-     * @param ctx
-     * Represents the strategy that is difficulty level
+     * @param btnValue Represents the board value
+     * @param ctx Represents the strategy that is difficulty level
      */
 	public static void notifyTurn(String btnValue[], MoveStrategyContext ctx) throws HeadlessException, IOException{
 		int p = ctx.getNextMove(btnValue);

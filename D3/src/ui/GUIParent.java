@@ -8,9 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 /** 
  * This class is to display GUI of menu bar. 
- * @version 1.0 
+ * @version 3.0 
  * @see ui
  */
 public class GUIParent extends JFrame{
@@ -36,6 +37,13 @@ public class GUIParent extends JFrame{
 		gameMenu.add(help);
 		
 		file.add(exit);
+		exit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				int res = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
+				if (res == JOptionPane.YES_OPTION)
+					System.exit(1);
+			}
+		});
 		help.add(viewHelp);
 		this.setJMenuBar(gameMenu);
 		viewHelp.addActionListener(new ActionListener(){

@@ -8,15 +8,16 @@ import java.util.Map;
 import java.util.Random;
 /**
  * This is the concrete class implementing the hard level of the MoveStrategy
+ * @version 3.0
  */
 public class Hard implements MoveStrategy {
 	
 	static String[] btnVal = new String [9];
 	static Map<Integer, Integer> pointScore;
 	/**
-	 * 
-	 * @param btnValue
 	 * This methods gets board value and sets to the local array
+	 * @param btnValue
+	 * 
 	 */
 	public static void setBtnValue(String btnValue[]){
 		for(int i=0;i<9;i++)
@@ -24,8 +25,7 @@ public class Hard implements MoveStrategy {
 	}
 	/**
 	 * This methods gets empty cells and adds to the array
-	 * @return 
-	 * emptyVal is returning empty cell
+	 * @return emptyVal is returning empty cell
 	 */
 	private static ArrayList<Integer> getEmptyCells(){
 		ArrayList<Integer> emptyVal = new ArrayList <Integer>();
@@ -38,16 +38,11 @@ public class Hard implements MoveStrategy {
 	}
 	/**
 	 * This method implements the game theory for minimizing loss for maximum loss scenario
-	 * @param depth
-	 * This parameter contains the number of levels in minimax tree
-	 * @param playerMark
-	 * Represents the current player mark
-	 * @param computerMark
-	 * Represents the computer player mark
-	 * @param humanMark
-	 * Represents the human player mark
-	 * @return
-	 * Represents the score at that depth level of the tree
+	 * @param depth This parameter contains the number of levels in minimax tree
+	 * @param playerMark Represents the current player mark
+	 * @param computerMark Represents the computer player mark
+	 * @param humanMark Represents the human player mark
+	 * @return Represents the score at that depth level of the tree
 	 */
 	public static int minimax(int depth, String playerMark, String computerMark, String humanMark){
 		ArrayList<Integer>  emptyCell = new ArrayList <>();
@@ -106,10 +101,8 @@ public class Hard implements MoveStrategy {
 	}
 	/**
 	 * This method picks maximum value
-	 * @param score
-	 * This represents the array of scores returned from minimax algorithm
-	 * @return
-	 * It returns maximum value from the array of scores
+	 * @param score This represents the array of scores returned from minimax algorithm
+	 * @return It returns maximum value from the array of scores
 	 */
 	public static int max (List<Integer> score)
 	{
@@ -124,10 +117,8 @@ public class Hard implements MoveStrategy {
 	}
 	/**
 	 * This method picks the minimum value
-	 * @param score
-	 * This represents the array of scores returned from minimax algorithm
-	 * @return
-	 * Returns minimum value from the array of scores
+	 * @param score This represents the array of scores returned from minimax algorithm
+	 * @return Returns minimum value from the array of scores
 	 */
 	public static int min (List<Integer> score)
 	{
@@ -143,8 +134,7 @@ public class Hard implements MoveStrategy {
 	 * This methods goes though all maximum values from minimax scores
 	 * and picks the board cells that can are applicable for these values, 
 	 * selects one cell and returns selected cell number.
-	 * @return
-	 * Returns selected cell position
+	 * @return Returns selected cell position
 	 */
 	public static int bestMove(){
 		int max = Integer.MIN_VALUE;
@@ -165,10 +155,8 @@ public class Hard implements MoveStrategy {
 	}
 	/**
 	 * This method is used to pick the best move
-	 * @param
-	 * btnValue - represents the board value
-	 * @return
-	 * It return the cell of best move
+	 * @param btnValue represents the board value
+	 * @return It return the cell of best move
 	 */
 	@Override
 	public int selectMove(String[] btnValue) {

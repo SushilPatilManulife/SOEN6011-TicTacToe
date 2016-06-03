@@ -43,7 +43,7 @@ import control.Controller;
  * If player has selected 3/5 rounds mode, then after each round players are able to see start new round button.
  * After each round winner of that round is displayed and according to mode 3/5, best of Game will be displayed after finishing all rounds.
  * Winner will get some Gift!!!
- * @version 2.0
+ * @version 3.0
  */
 public class GameBoard extends GUIParent {
 	
@@ -237,8 +237,7 @@ public class GameBoard extends GUIParent {
 	/**
 	 * This method is called when a button is clicked 
 	 * to perform appropriate actions based on mode and turn
-	 * @param checkClick
-	 * Represents clicked button
+	 * @param checkClick Represents clicked button
 	 */
 	public static void cellClicked(JButton checkClick) throws HeadlessException, IOException {
 		invalidMove.setVisible(false);
@@ -253,10 +252,8 @@ public class GameBoard extends GUIParent {
 	}
 	/**
 	 * This method calls checks the cell if it is empty and updates the board
-	 * @param checkClick
-	 * This represents the button that is clicked
-	 * @return
-	 * Returns if its added or not
+	 * @param checkClick This represents the button that is clicked
+	 * @return Returns if its added or not
 	 */
 	public static boolean addMove(JButton checkClick) throws HeadlessException, IOException{
 		if(checkClick.getText()== ""){
@@ -271,8 +268,7 @@ public class GameBoard extends GUIParent {
 	}
 	/**
 	 * Based on the players turn it gets the player icon and returns
-	 * @return
-	 * It returns the icon for the player's turn
+	 * @return It returns the icon for the players turn
 	 */
 	public static ImageIcon updateIcon()
 	{
@@ -283,8 +279,7 @@ public class GameBoard extends GUIParent {
 	}
 	/**
 	 * Sets the icon for number of rounds and returns the icon
-	 * @return
-	 * Returns the icon of player for selected number of rounds
+	 * @return Returns the icon of player for selected number of rounds
 	 */
 	public static ImageIcon getRoundIcon()
 	{
@@ -294,8 +289,7 @@ public class GameBoard extends GUIParent {
 	}
 	/**
 	 * This method sets the round result icon
-	 * @return
-	 * Returns the icon for displaying the round result
+	 * @return Returns the icon for displaying the round result
 	 */
 	public static ImageIcon getResultIcon()
 	{
@@ -305,8 +299,7 @@ public class GameBoard extends GUIParent {
 	}
 	/**
 	 * This method updates the board and array that stores the values for each cell on the board
-	 * @param checkClick
-	 * gets the button that is clicked
+	 * @param checkClick gets the button that is clicked
 	 */
 	public static void updateBoard(JButton checkClick){
 			if(checkPlayer < 9 ){
