@@ -55,6 +55,7 @@ import ui.GameBoard;
  */
 public class Cards extends GUIParent implements ItemListener {
 	//static JFrame frame;
+	
     JPanel cards, formPanel; //a panel that uses CardLayout
     final static String BUTTONPANEL = "Two Players";
     final static String TEXTPANEL = "One Player";
@@ -69,7 +70,6 @@ public class Cards extends GUIParent implements ItemListener {
      */
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
-        
         
         cb.setEditable(false);
         cb.addItemListener(this);

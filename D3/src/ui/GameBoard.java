@@ -19,11 +19,13 @@ import java.net.URL;
 import java.util.Arrays;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -66,16 +68,16 @@ public class GameBoard extends GUIParent {
 	 public static int mode;
 	 public static int playOption;
 	 public static String music;
-	/**
+	/*
 	 * checkPlayer counts number of moves and is used to set turn
 	 */
+	 static JMenuItem mnNewGame = new JMenuItem("New Game");
 	static int checkPlayer=0;
 	static String turn;
 	static String name1, name2;
 	static String mark = "X";
 	static String btnValue[] = new String[9];
 	static boolean boardEnable = true;
-	//static int currentRound;
 	static int totalRound;
 	static PlayMusic ls;
 	public static void main() {
@@ -122,7 +124,7 @@ public class GameBoard extends GUIParent {
 			}
 		}
 		};
-		
+		file.add(mnNewGame);
 		playerTurnPannel.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -150,14 +152,20 @@ public class GameBoard extends GUIParent {
 				exitGame();
 			}
 		});
-		
+		mnNewGame.setVisible(true);
+		for(ActionListener act : mnNewGame.getActionListeners()) {
+			mnNewGame.removeActionListener(act);
+		}
 		mnNewGame.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+
 				resetBoard();
 				String[] args = {};
-				dispose();
-				Controller.main(args);
 				ls.stop();
+				
+				Controller.main(args);
+				dispose();
+				
 			}
 		});
 		addWindowListener(new WindowAdapter(){
@@ -193,10 +201,6 @@ public class GameBoard extends GUIParent {
 		lblTiesScore.setBounds(23, 58, 108, 14);
 		scoreBoardPannel.add(lblTiesScore);
 		lblTiesScore.setText("Ties : 0");
-		
-		//lblScoreBoard.setBounds(23, 8, 91, 14);
-		//scoreBoardPannel.add(lblScoreBoard);
-		
 		
 		lblPlayerMove.setText(name1 + "'s turn" );
 		lblPlayerMove.setIcon(updateIcon());
@@ -394,9 +398,7 @@ public class GameBoard extends GUIParent {
      * @param token Mark is either X or O.
      */
 	public static void roundWon(int[] line){
-		//TODO: Remove this Comment to play the music // playMusic();
 		Board.displayRoundResult(line);
-		//JOptionPane.showMessageDialog(null, turn + " wins this round!.\nClick OK to continue.");
 		resultLbl.setText(turn + " wins this round!");
 		resultLbl.setIcon(getResultIcon());
         Font f = resultLbl.getFont();
@@ -412,9 +414,7 @@ public class GameBoard extends GUIParent {
      * Displayed when round is tie.
      */
 	public static void roundTie(){
-		//TODO:Label instead of message , round # is a tie
-		//JOptionPane.showMessageDialog(null,  "It's a tie! \n Click OK to continue.");
-        nextRound.setVisible(true);
+		nextRound.setVisible(true);
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
         resultLbl.setText("It's a tie!");
@@ -432,17 +432,16 @@ public class GameBoard extends GUIParent {
 	 * @throws HeadlessException 
      */
 	public static void gameWon(String result) throws HeadlessException, IOException{
-		//TODO: new game button, disable game board, display 
 
-		//playMusic();
 		nextRound.setVisible(false);
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
         boardEnable = false;
-
-        if(mode==1 && turn == "Computer")
+        String state = Controller.getState();
+        if(mode==1 && result.substring(0).contains("Computer"))
         	JOptionPane.showMessageDialog(null, result ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
-
+        else if (state == "tie")
+        	JOptionPane.showMessageDialog(null, result ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
         else
         	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result,"/winner_gift.gif"),"Game Result",JOptionPane.INFORMATION_MESSAGE);
         
@@ -471,7 +470,7 @@ public class GameBoard extends GUIParent {
         msgBoxResultLabel=new JLabel(result);
         
         msgBoxResultLabel.setFont(new Font("Lucida Calligraphy", Font.BOLD, 18));
-        msgBoxResultLabel.setForeground(Color.RED);
+        msgBoxResultLabel.setForeground(new Color(23,36,110));
         ImageIcon image = null;
         image = new ImageIcon(this.getClass().getResource(winnerImage));
         msgBoxAnimationLabel.setIcon(image);

@@ -17,7 +17,7 @@ public class GUIParent extends JFrame{
 	JMenuBar gameMenu = new JMenuBar();
 	JMenu file = new JMenu("File");
 	JMenu help = new JMenu("Help");
-	static JMenuItem mnNewGame = new JMenuItem("New Game");
+	
 	JMenuItem exit = new JMenuItem("Exit");
 	JMenuItem viewHelp = new JMenuItem("View Help");
 	JMenuItem about = new JMenuItem("About");
@@ -34,7 +34,7 @@ public class GUIParent extends JFrame{
 		new Help();
 		gameMenu.add(file);
 		gameMenu.add(help);
-		file.add(mnNewGame);
+		
 		file.add(exit);
 		help.add(viewHelp);
 		this.setJMenuBar(gameMenu);

@@ -23,7 +23,7 @@ public class Controller {
 	private static int currentRound;
 	private static MoveStrategyContext ctx;
 	private static Cards c;
-	
+	private static String state;
 	 /**
      * Constructor of class to initialize all parameters.
      * @param name1 Player 1 name.
@@ -132,6 +132,13 @@ public class Controller {
 		return currentPlayer.getToken();
 	}
 	/**
+     * Getters property to get the finished game state
+     * @return state property of the game.
+     */
+	public static String getState(){
+		return state;
+	}
+	/**
      * This method switches turn between players.
      */
 	public static void changeTurn(){
@@ -153,6 +160,7 @@ public class Controller {
 		turn = 1;
 		currentPlayer = player1;
 	}
+	
 	public static void notifyComputer(String btnValue[]) throws HeadlessException, IOException{
 		ComputerPlayer.notifyTurn(btnValue, ctx);
 	}
@@ -210,12 +218,13 @@ public class Controller {
 		
 			int max = player1.getScore();
 			String result = player1.getName() +  " is the winner with score of "+ player1.getScore()+" out of "+ totalRound;
-			
+			state = "win";
 			if(player2.getScore()> max){
 				result = player2.getName() + " is the winner with score of "+ player2.getScore()+" out of "+ totalRound;
 			}
 			else if(player2.getScore()== max){
 				result = player1.getName() + " and "+ player2.getName()+ " are tied each with a score of "+ player2.getScore()+" out of "+ totalRound;
+				state = "tie";
 			}
 			return result;
 		
