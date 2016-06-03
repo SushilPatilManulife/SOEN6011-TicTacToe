@@ -86,12 +86,13 @@ public class GameBoard extends GUIParent {
 			public void run() {
 				try {
 					if(mode==1){
-						music="background_computer.wav";
+						music="/background_computer.wav";
 					}
 					else{
-						music="background_player.wav";
+						music="/background_player.wav";
 					}
-					ls=new PlayMusic(music);
+					InputStream m = getClass().getResourceAsStream(music);
+					ls=new PlayMusic(m);
 					ls.play();
 					GameBoard frame = new GameBoard();
 					frame.setVisible(true);
@@ -235,6 +236,7 @@ public class GameBoard extends GUIParent {
 			Controller.notifyComputer(btnValue);
 			
 		}
+		
 	}
 
 	/**
@@ -391,7 +393,6 @@ public class GameBoard extends GUIParent {
 	/**
      * This method displays winner of round.
      * @param line To highlight wining position on 3*3 board.
-     * @param token Mark is either X or O.
      */
 	public static void roundWon(int[] line){
 		Board.displayRoundResult(line);

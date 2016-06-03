@@ -104,7 +104,7 @@ public class Cards extends GUIParent implements ItemListener {
     }
     /**
      * This method updates the UI based on the selection{one palyer/two player}
-     * @param Its the event of changing the combo box
+     * @param evt Its the event of changing the combo box
      */
     public void itemStateChanged(ItemEvent evt) {
         CardLayout cl = (CardLayout)(cards.getLayout());

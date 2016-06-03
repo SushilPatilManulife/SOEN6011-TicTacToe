@@ -53,12 +53,16 @@ public class Controller {
 	}
 	/**
      * Constructor of class to initialize all parameters.
-     * @param name1 Player 1 name.
-     * @param name2 Player 1 mark.
-     * @param mark1 Player 2 mark.
+     * @param name Human name.
+     * @param mark2 Player 2 mark.
+     * @param mark1 Player 1 mark.
      * @param totalRound Rounds which player selected.
-     * @param level
+     * @param HumanTurn is the turn dedicated to human player
+     * @param level is the difficulty level
      */
+	/*
+	 * strategy pattern used for selecting the difficulty level
+	 */
 	public Controller(String name, String mark1, String mark2, int totalRound, int HumanTurn, String level){
 		c.dispose();
 		currentRound = 1;

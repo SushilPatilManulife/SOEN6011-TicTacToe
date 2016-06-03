@@ -22,11 +22,11 @@ public class PlayMusic{
 		 * Constructor which accepts music filename to be played.
 		 * @param filename
 		 */
-		public PlayMusic(String filename){
+		public PlayMusic(InputStream filename){
 			try
 			{
-				InputStream test = new FileInputStream(filename);
-				BGM = new AudioStream(test);
+				//InputStream test = this.getClass().getClassLoader().getResourceAsStream(filename);
+				BGM = new AudioStream(filename);
 				MD=BGM.getData();
 				loop= new ContinuousAudioDataStream(MD);
 	       //AudioPlayer.player.start(BGM);

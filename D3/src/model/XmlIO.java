@@ -1,15 +1,26 @@
 package model;
 
 import java.io.File;
-import java.util.*;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+
+import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.Reader;
-import java.io.Writer;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
@@ -21,6 +32,7 @@ import javax.xml.stream.XMLStreamReader;
 public class XmlIO
 {
 	private static final String fileName = "score.xml";
+	static InputStream url;
 	/**
 	 * this method adds value t the xml file
 	 * @param o object to be added
@@ -35,6 +47,7 @@ public class XmlIO
     xmlConverter.setProperty("jaxb.formatted.output", true);
     xmlConverter.marshal(o, writer);
   }
+
  /**
   * this method reads from the xml file
   * @param reader File Reader for accessing xml file
@@ -82,6 +95,9 @@ public class XmlIO
 	
 	int start, end;
 	File xmlFile = new File(fileName);
+	if(!xmlFile.exists()){
+		JOptionPane.showMessageDialog(null, "Record Does nor exist");
+	}
 	Score root = new Score();
 	Map<String, Integer> standings = new TreeMap<String, Integer>();
     root = readObjectAsXmlFrom(new FileReader(xmlFile.getAbsolutePath()), root.getClass());
