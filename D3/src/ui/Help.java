@@ -58,6 +58,7 @@ public class Help extends JPanel{
 		helpDg.setTitle("Help");
 		//content.setEditable(false);
 		helpPnl.setVisible(true);
+		helpDg.setBounds(100, 100, 700, 300);
 		helpDg.pack();
 	}
 	/**
