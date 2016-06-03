@@ -51,13 +51,13 @@ public class XmlIO {
 	
 	public static void main(String[] args) {
 		XmlIO log = new XmlIO();
-//		Score score = new Score();
-//		score.setId(100);
-//		score.setAge(29);
-//		score.setName("Bob");
-//		log.saveXML(score);
-		Score score =  new Score();
-		score = log.readXML();
-		System.out.println(score.getAge());
+		Score score = new Score();
+		score.setId(100);
+		score.setAge(29);
+		score.setName("Bob");
+		log.saveXML(score);
+		Score score2 =  new Score();
+		score2 = log.readXML();
+		System.out.println(score2.getAge());
 	}
 }
