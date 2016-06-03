@@ -14,11 +14,19 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
  
- 
+ /**
+  * this class handles the I/O for the xml file containing the player name and score
+  * 
+  */
 public class XmlIO
 {
 	private static final String fileName = "score.xml";
-	
+	/**
+	 * this method adds value t the xml file
+	 * @param o object to be added
+	 * @param writer FileWriter used for adding the value
+	 * @throws Exception
+	 */
   private static void writeAsXml(Object o, Writer writer) throws Exception
   {
     JAXBContext jaxb = JAXBContext.newInstance(o.getClass());
@@ -27,7 +35,13 @@ public class XmlIO
     xmlConverter.setProperty("jaxb.formatted.output", true);
     xmlConverter.marshal(o, writer);
   }
- 
+ /**
+  * this method reads from the xml file
+  * @param reader File Reader for accessing xml file
+  * @param c class of the object to be read
+  * @return xml data in form of the object class
+  * @throws Exception
+  */
   private static <T> T readObjectAsXmlFrom(Reader reader, Class<T> c) throws Exception
   {
     JAXBContext jaxb = JAXBContext.newInstance(c);
@@ -39,7 +53,12 @@ public class XmlIO
  
     return xmlInterpreter.unmarshal(xmlReader, c).getValue();
   }
-  // Allow to insert any score or player
+  /**
+   * this method is used to insert any score or player
+   * @param name is the name of the player
+   * @param score is the score of the player
+   * @throws Exception
+   */
   public static void addScore(String name, int score) throws Exception{
 	  File xmlFile = new File(fileName);
 	  Score root = new Score();
@@ -47,7 +66,11 @@ public class XmlIO
     root.addResult(name,score);
     writeAsXml(root, new FileWriter(xmlFile));
   }
-  // increment wining record if player exist or create new entry if not exist 
+  /**
+   * this method increments wining record if player exist or create new entry if not exist 
+   * @param name is the player name
+   * @throws Exception
+   */
   public static void addWin(String name) throws Exception{
 	  Integer newScore = 1;
 	  Map<String, Integer> standings = new TreeMap<String, Integer>();
@@ -62,7 +85,11 @@ public class XmlIO
     root.addResult(name,newScore);
     writeAsXml(root, new FileWriter(xmlFile));
   }
-  // top ten players on file
+  /**
+   * this method selects and returns the top ten players on file
+   * @return Array of top 10 playe name and score
+   * @throws Exception
+   */
   public static ArrayList<String> getTopTen() throws Exception{
 	
 	int start, end;
@@ -83,7 +110,11 @@ public class XmlIO
     }
 	return result;
   }
-  
+  /**
+   * this method is used for sorting a map
+   * @param map the unsorted map
+   * @return the sorted map
+   */
   public static <K, V extends Comparable<? super V>> Map<K, V> 
   sortByValue( Map<K, V> map )
 {
@@ -104,11 +135,5 @@ public class XmlIO
   return result;
 }
 
-// for testing and demo 
-//  public static void main(String... args) throws Exception
-//  {
-//	  //addScore("SAMQ", 500);
-//	  addWin("SAMSAAS");
-//	  System.out.println(getTopTen());
-//  }
+
 }

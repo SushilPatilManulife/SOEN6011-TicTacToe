@@ -11,12 +11,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import model.XmlIO;
-
+/**
+ * this class displays the top 10 player list
+ * @author shidokht
+ *
+ */
 public class TopScoreLog extends JPanel{
 
 		JScrollPane ScorePnl; 
 		static JDialog scoreDg; 
-
+/**
+ * constructor method for TopScoreLog
+ */
 		public TopScoreLog(){
 
 			scoreDg = new JDialog();
@@ -61,7 +67,9 @@ public class TopScoreLog extends JPanel{
 			scoreDg.setBounds(100, 100, 300, 100);
 			scoreDg.pack();
 		}
-
+/**
+ * method to display the dialog with top 10 player list
+ */
 		public static void getScoreList(){
 			new TopScoreLog();
 			scoreDg.setVisible(true);
