@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 import model.ComputerPlayer;
 import model.HumanPlayer;
 import model.Player;
+import model.XmlIO;
 import ui.Board;
 import ui.Cards;
 import ui.GameBoard;
@@ -28,6 +29,7 @@ public class Controller {
 	private static MoveStrategyContext ctx;
 	private static Cards c;
 	private static String state;
+	private static String level;
 	 /**
      * Constructor of class to initialize all parameters.
      * @param name1 Player 1 name.
@@ -73,13 +75,14 @@ public class Controller {
 		turn = 1;
 		currentPlayer = player1;
 		 ctx = new MoveStrategyContext();
-		if(level == "easy")
+		if(level == "Easy")
 		ctx.setMoveStrategy(new Easy());
-		else if(level == "medium")
+		else if(level == "Medium")
 			ctx.setMoveStrategy(new Medium());
 		else 
 			ctx.setMoveStrategy(new Hard());
 		GameBoard.mode = 1;
+		this.level = level;
 		GameBoard.main();
 		
 	}
@@ -92,7 +95,9 @@ public class Controller {
 			}
 		});
 	}
-	
+	public static String getLevel(){
+		return level;
+	}
 	 /**
      * Getters property to get player 1's name.
      * @return Player 1 name
@@ -207,6 +212,7 @@ public class Controller {
 		GameBoard.updateScoreboard(player1.getScore(), player2.getScore(), tie);
 		if(currentRound > totalRound){
 		String result = checkResult();
+		
 		GameBoard.gameWon(result);
 		}
 		
@@ -223,12 +229,23 @@ public class Controller {
 			int max = player1.getScore();
 			String result = player1.getName() +  " is the winner with score of "+ player1.getScore()+" out of "+ totalRound;
 			state = "win";
+			String winner = player1.getName();
 			if(player2.getScore()> max){
 				result = player2.getName() + " is the winner with score of "+ player2.getScore()+" out of "+ totalRound;
+				winner = player2.getName();
 			}
 			else if(player2.getScore()== max){
 				result = player1.getName() + " and "+ player2.getName()+ " are tied each with a score of "+ player2.getScore()+" out of "+ totalRound;
 				state = "tie";
+			}
+			if(state == "win")
+			{ 
+        	try {
+				XmlIO.addWin(winner);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			}
 			return result;
 		

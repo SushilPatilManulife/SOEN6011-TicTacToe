@@ -19,9 +19,10 @@ public class GUIParent extends JFrame{
 	JMenu file = new JMenu("File");
 	JMenu help = new JMenu("Help");
 	
+    JMenuItem mnNewGame = new JMenuItem("New Game");
 	JMenuItem exit = new JMenuItem("Exit");
 	JMenuItem viewHelp = new JMenuItem("View Help");
-	JMenuItem about = new JMenuItem("About");
+	JMenuItem top = new JMenuItem("View top 10 players");
 	/**
 	 * this method creates the frame and sets common properties
 	 */
@@ -35,7 +36,8 @@ public class GUIParent extends JFrame{
 		new Help();
 		gameMenu.add(file);
 		gameMenu.add(help);
-		
+		file.add(mnNewGame);
+		file.add(top);
 		file.add(exit);
 		exit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -51,6 +53,11 @@ public class GUIParent extends JFrame{
 				Help.getHelp();
 			}
 		});
+		top.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				TopScoreLog.getScoreList();
+			}
+			});
 	}
 	
 	/**

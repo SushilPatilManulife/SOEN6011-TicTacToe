@@ -145,11 +145,11 @@ public class OnePlayerCard extends JPanel {
 		JLabel levelLbl = new JLabel("level");
 		level = new ButtonGroup();
 		JRadioButton easy = new JRadioButton("Easy");
-		easy.setActionCommand("easy");
+		easy.setActionCommand("Easy");
 		JRadioButton medium = new JRadioButton("Medium");
-		medium.setActionCommand("medium");
-		JRadioButton hard = new JRadioButton("Hard");
-		hard.setActionCommand("hard");
+		medium.setActionCommand("Medium");
+		JRadioButton hard = new JRadioButton("Advanced");
+		hard.setActionCommand("Advanced");
 		level.add(easy);
 		level.add(medium);
 		level.add(hard);

@@ -2,12 +2,52 @@
 <score>
     <standings>
         <item>
-            <key>Playeris</key>
+            <key>Play</key>
             <value>1</value>
         </item>
         <item>
-            <key>Player 1</key>
+            <key>jimmy2</key>
+            <value>23</value>
+        </item>
+        <item>
+            <key>amir1</key>
+            <value>15</value>
+        </item>
+        <item>
+            <key>amir2</key>
+            <value>67</value>
+        </item>
+        <item>
+            <key>johnny</key>
+            <value>121</value>
+        </item>
+        <item>
+            <key>Mani1</key>
+            <value>67</value>
+        </item>
+        <item>
+            <key>Computer</key>
             <value>2</value>
+        </item>
+        <item>
+            <key>Mani2</key>
+            <value>68</value>
+        </item>
+        <item>
+            <key>eddy</key>
+            <value>140</value>
+        </item>
+        <item>
+            <key>jimmy1</key>
+            <value>13</value>
+        </item>
+        <item>
+            <key>jimmy</key>
+            <value>87</value>
+        </item>
+        <item>
+            <key>Player 1</key>
+            <value>27</value>
         </item>
     </standings>
 </score>

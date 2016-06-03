@@ -119,7 +119,7 @@ public class Cards extends GUIParent implements ItemListener {
     public void createAndShowGUI() {
     	initialize();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        mnNewGame.setVisible(false);
         //Create and set up the content pane.
         Cards demo = new Cards();
 		formPanel = new JPanel(){	 

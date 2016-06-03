@@ -72,7 +72,7 @@ public class GameBoard extends GUIParent {
 	/*
 	 * checkPlayer counts number of moves and is used to set turn
 	 */
-	 static JMenuItem mnNewGame = new JMenuItem("New Game");
+	 
 	static int checkPlayer=0;
 	static String turn;
 	static String name1, name2;
@@ -125,7 +125,7 @@ public class GameBoard extends GUIParent {
 			}
 		}
 		};
-		file.add(mnNewGame);
+		
 		playerTurnPannel.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -228,13 +228,15 @@ public class GameBoard extends GUIParent {
 			}
 		});
 		contentPane.add(playerTurnPannel);
-		
+		if(mode == 1)
+			setTitle("Tic Tac Toe - " + Controller.getLevel()+ " level");
 		checkPlayer=0;
 		if( mode == 1 && turn == "Computer"){
 			Controller.notifyComputer(btnValue);
+			
 		}
 	}
-	
+
 	/**
 	 * This method is called when a button is clicked 
 	 * to perform appropriate actions based on mode and turn
@@ -399,6 +401,7 @@ public class GameBoard extends GUIParent {
         resultLbl.setFont(new Font(f.getFontName(), Font.BOLD, 14));
 		resultLbl.setOpaque(true);
         resultLbl.setVisible(true);
+        resultLbl.setBackground(new Color(201,214,230));
         nextRound.setVisible(true);
         lblPlayerMove.setVisible(false);
         invalidMove.setVisible(false);
@@ -413,6 +416,7 @@ public class GameBoard extends GUIParent {
         invalidMove.setVisible(false);
         resultLbl.setText("It's a tie!");
         resultLbl.setIcon(getResultIcon());
+        resultLbl.setBackground(new Color(201,214,230));
         Font f = resultLbl.getFont();
         resultLbl.setFont(new Font(f.getFontName(), Font.BOLD, 14));
         resultLbl.setOpaque(true);
@@ -438,13 +442,7 @@ public class GameBoard extends GUIParent {
         	JOptionPane.showMessageDialog(null, result ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
         else{
         	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result,"/winner_gift.gif"),"Game Result",JOptionPane.INFORMATION_MESSAGE);
-        	XmlIO xl=new XmlIO();
-        	try {
-				xl.addWin(result.substring(0,result.lastIndexOf("is")-1));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
         }
 	}
 	/**
