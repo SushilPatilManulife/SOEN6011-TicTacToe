@@ -32,6 +32,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import model.XmlIO;
 import sun.audio.AudioData;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
@@ -435,9 +436,16 @@ public class GameBoard extends GUIParent {
         	JOptionPane.showMessageDialog(null, result ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
         else if (state == "tie")
         	JOptionPane.showMessageDialog(null, result ,"Game Result",JOptionPane.INFORMATION_MESSAGE);
-        else
+        else{
         	JOptionPane.showMessageDialog(null, gameBoard.getPanel(result,"/winner_gift.gif"),"Game Result",JOptionPane.INFORMATION_MESSAGE);
-        
+        	XmlIO xl=new XmlIO();
+        	try {
+				xl.addWin(result.substring(0,result.lastIndexOf("is")-1));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
 	}
 	/**
      * This method updates score on score board.

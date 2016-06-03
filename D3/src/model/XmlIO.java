@@ -105,10 +105,10 @@ public class XmlIO
 }
 
 // for testing and demo 
-//  public static void main(String... args) throws Exception
-//  {
-////	  addScore("Mani", 350);
-//	  addWin("Mani");
-//	  System.out.println(getTopTen());
-//  }
+  public static void main(String... args) throws Exception
+  {
+	  //addScore("SAMQ", 500);
+	  addWin("SAMSAAS");
+	  System.out.println(getTopTen());
+  }
 }
