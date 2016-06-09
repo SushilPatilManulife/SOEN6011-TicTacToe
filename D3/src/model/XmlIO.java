@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -75,16 +76,18 @@ public class XmlIO
   public static void addWin(String name) throws Exception{
 	  Integer newScore = 1;
 	  Map<String, Integer> standings = new TreeMap<String, Integer>();
-	  File xmlFile = new File(fileName);
+	  File xmlFile = getFile();
 	  Score root = new Score();
+	  // System.out.println(xmlFile.getAbsolutePath());
     root = readObjectAsXmlFrom(new FileReader(xmlFile.getAbsolutePath()), root.getClass());
+    // writeAsXml(root, new PrintWriter(System.out));
     standings =  root.standings;
     if(standings.containsKey(name)) {
     	int current = standings.get(name);
     	newScore = current + 1;
     }
     root.addResult(name,newScore);
-    writeAsXml(root, new FileWriter(xmlFile));
+    writeAsXml(root, new FileWriter(xmlFile.getAbsolutePath()));
   }
   /**
    * this method selects and returns the top ten players on file
@@ -94,7 +97,7 @@ public class XmlIO
   public static ArrayList<String> getTopTen() throws Exception{
 	
 	int start, end;
-	File xmlFile = new File(fileName);
+	File xmlFile = getFile();
 	if(!xmlFile.exists()){
 		JOptionPane.showMessageDialog(null, "Record Does nor exist");
 	}
@@ -138,6 +141,15 @@ public class XmlIO
   }
   return result;
 }
-
-
+  
+  private static File getFile() throws Exception
+  {
+	  File scoreFile = new File(fileName);
+	  if(!scoreFile.isFile()){
+		  scoreFile.createNewFile();
+		  writeAsXml(new Score(), new FileWriter(scoreFile));
+	  }
+	  return scoreFile;
+  }
+  
 }
