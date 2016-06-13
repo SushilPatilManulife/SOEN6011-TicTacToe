@@ -76,7 +76,7 @@ public class OnePlayerCard extends JPanel {
 		pnl0.add(b3);
 		pnl0.add(b5);
 		pnl0.setOpaque(false);
-		b3.setSelected(true);
+		b1.setSelected(true);
 		c.gridx++;
 
 		this.add(pnl0, c);
