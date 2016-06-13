@@ -242,7 +242,8 @@ public class Controller {
 				result = player1.getName() + " and "+ player2.getName()+ " are tied each with a score of "+ player2.getScore()+" out of "+ totalRound;
 				state = "tie";
 			}
-			if(state == "win")
+			int insert = (GameBoard.mode ==1 && winner.equals("Computer"))? 0 : 1;
+			if(insert == 1 && state == "win")
 			{ 
         	try {
 				XmlIO.addWin(winner);
@@ -250,6 +251,7 @@ public class Controller {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+				
 			}
 			return result;
 		

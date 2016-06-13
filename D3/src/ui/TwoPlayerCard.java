@@ -92,7 +92,7 @@ public class TwoPlayerCard extends JPanel {
 		b1.setOpaque(false);
 		b3.setOpaque(false);
 		b5.setOpaque(false);
-		b3.setSelected(true);
+		b1.setSelected(true);
 		c.gridx++;
 		
 		this.add(pnl0, c);
